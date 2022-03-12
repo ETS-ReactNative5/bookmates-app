@@ -1,4 +1,3 @@
-require('dotenv').config();
 const router = require ('express').Router();
 const User = require ('../models/User');
 const bcrypt = require ('bcryptjs');
@@ -51,7 +50,7 @@ router.post('/login', async (req, res) => {
     
     //Create a JWT token
     const token = jwt.sign({_id: user._id}, process.env.SECRET_KEY);
-    res.header('auth_token', token).send(token);
+    res.header('access_token', token).send(token);
 
 });
 
