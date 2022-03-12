@@ -1,37 +1,20 @@
 //jshint esversion:6
+require('dotenv').config();
 const express = require("express");
-const cors = require("cors");
-var corsOptions = {
-    origin: "http://localhost:3000"
-};
-const jwt = require("jsonwebtoken");
-const app = express()
+const mongoose = require('mongoose');
+const app = express();
 
-app.use(cors(corsOptions));
-// parse requests of content-type - application/json
+//Import Routes
+const authRoute = require ('./routes/auth');
+
+//Connect to DB
+mongoose.connect(process.env.DB_CONNECT,
+() => console.log("Connected to database"));
+
+//Middleware
 app.use(express.json());
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
 
-//Connect to db
-const db = require("./app/models");
-db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => {
-    console.log("Successfully connect to MongoDB.");
-    initial();
-  })
-  .catch(err => {
-    console.error("Connection error", err);
-    process.exit();
-  });
+//Route Middlewares
+app.use('/api/user', authRoute);
 
-
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to bookmates application." });
-  });
-
-app.listen(8000);
+app.listen(3000, () => console.log('Listening on port: 3000'));
