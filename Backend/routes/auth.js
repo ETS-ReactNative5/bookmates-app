@@ -1,6 +1,8 @@
+require('dotenv').config();
 const router = require ('express').Router();
 const User = require ('../models/User');
 const bcrypt = require ('bcryptjs');
+const jwt = require ('jsonwebtoken');
 const {registerValidation, loginValidation} = require('../controllers/validation');
 
 //Register
@@ -47,8 +49,10 @@ router.post('/login', async (req, res) => {
     const valid_password = await bcrypt.compare (req.body.password, user.password);
     if(!valid_password) return res.status(401).send('Incorrect password');
     
-    return res.send('Logged in');
-});
+    //Create a JWT token
+    const token = jwt.sign({_id: user._id}, process.env.SECRET_KEY);
+    res.header('auth_token', token).send(token);
 
+});
 
 module.exports = router;
