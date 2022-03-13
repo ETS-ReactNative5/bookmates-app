@@ -39,12 +39,7 @@ const userSchema = new mongoose.Schema({
 
   genres_preferences: Array,
   reviews: Array,
-  // birth_date: {
-  //     type: Date,
-  //     // default: Date.now
-  //     required: true,
-  //     trim: true,
-  // }
+  birth_date: Date,
 });
 
 module.exports = mongoose.model("User", userSchema);

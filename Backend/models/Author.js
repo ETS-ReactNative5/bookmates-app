@@ -15,6 +15,8 @@ const authorSchema = new mongoose.Schema({
   },
   biography: String,
   books: Array,
+  birth_date: Date,
+  death_date: Date,
 });
 
 module.exports = mongoose.model("Author", bookSchema);
