@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-
+  profile_image_URL: String,
   followers: Array,
   following: Array,
 
