@@ -1,8 +1,25 @@
+import React from 'react';
 import { View, Text, TextInput, StyleSheet, StatusBar, Image } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Logo from '../assets/Vectorbook-logo.png';
 
 const Login = () => {
+
+  const [data, setData] = React.useState({
+    username: '',
+    password: '',
+    check_textInputChange: false,
+    secureTextEntry: true,
+    isValidUser: true,
+    isValidPassword: true,
+  });
+
+  const updateSecureTextEntry = () => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry,
+    });
+  };
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#6886C5" barStyle="light-content" />
@@ -12,14 +29,29 @@ const Login = () => {
       </View>
 
       <View style={[styles.form,{backgroundColor: '#ffffff'}]}>
+        {/*Email Input Field*/}
         <Text style={[styles.text_footer,{color: '#BDBDBD',}]}>
-            Email
-          </Text>
+          Email
+        </Text>
         <View style={styles.action}>
           <Feather name="mail" color="#BDBDBD" size={20}/>
           <TextInput
             placeholder="Enter your email address"
             placeholderTextColor="#666666"
+            style={[styles.textInput,{color: '#BDBDBD'}]}
+            autoCapitalize="none"
+          />
+        </View>
+        {/*Password Input Field*/}
+        <Text style={[styles.text_footer,{color: '#BDBDBD',marginTop: 35}]}>
+          Password
+        </Text>
+        <View style={styles.action}>
+          <Feather name="lock" color="#BDBDBD" size={20} />
+          <TextInput
+            placeholder="Enter your password"
+            placeholderTextColor="#666666"
+            secureTextEntry={data.secureTextEntry ? true : false}
             style={[styles.textInput,{color: '#BDBDBD'}]}
             autoCapitalize="none"
           />
@@ -70,5 +102,20 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === 'ios' ? 0 : -12,
     paddingLeft: 10,
     color: '#05375a',
+  },
+  button: {
+    alignItems: 'center',
+    marginTop: 50,
+  },
+  signIn: {
+    width: '100%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  textSign: {
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 })
