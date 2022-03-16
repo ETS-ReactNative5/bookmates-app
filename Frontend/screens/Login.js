@@ -12,13 +12,22 @@ const Login = () => {
       </View>
 
       <View style={[styles.form,{backgroundColor: '#ffffff'}]}>
-
+        <Text style={[styles.text_footer,{color: '#BDBDBD',}]}>
+            Email
+          </Text>
+        <View style={styles.action}>
+          <Feather name="mail" color="#BDBDBD" size={20}/>
+          <TextInput
+            placeholder="Enter your email address"
+            placeholderTextColor="#666666"
+            style={[styles.textInput,{color: '#BDBDBD'}]}
+            autoCapitalize="none"
+          />
+        </View>
       </View>
-
     </View>
   )
 }
-
 export default Login
 
 const styles = StyleSheet.create({
@@ -44,5 +53,22 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     fontSize: 28,
+  },
+  text_footer: {
+    color: '#05375a',
+    fontSize: 18,
+  },
+  action: {
+    flexDirection: 'row',
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f2f2f2',
+    paddingBottom: 5,
+  },
+  textInput: {
+    flex: 1,
+    marginTop: Platform.OS === 'ios' ? 0 : -12,
+    paddingLeft: 10,
+    color: '#05375a',
   },
 })
