@@ -66,6 +66,15 @@ const Login = () => {
             (<Feather name="eye" color="grey" size={20} />)}
           </TouchableOpacity>
         </View>
+
+        {/*Sign in button*/}
+        <View style={styles.button}>
+          <TouchableOpacity style={[styles.signIn,{backgroundColor: '#6886C5',marginTop: 5,borderRadius: 30}]}>
+            <Text style={[styles.textSign,{color: '#ffffff'}]}>
+              SIGN IN
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )
