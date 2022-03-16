@@ -3,15 +3,11 @@ import { View, Text, TextInput, StyleSheet, StatusBar, Image, TouchableOpacity }
 import Feather from 'react-native-vector-icons/Feather';
 import Logo from '../assets/Vectorbook-logo.png';
 
-const Login = () => {
+const Login = ({ navigation }) => {
 
   const [data, setData] = React.useState({
-    username: '',
-    password: '',
     check_textInputChange: false,
     secureTextEntry: true,
-    isValidUser: true,
-    isValidPassword: true,
   });
 
   const updateSecureTextEntry = () => {
