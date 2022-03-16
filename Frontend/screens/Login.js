@@ -29,11 +29,8 @@ const Login = ({ navigation }) => {
       <View style={[styles.form,{backgroundColor: '#ffffff'}]}>
 
         {/*Email Input Field*/}
-        <Text style={[styles.form_text,{color: '#BDBDBD',}]}>
-          Email
-        </Text>
         <View style={styles.action}>
-          <Feather name="mail" color="#BDBDBD" size={20}/>
+          <Feather name="mail" color="#BDBDBD" size={20} style={{marginTop: Platform.OS === 'ios' ? 10 : 20}}/>
           <TextInput
             placeholder="Enter your email address"
             placeholderTextColor="#BDBDBD"
@@ -43,11 +40,8 @@ const Login = ({ navigation }) => {
         </View>
 
         {/*Password Input Field*/}
-        <Text style={[styles.form_text,{color: '#BDBDBD',marginTop: 35}]}>
-          Password
-        </Text>
         <View style={styles.action}>
-          <Feather name="lock" color="#BDBDBD" size={20} />
+          <Feather name="lock" color="#BDBDBD" size={20} style={{marginTop: Platform.OS === 'ios' ? 10 : 20}} />
           <TextInput
             placeholder="Enter your password"
             placeholderTextColor="#BDBDBD"
@@ -57,9 +51,9 @@ const Login = ({ navigation }) => {
           />
           <TouchableOpacity onPress={updateSecureTextEntry}>
             {data.secureTextEntry ? 
-            (<Feather name="eye-off" color="grey" size={20} />) 
+            (<Feather name="eye-off" color="grey" size={20} style={{marginTop: Platform.OS === 'ios' ? 10 : 20}} />) 
             : 
-            (<Feather name="eye" color="grey" size={20} />)}
+            (<Feather name="eye" color="grey" size={20} style={{marginTop: Platform.OS === 'ios' ? 10 : 20}}/>)}
           </TouchableOpacity>
         </View>
 
@@ -128,7 +122,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    marginTop: Platform.OS === 'ios' ? 0 : -12,
+    marginTop: Platform.OS === 'ios' ? 10 : 20,
     paddingLeft: 10,
     color: '#BDBDBD',
   },
