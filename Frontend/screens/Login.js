@@ -75,6 +75,13 @@ const Login = () => {
             </Text>
           </TouchableOpacity>
         </View>
+
+        <TouchableOpacity>
+            <Text style={{ color: '#6886C5', marginTop: 25, fontWeight: 'bold', textAlign: 'center' }}>
+              Forgot password?
+            </Text>
+        </TouchableOpacity>
+
       </View>
     </View>
   )
