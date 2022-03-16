@@ -76,10 +76,17 @@ const Login = () => {
           </TouchableOpacity>
         </View>
 
+        {/*Forgot password?*/}
         <TouchableOpacity>
             <Text style={{ color: '#6886C5', marginTop: 25, fontWeight: 'bold', textAlign: 'center' }}>
               Forgot password?
             </Text>
+        </TouchableOpacity>
+
+        {/*Sign up prompt*/}
+        <Text style={{ color: '#606060', marginTop: 25, textAlign: 'center' }}>Don't have an account? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+          <Text style={{ color: '#6886C5', fontWeight: 'bold', textAlign:'center'}}>SIGN UP</Text>
         </TouchableOpacity>
 
       </View>
