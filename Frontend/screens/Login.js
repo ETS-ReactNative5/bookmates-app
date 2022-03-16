@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, StatusBar, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, StatusBar, Image, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Logo from '../assets/Vectorbook-logo.png';
 
@@ -23,38 +23,48 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#6886C5" barStyle="light-content" />
+
+      {/*Header part*/}
       <View style={styles.header}>
         <Image source={Logo} style={{ marginBottom: 20 }} />
         <Text style={styles.text_header}>bookmates</Text>
       </View>
 
       <View style={[styles.form,{backgroundColor: '#ffffff'}]}>
+
         {/*Email Input Field*/}
-        <Text style={[styles.text_footer,{color: '#BDBDBD',}]}>
+        <Text style={[styles.form_text,{color: '#BDBDBD',}]}>
           Email
         </Text>
         <View style={styles.action}>
           <Feather name="mail" color="#BDBDBD" size={20}/>
           <TextInput
             placeholder="Enter your email address"
-            placeholderTextColor="#666666"
+            placeholderTextColor="#BDBDBD"
             style={[styles.textInput,{color: '#BDBDBD'}]}
             autoCapitalize="none"
           />
         </View>
+
         {/*Password Input Field*/}
-        <Text style={[styles.text_footer,{color: '#BDBDBD',marginTop: 35}]}>
+        <Text style={[styles.form_text,{color: '#BDBDBD',marginTop: 35}]}>
           Password
         </Text>
         <View style={styles.action}>
           <Feather name="lock" color="#BDBDBD" size={20} />
           <TextInput
             placeholder="Enter your password"
-            placeholderTextColor="#666666"
+            placeholderTextColor="#BDBDBD"
             secureTextEntry={data.secureTextEntry ? true : false}
             style={[styles.textInput,{color: '#BDBDBD'}]}
             autoCapitalize="none"
           />
+          <TouchableOpacity onPress={updateSecureTextEntry}>
+            {data.secureTextEntry ? 
+            (<Feather name="eye-off" color="grey" size={20} />) 
+            : 
+            (<Feather name="eye" color="grey" size={20} />)}
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -86,8 +96,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 28,
   },
-  text_footer: {
-    color: '#05375a',
+  form_text: {
+    color: '#BDBDBD',
     fontSize: 18,
   },
   action: {
@@ -101,7 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: Platform.OS === 'ios' ? 0 : -12,
     paddingLeft: 10,
-    color: '#05375a',
+    color: '#BDBDBD',
   },
   button: {
     alignItems: 'center',
