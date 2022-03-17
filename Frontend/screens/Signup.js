@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, StatusBar, Image, TouchableOpacity } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import Feather from 'react-native-vector-icons/Feather';
 import Logo from '../assets/Vectorbook-logo.png';
 
@@ -28,11 +29,22 @@ const Signup = ({ navigation }) => {
 
       <View style={[styles.form,{backgroundColor: '#ffffff'}]}>
 
-        {/*Name Input Field*/}
+        {/*First Name Input Field*/}
         <View style={styles.action}>
         <Feather name="user" size={24} color="#BDBDBD" style={{marginTop: Platform.OS === 'ios' ? 10 : 20}}/>
           <TextInput
-            placeholder="Enter your name"
+            placeholder="Enter your first name"
+            placeholderTextColor="#BDBDBD"
+            style={[styles.textInput,{color: '#BDBDBD'}]}
+            autoCapitalize="none"
+          />
+        </View>
+
+        {/*Last Name Input Field*/}
+        <View style={styles.action}>
+        <Feather name="user" size={24} color="#BDBDBD" style={{marginTop: Platform.OS === 'ios' ? 10 : 20}}/>
+          <TextInput
+            placeholder="Enter your last name"
             placeholderTextColor="#BDBDBD"
             style={[styles.textInput,{color: '#BDBDBD'}]}
             autoCapitalize="none"

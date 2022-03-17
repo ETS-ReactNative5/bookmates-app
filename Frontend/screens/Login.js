@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet, StatusBar, Image, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Logo from '../assets/Vectorbook-logo.png';
+import * as Animatable from 'react-native-animatable';
 
 const Login = ({ navigation }) => {
-
   const [data, setData] = React.useState({
     check_textInputChange: false,
     secureTextEntry: true,
@@ -26,64 +26,62 @@ const Login = ({ navigation }) => {
         <Text style={styles.text_header}>bookmates</Text>
       </View>
 
-      <View style={[styles.form,{backgroundColor: '#ffffff'}]}>
-
+      <View style={[styles.form, { backgroundColor: '#ffffff' }]}>
         {/*Email Input Field*/}
         <View style={styles.action}>
-          <Feather name="mail" color="#BDBDBD" size={20} style={{marginTop: Platform.OS === 'ios' ? 10 : 20}}/>
+          <Feather name="mail" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 10 : 20 }} />
           <TextInput
             placeholder="Enter your email address"
             placeholderTextColor="#BDBDBD"
-            style={[styles.textInput,{color: '#BDBDBD'}]}
+            style={[styles.textInput, { color: '#BDBDBD' }]}
             autoCapitalize="none"
+            onChangeText={(val) => textInputChange(val)}
           />
         </View>
 
         {/*Password Input Field*/}
         <View style={styles.action}>
-          <Feather name="lock" color="#BDBDBD" size={20} style={{marginTop: Platform.OS === 'ios' ? 10 : 20}} />
+          <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 10 : 20 }} />
           <TextInput
             placeholder="Enter your password"
             placeholderTextColor="#BDBDBD"
             secureTextEntry={data.secureTextEntry ? true : false}
-            style={[styles.textInput,{color: '#BDBDBD'}]}
+            style={[styles.textInput, { color: '#BDBDBD' }]}
             autoCapitalize="none"
           />
           <TouchableOpacity onPress={updateSecureTextEntry}>
-            {data.secureTextEntry ? 
-            (<Feather name="eye-off" color="grey" size={20} style={{marginTop: Platform.OS === 'ios' ? 10 : 20}} />) 
-            : 
-            (<Feather name="eye" color="grey" size={20} style={{marginTop: Platform.OS === 'ios' ? 10 : 20}}/>)}
+            {data.secureTextEntry ? (
+              <Feather name="eye-off" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 10 : 20 }} />
+            ) : (
+              <Feather name="eye" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 10 : 20 }} />
+            )}
           </TouchableOpacity>
         </View>
 
         {/*Sign in button*/}
         <View style={styles.button}>
-          <TouchableOpacity style={[styles.signIn,{backgroundColor: '#6886C5',marginTop: 5,borderRadius: 30}]}>
-            <Text style={[styles.textSign,{color: '#ffffff'}]}>
-              SIGN IN
-            </Text>
+          <TouchableOpacity style={[styles.signIn, { backgroundColor: '#6886C5', marginTop: 5, borderRadius: 30 }]}>
+            <Text style={[styles.textSign, { color: '#ffffff' }]}>SIGN IN</Text>
           </TouchableOpacity>
         </View>
 
         {/*Forgot password?*/}
         <TouchableOpacity>
-            <Text style={{ color: '#6886C5', marginTop: 25, fontWeight: 'bold', textAlign: 'center' }}>
-              Forgot password?
-            </Text>
+          <Text style={{ color: '#6886C5', marginTop: 25, fontWeight: 'bold', textAlign: 'center' }}>
+            Forgot password?
+          </Text>
         </TouchableOpacity>
 
         {/*Sign up prompt*/}
         <Text style={{ color: '#606060', marginTop: 25, textAlign: 'center' }}>Don't have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-          <Text style={{ color: '#6886C5', fontWeight: 'bold', textAlign:'center'}}>SIGN UP</Text>
+          <Text style={{ color: '#6886C5', fontWeight: 'bold', textAlign: 'center' }}>SIGN UP</Text>
         </TouchableOpacity>
-
       </View>
     </View>
-  )
-}
-export default Login
+  );
+};
+export default Login;
 
 const styles = StyleSheet.create({
   container: {
@@ -141,4 +139,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-})
+});
