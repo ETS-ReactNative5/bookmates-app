@@ -29,7 +29,7 @@ const Login = ({ navigation }) => {
       <View style={[styles.form, { backgroundColor: '#ffffff' }]}>
         {/*Email Input Field*/}
         <View style={styles.action}>
-          <Feather name="mail" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 10 : 20 }} />
+          <Feather name="mail" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
           <TextInput
             placeholder="Enter your email address"
             placeholderTextColor="#BDBDBD"
@@ -41,7 +41,7 @@ const Login = ({ navigation }) => {
 
         {/*Password Input Field*/}
         <View style={styles.action}>
-          <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 10 : 20 }} />
+          <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
           <TextInput
             placeholder="Enter your password"
             placeholderTextColor="#BDBDBD"
@@ -51,9 +51,9 @@ const Login = ({ navigation }) => {
           />
           <TouchableOpacity onPress={updateSecureTextEntry}>
             {data.secureTextEntry ? (
-              <Feather name="eye-off" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 10 : 20 }} />
+              <Feather name="eye-off" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
             ) : (
-              <Feather name="eye" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 10 : 20 }} />
+              <Feather name="eye" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
             )}
           </TouchableOpacity>
         </View>
@@ -117,10 +117,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#f2f2f2',
     paddingBottom: 5,
+    width: '90%',
+    alignSelf:'center',
   },
   textInput: {
     flex: 1,
-    marginTop: Platform.OS === 'ios' ? 10 : 20,
+    marginTop: Platform.OS === 'ios' ? 15 : 25,
     paddingLeft: 10,
     color: '#BDBDBD',
   },
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   signIn: {
-    width: '100%',
+    width: '90%',
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',

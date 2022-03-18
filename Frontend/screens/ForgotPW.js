@@ -31,7 +31,7 @@ const ForgotPW = ({ navigation }) => {
 
             {/*Email Input Field*/}
             <View style={styles.action}>
-                <Feather name="mail" color="#BDBDBD" size={20} style={{marginTop: Platform.OS === 'ios' ? 10 : 20}}/>
+                <Feather name="mail" color="#BDBDBD" size={20} style={{marginTop: Platform.OS === 'ios' ? 15 : 25}}/>
                 <TextInput
                 placeholder="Enter your email address"
                 placeholderTextColor="#BDBDBD"
@@ -40,7 +40,7 @@ const ForgotPW = ({ navigation }) => {
                 />
             </View>
 
-            {/*Sign in button*/}
+            {/*Send button*/}
             <View style={styles.button}>
                 <TouchableOpacity style={[styles.signIn,{backgroundColor: '#6886C5',marginTop: 5,borderRadius: 30}]}>
                 <Text style={[styles.textSign,{color: '#ffffff'}]}>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     form: {
-      flex: 1,
+      flex: 1.2,
       backgroundColor: '#fff',
       borderTopLeftRadius: 30,
       borderTopRightRadius: 30,
@@ -86,16 +86,17 @@ const styles = StyleSheet.create({
       borderBottomColor: '#f2f2f2',
       paddingBottom: 5,
       width: '80%',
+      alignSelf:'center',
     },
     textInput: {
       flex: 1,
-      marginTop: Platform.OS === 'ios' ? 10 : 20,
+      marginTop: Platform.OS === 'ios' ? 15 : 25,
       paddingLeft: 10,
       color: '#BDBDBD',
     },
     button: {
       alignItems: 'center',
-      marginTop: 50,
+      marginTop: Platform.OS === 'ios' ? 20 : 30,
     },
     signIn: {
       width: '80%',
@@ -115,6 +116,7 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         marginTop: 15,
         padding: 15,
+        marginTop: Platform.OS === 'ios' ? 15 : 25,
     }
   });
   
