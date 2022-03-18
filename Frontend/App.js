@@ -4,6 +4,7 @@ import SplashScreen from './screens/Splash';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import ForgotPW from './screens/ForgotPW';
+import ChangePW from './screens/ChangePW';
 
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +20,7 @@ function App() {
         <Stack.Screen name="Login" component = {Login} />
         <Stack.Screen name="Signup" component = {Signup} />
         <Stack.Screen name="ForgotPW" component = {ForgotPW} />
+        <Stack.Screen name="ChangePW" component = {ChangePW} />
       </Stack.Navigator>
     </NavigationContainer>
   );

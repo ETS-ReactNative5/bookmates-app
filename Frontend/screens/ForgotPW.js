@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet, StatusBar, Image, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Logo from '../assets/Vectorbook-logo.png';
-import * as Animatable from 'react-native-animatable';
 
 const ForgotPW = ({ navigation }) => {
   return (
@@ -24,7 +23,7 @@ const ForgotPW = ({ navigation }) => {
 
             {/*Instructions*/}
             <View style={styles.instructions}> 
-                <Text style={{textAlign:'center', fontSize:15}}>
+                <Text style={{textAlign:'center', fontSize:15, lineHeight:25}}>
                     We will send you instructions on how to reset your password
                 </Text>
             </View>
@@ -42,7 +41,7 @@ const ForgotPW = ({ navigation }) => {
 
             {/*Send button*/}
             <View style={styles.button}>
-                <TouchableOpacity style={[styles.signIn,{backgroundColor: '#6886C5',marginTop: 5,borderRadius: 30}]}>
+                <TouchableOpacity onPress={() => navigation.navigate('ChangePW')} style={[styles.signIn,{backgroundColor: '#6886C5',marginTop: 5,borderRadius: 30}]}>
                 <Text style={[styles.textSign,{color: '#ffffff'}]}>
                     SEND
                 </Text>
@@ -110,13 +109,13 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
     },
     instructions: {
-        backgroundColor: '#F1F1FE',
-        width: '80%',
-        alignSelf:'center',
-        borderRadius: 12,
-        marginTop: 15,
-        padding: 15,
-        marginTop: Platform.OS === 'ios' ? 15 : 25,
+      backgroundColor: '#F1F1FE',
+      width: '80%',
+      alignSelf:'center',
+      borderRadius: 12,
+      marginTop: 15,
+      padding: 15,
+      marginTop: Platform.OS === 'ios' ? 15 : 25,
     }
   });
   
