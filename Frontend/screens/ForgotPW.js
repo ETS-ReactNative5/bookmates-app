@@ -17,7 +17,7 @@ const ForgotPW = ({ navigation }) => {
         <View style={[styles.form,{backgroundColor: '#ffffff'}]}>
 
             {/*Email Input Header*/}
-            <Text style={[{color: '#6886C5', fontSize:20,fontWeight:'bold', textAlign:'center'}]}>
+            <Text style={[{color: '#6886C5', fontSize:20, fontFamily:'Baloo2_800ExtraBold', textAlign:'center'}]}>
                 TYPE YOUR EMAIL
             </Text>
 
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
       paddingVertical: 30,
     },
     text_header: {
-      fontWeight: 'bold',
+      fontFamily:'Baloo2_800ExtraBold',
       color: 'white',
       fontSize: 28,
     },
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     },
     textSign: {
       fontSize: 18,
-      fontWeight: 'bold',
+      fontFamily:'Baloo2_800ExtraBold'
     },
     instructions: {
       backgroundColor: '#F1F1FE',

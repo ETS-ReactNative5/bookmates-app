@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet, StatusBar, Image, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Logo from '../assets/Vectorbook-logo.png';
-import * as Animatable from 'react-native-animatable';
 
 const Login = ({ navigation }) => {
+
   const [data, setData] = React.useState({
     check_textInputChange: false,
     secureTextEntry: true,
@@ -67,7 +67,7 @@ const Login = ({ navigation }) => {
 
         {/*Forgot password?*/}
         <TouchableOpacity onPress={() => navigation.navigate('ForgotPW')}>
-          <Text style={{ color: '#6886C5', marginTop: 25, fontWeight: 'bold', textAlign: 'center' }}>
+          <Text style={styles.forgot}>
             Forgot password?
           </Text>
         </TouchableOpacity>
@@ -75,7 +75,7 @@ const Login = ({ navigation }) => {
         {/*Sign up prompt*/}
         <Text style={{ color: '#606060', marginTop: 25, textAlign: 'center' }}>Don't have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-          <Text style={{ color: '#6886C5', fontWeight: 'bold', textAlign: 'center' }}>SIGN UP</Text>
+          <Text style={styles.prompt}>SIGN UP</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -103,9 +103,9 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
   },
   text_header: {
-    fontWeight: 'bold',
     color: 'white',
     fontSize: 28,
+    fontFamily:'Baloo2_800ExtraBold',
   },
   form_text: {
     color: '#BDBDBD',
@@ -139,6 +139,19 @@ const styles = StyleSheet.create({
   },
   textSign: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily:'Baloo2_800ExtraBold',
   },
+  prompt: {
+    fontFamily:'Baloo2_800ExtraBold',
+    color: '#6886C5', 
+    textAlign: 'center',
+
+  },
+  forgot: { 
+    color: '#6886C5', 
+    marginTop: 25, 
+    textAlign: 'center',
+    fontFamily:'Baloo2_800ExtraBold',
+    fontSize: 14
+  }
 });

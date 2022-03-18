@@ -1,17 +1,25 @@
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useFonts, Baloo2_800ExtraBold} from '@expo-google-fonts/baloo-2';
 import SplashScreen from './screens/Splash';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import ForgotPW from './screens/ForgotPW';
 import ChangePW from './screens/ChangePW';
 
-
 const Stack = createNativeStackNavigator();
 
 function App() {
+
+  const [fontsLoaded] = useFonts({
+    Baloo2_800ExtraBold
+  });
+
+  if (!fontsLoaded){
+    return null;
+  }
+
   return (
-    
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Splash" screenOptions={{
     headerShown: false
