@@ -34,7 +34,6 @@ export const ProfileBody = ({name,profileImage,followers,following,bio, email}) 
         <View style={{flexDirection:'row', justifyContent:'space-between', alignContent:'center'}}>
             <Text
                 style={{
-
                 fontWeight: 'bold',
                 }}>
                 {name}
