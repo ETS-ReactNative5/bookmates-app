@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import React from 'react'
 
 const Home = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>Map</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 

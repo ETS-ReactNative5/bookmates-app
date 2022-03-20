@@ -1,14 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import {View} from 'react-native';
+import {ProfileBody} from '../components/ProfileBody';
+import ProfileNav from '../components/ProfileNav';
 
-const MyProfile = () => {
+const Profile = () => {
+
   return (
-    <View>
-      <Text>MyProfile</Text>
+    <View style={{width: '100%', height: '100%', backgroundColor: 'white'}}>
+      <View style={{width: '100%', padding: 10}}>
+        <ProfileBody
+          name="Claudia Holland"
+          profileImage={require('./../assets/test_profile_pic.jpg')}
+          followers="220"
+          following="220"
+          bio="So many books, so little time📚"
+        />
+      </View>
+      <ProfileNav />
     </View>
-  )
-}
+  );
+};
 
-export default MyProfile
-
-const styles = StyleSheet.create({})
+export default Profile;
