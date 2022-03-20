@@ -17,7 +17,7 @@ const ForgotPW = ({ navigation }) => {
         <View style={[styles.form,{backgroundColor: '#ffffff'}]}>
 
             {/*Email Input Header*/}
-            <Text style={[{color: '#6886C5', fontSize:20, fontFamily:'Baloo2_800ExtraBold', textAlign:'center'}]}>
+            <Text style={[{color: '#6886C5', fontSize:20, fontFamily:'Baloo2_600SemiBold', textAlign:'center'}]}>
                 TYPE YOUR EMAIL
             </Text>
 
@@ -80,12 +80,12 @@ const styles = StyleSheet.create({
     },
     action: {
       flexDirection: 'row',
-      marginTop: 10,
+      marginTop: 20,
       borderBottomWidth: 1,
       borderBottomColor: '#f2f2f2',
-      paddingBottom: 5,
       width: '80%',
       alignSelf:'center',
+      marginBottom:20
     },
     textInput: {
       flex: 1,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     },
     textSign: {
       fontSize: 18,
-      fontFamily:'Baloo2_800ExtraBold'
+      fontFamily:'Baloo2_600SemiBold'
     },
     instructions: {
       backgroundColor: '#F1F1FE',

@@ -38,13 +38,13 @@ const ChangePW = () => {
             <View style={[styles.form,{backgroundColor: '#ffffff'}]}>
 
                 {/*Password Input Header*/}
-                <Text style={[{color: '#6886C5', fontSize:20,fontFamily:'Baloo2_800ExtraBold', textAlign:'center'}]}>
+                <Text style={[{color: '#6886C5', fontSize:20,fontFamily:'Baloo2_600SemiBold', textAlign:'center'}]}>
                     TYPE NEW PASSWORD
                 </Text>
 
                 {/*Password Input Field*/}
                 <View style={styles.action}>
-                    <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
+                    <Feather name="lock" color="#BDBDBD" size={20} style={{marginTop: 30}} />
                     <TextInput
                         placeholder="Choose new password"
                         placeholderTextColor="#BDBDBD"
@@ -54,15 +54,15 @@ const ChangePW = () => {
                     />
                     <TouchableOpacity onPress={updateSecureTextEntry1}>
                         {data.secureTextEntry1 ? (
-                        <Feather name="eye-off" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
+                        <Feather name="eye-off" color="grey" size={20} style={{marginTop: 30}} />
                         ) : 
-                        (<Feather name="eye" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />)}
+                        (<Feather name="eye" color="grey" size={20} style={{marginTop: 30}} />)}
                     </TouchableOpacity>
                 </View>
 
                 {/*Confirm Password Input Field*/}
                 <View style={styles.action}>
-                    <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
+                    <Feather name="lock" color="#BDBDBD" size={20} style={{marginTop: 30}} />
                     <TextInput
                         placeholder="Confirm new password"
                         placeholderTextColor="#BDBDBD"
@@ -72,9 +72,9 @@ const ChangePW = () => {
                     />
                     <TouchableOpacity onPress={updateSecureTextEntry2}>
                         {data.secureTextEntry2 ? (
-                        <Feather name="eye-off" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
+                        <Feather name="eye-off" color="grey" size={20} style={{marginTop: 30}} />
                         ) : 
-                        (<Feather name="eye" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />)}
+                        (<Feather name="eye" color="grey" size={20} style={{marginTop: 30}} />)}
                     </TouchableOpacity>
                 </View>
 
@@ -129,13 +129,13 @@ const styles = StyleSheet.create({
     },
     textInput: {
     flex: 1,
-    marginTop: Platform.OS === 'ios' ? 15 : 25,
+    marginTop: 30,
     paddingLeft: 10,
     color: '#BDBDBD',
     },
     button: {
     alignItems: 'center',
-    marginTop: Platform.OS === 'ios' ? 20 : 30,
+    marginTop: 50,
     },
     signIn: {
     width: '80%',
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     },
     textSign: {
     fontSize: 18,
-    fontFamily:'Baloo2_800ExtraBold',
+    fontFamily:'Baloo2_600SemiBold',
     },
 });
 

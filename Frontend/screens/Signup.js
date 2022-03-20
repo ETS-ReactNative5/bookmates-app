@@ -7,15 +7,24 @@ const Signup = ({ navigation }) => {
 
   const [data, setData] = React.useState({
     check_textInputChange: false,
-    secureTextEntry: true,
+    secureTextEntry1: true,
+    secureTextEntry2: true,
   });
 
-  const updateSecureTextEntry = () => {
-    setData({
-      ...data,
-      secureTextEntry: !data.secureTextEntry,
-    });
+  const updateSecureTextEntry1 = () => {
+      setData({
+        ...data,
+        secureTextEntry1: !data.secureTextEntry1,
+      });
   };
+
+  const updateSecureTextEntry2 = () => {
+      setData({
+        ...data,
+        secureTextEntry2: !data.secureTextEntry2,
+      });
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#6886C5" barStyle="light-content" />
@@ -30,7 +39,7 @@ const Signup = ({ navigation }) => {
 
         {/*First Name Input Field*/}
         <View style={styles.action}>
-        <Feather name="user" size={24} color="#BDBDBD" style={{marginTop: Platform.OS === 'ios' ? 15 : 25}}/>
+        <Feather name="user" size={24} color="#BDBDBD" style={{marginTop: Platform.OS === 'ios' ? 10 : 15}}/>
           <TextInput
             placeholder="Enter your first name"
             placeholderTextColor="#BDBDBD"
@@ -67,32 +76,52 @@ const Signup = ({ navigation }) => {
           <TextInput
             placeholder="Choose a password"
             placeholderTextColor="#BDBDBD"
-            secureTextEntry={data.secureTextEntry ? true : false}
+            secureTextEntry1={data.secureTextEntry1 ? true : false}
             style={[styles.textInput,{color: '#BDBDBD'}]}
             autoCapitalize="none"
           />
-          <TouchableOpacity onPress={updateSecureTextEntry}>
-            {data.secureTextEntry ? 
+          <TouchableOpacity onPress={updateSecureTextEntry1}>
+            {data.secureTextEntry1 ? 
             (<Feather name="eye-off" color="grey" size={20} style={{marginTop: Platform.OS === 'ios' ? 15 : 25}} />) 
             : 
             (<Feather name="eye" color="grey" size={20} style={{marginTop: Platform.OS === 'ios' ? 15 : 25}}/>)}
           </TouchableOpacity>
         </View>
 
-        {/*Sign in button*/}
+        {/*Confirm Password Input Field*/}
+        <View style={styles.action}>
+            <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
+            <TextInput
+                placeholder="Confirm password"
+                placeholderTextColor="#BDBDBD"
+                secureTextEntry={data.secureTextEntry2 ? true : false}
+                style={[styles.textInput, { color: '#BDBDBD' }]}
+                autoCapitalize="none"
+            />
+            <TouchableOpacity onPress={updateSecureTextEntry2}>
+                {data.secureTextEntry2 ? (
+                <Feather name="eye-off" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
+                ) : 
+                (<Feather name="eye" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />)}
+            </TouchableOpacity>
+        </View>
+
+        {/*Sign up button*/}
         <View style={styles.button}>
-          <TouchableOpacity style={[styles.signIn,{backgroundColor: '#6886C5',marginTop: 5,borderRadius: 30}]}>
+          <TouchableOpacity style={[styles.signIn,{backgroundColor: '#6886C5',marginTop: 15,borderRadius: 30}]}>
             <Text style={[styles.textSign,{color: '#ffffff'}]}>
               SIGN UP
             </Text>
           </TouchableOpacity>
         </View>
 
-        {/*Sign up prompt*/}
-        <Text style={{ color: '#606060', marginTop: 25, textAlign: 'center' }}>Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={{ color: '#6886C5', fontFamily:'Baloo2_800ExtraBold',textAlign:'center'}}>SIGN IN</Text>
-        </TouchableOpacity>
+        {/*Sign in prompt*/}
+        <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', paddingVertical:30}}>
+          <Text style={{ color: '#606060', textAlign: 'center' }}>Already have an account? </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.prompt}>SIGN IN</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )
@@ -111,7 +140,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   form: {
-    flex: 1.8,
+    flex: 2.2,
     backgroundColor: '#fff',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
@@ -156,6 +185,11 @@ const styles = StyleSheet.create({
   },
   textSign: {
     fontSize: 18,
-    fontFamily:'Baloo2_800ExtraBold',
+    fontFamily:'Baloo2_600SemiBold',
+  },
+  prompt: {
+    fontFamily:'Baloo2_600SemiBold',
+    color: '#6886C5', 
+    fontSize:16
   },
 })

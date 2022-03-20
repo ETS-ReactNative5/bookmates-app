@@ -35,7 +35,6 @@ const Login = ({ navigation }) => {
             placeholderTextColor="#BDBDBD"
             style={[styles.textInput, { color: '#BDBDBD' }]}
             autoCapitalize="none"
-            onChangeText={(val) => textInputChange(val)}
           />
         </View>
 
@@ -73,10 +72,12 @@ const Login = ({ navigation }) => {
         </TouchableOpacity>
 
         {/*Sign up prompt*/}
-        <Text style={{ color: '#606060', marginTop: 25, textAlign: 'center' }}>Don't have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-          <Text style={styles.prompt}>SIGN UP</Text>
-        </TouchableOpacity>
+        <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', paddingVertical:30}}>
+          <Text style={{ color: '#606060', textAlign: 'center' }}>Don't have an account? </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+            <Text style={styles.prompt}>SIGN UP</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -139,19 +140,18 @@ const styles = StyleSheet.create({
   },
   textSign: {
     fontSize: 18,
-    fontFamily:'Baloo2_800ExtraBold',
+    fontFamily:'Baloo2_600SemiBold',
   },
   prompt: {
-    fontFamily:'Baloo2_800ExtraBold',
+    fontFamily:'Baloo2_600SemiBold',
     color: '#6886C5', 
-    textAlign: 'center',
-
+    fontSize:16
   },
   forgot: { 
     color: '#6886C5', 
-    marginTop: 25, 
+    marginTop:30, 
     textAlign: 'center',
-    fontFamily:'Baloo2_800ExtraBold',
-    fontSize: 14
+    fontFamily:'Baloo2_600SemiBold',
+    fontSize: 16
   }
 });
