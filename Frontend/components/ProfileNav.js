@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const ProfileNav = () => {
   const Tab = createMaterialTopTabNavigator();

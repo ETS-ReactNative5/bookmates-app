@@ -13,6 +13,7 @@ const Profile = () => {
           followers="220"
           following="220"
           bio="So many books, so little time📚"
+          email="claudiaholland@gmail.com"
         />
       </View>
       <ProfileNav />

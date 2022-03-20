@@ -1,14 +1,9 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
-export const ProfileBody = ({
-  name,
-  profileImage,
-  followers,
-  following,
-  bio, 
-  id
-}) => {
-  return (
+import { useNavigation } from '@react-navigation/native';
+export const ProfileBody = ({name,profileImage,followers,following,bio, email}) => {
+    const navigation = useNavigation(); 
+    return (
       <SafeAreaView>
         <View
         style={{
@@ -36,19 +31,24 @@ export const ProfileBody = ({
                 <Text>Following</Text>
             </View>
         </View>
-        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+        <View style={{flexDirection:'row', justifyContent:'space-between', alignContent:'center'}}>
             <Text
                 style={{
-                paddingVertical: 10,
+
                 fontWeight: 'bold',
                 }}>
                 {name}
             </Text>
-            <TouchableOpacity style={{width:100, height:22, backgroundColor:'#6886C5', borderRadius:20}}>
+            <TouchableOpacity onPress={() => navigation.navigate('EditProfile',{
+                name: name,
+                profileImage: profileImage,
+                email: email,
+                bio: bio})} 
+                style={{width:100, height:22, backgroundColor:'#6886C5', borderRadius:20}}>
                 <Text style={{textAlign:'center', color:'#FFF', fontWeight:'bold'}}>Edit Profile</Text>
             </TouchableOpacity>
         </View>
-        <Text>{bio}</Text>
+        <Text style={{paddingVertical: 15}}>{bio}</Text>
     </SafeAreaView>
 
   );
