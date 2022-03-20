@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity, SafeAreaView, StatusBar} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
 export const ProfileBody = ({
   name,
   profileImage,
   followers,
   following,
-  bio
+  bio, 
+  id
 }) => {
   return (
       <SafeAreaView>
@@ -26,13 +26,6 @@ export const ProfileBody = ({
                     borderRadius: 100,
                     }}
                 />
-                <Text
-                    style={{
-                    paddingVertical: 10,
-                    fontWeight: 'bold',
-                    }}>
-                    {name}
-                </Text>
             </View>
             <View style={{alignItems: 'center'}}>
                 <Text style={{fontWeight: 'bold', fontSize: 18}}>{followers}</Text>
@@ -42,6 +35,18 @@ export const ProfileBody = ({
                 <Text style={{fontWeight: 'bold', fontSize: 18}}>{following}</Text>
                 <Text>Following</Text>
             </View>
+        </View>
+        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+            <Text
+                style={{
+                paddingVertical: 10,
+                fontWeight: 'bold',
+                }}>
+                {name}
+            </Text>
+            <TouchableOpacity style={{width:100, height:22, backgroundColor:'#6886C5', borderRadius:20}}>
+                <Text style={{textAlign:'center', color:'#FFF', fontWeight:'bold'}}>Edit Profile</Text>
+            </TouchableOpacity>
         </View>
         <Text>{bio}</Text>
     </SafeAreaView>

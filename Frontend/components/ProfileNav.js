@@ -6,25 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 const ProfileNav = () => {
   const Tab = createMaterialTopTabNavigator();
 
-  let squares = [];
-  let numberOfSquare = 3;
-
-  for (let index = 0; index < numberOfSquare; index++) {
-    squares.push(
-      <View key={index}>
-        <View
-          style={{
-            width: 130,
-            height: 150,
-            marginVertical: 0.5,
-            backgroundColor: 'black',
-            opacity: 0.1,
-          }}></View>
-      </View>,
-    );
-  }
-
-  const Books = () => {
+  const Bookshelf = () => {
     return (
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -42,7 +24,7 @@ const ProfileNav = () => {
             paddingVertical: 5,
             justifyContent: 'space-between',
           }}>
-          {squares}
+            <Text style={{marginBottom: 10}}>Bookshelf</Text>
         </View>
       </ScrollView>
     );
@@ -65,7 +47,7 @@ const ProfileNav = () => {
             paddingVertical: 5,
             justifyContent: 'space-between',
           }}>
-          {squares}
+            <Text>Reviews</Text>        
         </View>
       </ScrollView>
     );
@@ -74,13 +56,12 @@ const ProfileNav = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
-        tabBarShowLabel: false,
         tabBarIndicatorStyle: {
-          backgroundColor: 'black',
-          height: 1.5,
+          backgroundColor: '#6886C5',
+          height: 2.5,
         },
       })}>
-      <Tab.Screen name="Books" component={Books} />
+      <Tab.Screen name="Bookshelf" component={Bookshelf} />
       <Tab.Screen name="Reviews" component={Reviews} />
     </Tab.Navigator>
   );

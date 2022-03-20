@@ -4,7 +4,6 @@ import {ProfileBody} from '../components/ProfileBody';
 import ProfileNav from '../components/ProfileNav';
 
 const Profile = () => {
-
   return (
     <View style={{width: '100%', height: '100%', backgroundColor: 'white'}}>
       <View style={{width: '100%', padding: 10}}>
