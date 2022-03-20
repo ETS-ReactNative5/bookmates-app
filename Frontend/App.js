@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import {useFonts, Baloo2_800ExtraBold} from '@expo-google-fonts/baloo-2';
+import {useFonts, Baloo2_800ExtraBold, Baloo2_600SemiBold} from '@expo-google-fonts/baloo-2';
 import SplashScreen from './screens/Splash';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
@@ -16,7 +16,8 @@ const Stack = createNativeStackNavigator();
 function App() {
 
   const [fontsLoaded] = useFonts({
-    Baloo2_800ExtraBold
+    Baloo2_800ExtraBold,
+    Baloo2_600SemiBold
   });
 
   if (!fontsLoaded){
