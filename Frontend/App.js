@@ -10,6 +10,7 @@ import ChangePW from './screens/ChangePW';
 import Home from './screens/Home';
 import MyTabs from './screens/Tabs';
 import EditProfile from './screens/EditProfile';
+import BookDetails from './screens/BookDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,7 @@ function App() {
         <Stack.Screen name="ChangePW" component = {ChangePW} />
         <Stack.Screen name="Home" component = {MyTabs} />
         <Stack.Screen name="EditProfile" component = {EditProfile} />
+        <Stack.Screen name="BookDetails" component = {BookDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );

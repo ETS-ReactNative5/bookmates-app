@@ -1,56 +1,11 @@
 import React from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Bookshelf from './Bookshelf';
+import ProfileReviews from './ProfileReviews';
 
 const ProfileNav = () => {
   const Tab = createMaterialTopTabNavigator();
-
-  const Bookshelf = () => {
-    return (
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{
-          width: '100%',
-          height: '100%',
-        }}>
-        <View
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'white',
-            flexWrap: 'wrap',
-            flexDirection: 'row',
-            paddingVertical: 5,
-            justifyContent: 'space-between',
-          }}>
-            <Text style={{marginBottom: 10}}>Bookshelf</Text>
-        </View>
-      </ScrollView>
-    );
-  };
-  const Reviews = () => {
-    return (
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{
-          width: '100%',
-          height: '100%',
-        }}>
-        <View
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'white',
-            flexWrap: 'wrap',
-            flexDirection: 'row',
-            paddingVertical: 5,
-            justifyContent: 'space-between',
-          }}>
-            <Text>Reviews</Text>        
-        </View>
-      </ScrollView>
-    );
-  };
 
   return (
     <Tab.Navigator
@@ -61,7 +16,7 @@ const ProfileNav = () => {
         },
       })}>
       <Tab.Screen name="Bookshelf" component={Bookshelf} />
-      <Tab.Screen name="Reviews" component={Reviews} />
+      <Tab.Screen name="Reviews" component={ProfileReviews} />
     </Tab.Navigator>
   );
 };

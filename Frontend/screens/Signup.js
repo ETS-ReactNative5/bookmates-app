@@ -39,7 +39,7 @@ const Signup = ({ navigation }) => {
 
         {/*First Name Input Field*/}
         <View style={styles.action}>
-        <Feather name="user" size={24} color="#BDBDBD" style={{marginTop: Platform.OS === 'ios' ? 10 : 15}}/>
+        <Feather name="user" size={24} color="#BDBDBD" style={{marginTop: 15}}/>
           <TextInput
             placeholder="Enter your first name"
             placeholderTextColor="#BDBDBD"
@@ -50,7 +50,7 @@ const Signup = ({ navigation }) => {
 
         {/*Last Name Input Field*/}
         <View style={styles.action}>
-        <Feather name="user" size={24} color="#BDBDBD" style={{marginTop: Platform.OS === 'ios' ? 15 : 25}}/>
+        <Feather name="user" size={24} color="#BDBDBD" style={{marginTop: 15}}/>
           <TextInput
             placeholder="Enter your last name"
             placeholderTextColor="#BDBDBD"
@@ -61,7 +61,7 @@ const Signup = ({ navigation }) => {
 
         {/*Email Input Field*/}
         <View style={styles.action}>
-          <Feather name="mail" color="#BDBDBD" size={20} style={{marginTop: Platform.OS === 'ios' ? 15 : 25}}/>
+          <Feather name="mail" color="#BDBDBD" size={20} style={{marginTop: 15}}/>
           <TextInput
             placeholder="Enter your email address"
             placeholderTextColor="#BDBDBD"
@@ -72,7 +72,7 @@ const Signup = ({ navigation }) => {
 
         {/*Password Input Field*/}
         <View style={styles.action}>
-          <Feather name="lock" color="#BDBDBD" size={20} style={{marginTop: Platform.OS === 'ios' ? 15 : 25}} />
+          <Feather name="lock" color="#BDBDBD" size={20} style={{marginTop: 15}} />
           <TextInput
             placeholder="Choose a password"
             placeholderTextColor="#BDBDBD"
@@ -82,15 +82,15 @@ const Signup = ({ navigation }) => {
           />
           <TouchableOpacity onPress={updateSecureTextEntry1}>
             {data.secureTextEntry1 ? 
-            (<Feather name="eye-off" color="grey" size={20} style={{marginTop: Platform.OS === 'ios' ? 15 : 25}} />) 
+            (<Feather name="eye-off" color="grey" size={20} style={{marginTop: 15}} />) 
             : 
-            (<Feather name="eye" color="grey" size={20} style={{marginTop: Platform.OS === 'ios' ? 15 : 25}}/>)}
+            (<Feather name="eye" color="grey" size={20} style={{marginTop: 15}}/>)}
           </TouchableOpacity>
         </View>
 
         {/*Confirm Password Input Field*/}
         <View style={styles.action}>
-            <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
+            <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: 15 }} />
             <TextInput
                 placeholder="Confirm password"
                 placeholderTextColor="#BDBDBD"
@@ -100,9 +100,9 @@ const Signup = ({ navigation }) => {
             />
             <TouchableOpacity onPress={updateSecureTextEntry2}>
                 {data.secureTextEntry2 ? (
-                <Feather name="eye-off" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
+                <Feather name="eye-off" color="grey" size={20} style={{ marginTop: 15 }} />
                 ) : 
-                (<Feather name="eye" color="grey" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />)}
+                (<Feather name="eye" color="grey" size={20} style={{ marginTop: 15}} />)}
             </TouchableOpacity>
         </View>
 
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   form: {
-    flex: 2.2,
+    flex: 2.5,
     backgroundColor: '#fff',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
@@ -168,13 +168,13 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    marginTop: Platform.OS === 'ios' ? 15 : 25,
+    marginTop: 15,
     paddingLeft: 10,
     color: '#BDBDBD',
   },
   button: {
     alignItems: 'center',
-    marginTop: Platform.OS === 'ios' ? 15 : 25,
+    marginTop: 15
   },
   signIn: {
     width: '90%',
