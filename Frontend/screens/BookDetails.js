@@ -1,17 +1,18 @@
-import { View, Text, StyleSheet, StatusBar, Image, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
-import React from 'react'
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { View,Text, StyleSheet, StatusBar,Modal, Image, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
+import React, { useState } from "react";
+import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const BookDetails = ({route, navigation}) => {
 
   const {title, thumbnail, description, author} = route.params;
   const Tab = createMaterialTopTabNavigator();
+  const [modalVisible, setModalVisible] = useState(false);
 
   const Description = () => {
     return (
       <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor:'white', flex:1}}>
-        <Text style={{lineHeight:25, paddingTop:10, textAlign:'justify'}}>{description}</Text>
+        <Text style={{lineHeight:25, paddingTop:10, textAlign:'justify', paddingHorizontal:10}}>{description}</Text>
       </ScrollView>
     )
   };
@@ -28,15 +29,44 @@ const BookDetails = ({route, navigation}) => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#6886C5" barStyle="light-content" />
 
-      {/*Header sec*/}
+      {/*Header section*/}
       <View style={styles.header}>
+
+      {/*Modal*/}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <View style={{flexDirection:'row', alignItems:'center'}}>
+                <Entypo name="add-to-list" size={18} color="#6886C5"/>
+                <Text style={styles.modalText}>Currently reading</Text>
+              </View>
+
+              <View style={{flexDirection:'row', alignItems:'center'}}>
+                <Entypo name="add-to-list" size={18} color="#6886C5"/>
+                <Text style={styles.modalText}>To read</Text>
+              </View>
+
+              <View style={{flexDirection:'row', alignItems:'center'}}>
+                <Entypo name="add-to-list" size={18} color="#6886C5"/>
+                <Text style={styles.modalText}>Finished</Text>
+              </View>
+
+              <Text style={styles.modalText}>Write review</Text>
+           
+            </View>
+          </View>
+      </Modal>
 
         {/*Navigation buttons*/}
         <View style={{flexDirection:'row', justifyContent:'space-between'}}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <MaterialCommunityIcons name="keyboard-backspace" size={30} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
             <MaterialCommunityIcons name="dots-horizontal" size={30} color="white" />
           </TouchableOpacity>
         </View>
@@ -59,7 +89,7 @@ const BookDetails = ({route, navigation}) => {
             },
             tabBarLabelStyle: { fontSize: 14, fontWeight:'bold'},
           })}>
-          <Tab.Screen name="Description" component={Description} initialParams={{description}}  />
+          <Tab.Screen name="Description" component={Description}/>
           <Tab.Screen name="Reviews" component={BookReviews} />
         </Tab.Navigator>
       </View>
@@ -101,5 +131,32 @@ const styles = StyleSheet.create({
     fontSize:16, 
     fontStyle:'italic',
     paddingTop:3
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: "flex-end",
+  },
+  modalView: {
+    width:'45%',
+    justifyContent:'center',
+    marginVertical:55,
+    marginHorizontal:20,
+    backgroundColor: "white",
+    borderRadius: 15,
+    padding: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  modalText: {
+    color: '#6886C5',
+    paddingVertical:5,
+    borderBottomColor:'#6886C5',
   }
 });
