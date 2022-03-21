@@ -14,6 +14,7 @@ const ProfileNav = () => {
           backgroundColor: '#6886C5',
           height: 2.5,
         },
+        tabBarLabelStyle: { fontSize: 14, fontWeight:'bold'},
       })}>
       <Tab.Screen name="Bookshelf" component={Bookshelf} />
       <Tab.Screen name="Reviews" component={ProfileReviews} />

@@ -9,7 +9,7 @@ const Search = () => {
   const onChangeSearch = query => setSearchQuery(query);
 
   return (
-    <SafeAreaView style={{flex:1}}>
+    <SafeAreaView style={{flex:1, backgroundColor: 'white'}}>
       <Searchbar
         placeholder="Search"
         onChangeText={onChangeSearch}
@@ -31,9 +31,9 @@ const Search = () => {
           <BookSearch thumbnail={require('./../assets/mebeforeyou.jpg')} 
           title="Me Before You"
           author="Jojo Moyes"
-          description="They had nothing in common until love gave them everything to lose...Louisa Clark is an ordinary girl living an exceedingly ordinary life—steady boyfriend, close family—who has barely been farther afield than their tiny village. She takes a badly needed job working for ex–Master of the Universe Will Traynor, who is wheelchair bound after an accident. Will has always lived a huge life—big deals, extreme sports, worldwide travel—and now hes pretty sure he cannot live the way he is.
+          description="They had nothing in common until love gave them everything to lose...Louisa Clark is an ordinary girl living an exceedingly ordinary life—steady boyfriend, close family—who has barely been farther afield than their tiny village. She takes a badly needed job working for exMaster of the Universe Will Traynor, who is wheelchair bound after an accident. Will has always lived a huge life—big deals, extreme sports, worldwide travel—and now hes pretty sure he cannot live the way he is.
           Will is acerbic, moody, bossy—but Lou refuses to treat him with kid gloves, and soon his happiness means more to her than she expected. When she learns that Will has shocking plans of his own, she sets out to show him that life is still worth living.
-          A Love Story for this generation and perfect for fans of John Green’s The Fault in Our Stars, Me Before You brings to life two people who couldn’t have less in common—a heartbreakingly romantic novel that asks, What do you do when making the person you love happy also means breaking your own heart?"/>
+          A Love Story for this generation and perfect for fans of John Greens The Fault in Our Stars, Me Before You brings to life two people who couldnt have less in common—a heartbreakingly romantic novel that asks, What do you do when making the person you love happy also means breaking your own heart?"/>
           <BookSearch thumbnail={require('./../assets/mockingbird.jpg')}/>
           <BookSearch thumbnail={require('./../assets/EE.jpg')}/>
         </View>

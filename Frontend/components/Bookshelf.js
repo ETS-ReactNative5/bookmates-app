@@ -4,7 +4,7 @@ import { BookSearch } from '../components/BookSearch';
 
 const Bookshelf = () => {
 return (
-    <SafeAreaView style={{flex:1}}>
+    <SafeAreaView style={{flex:1, backgroundColor: 'white'}}>
       <ScrollView style={{flex:1}}>
         <View style={{flexDirection: 'row', paddingVertical:20, justifyContent:'space-between', alignItems:'center'}}>
           <Text style={{color: '#6886C5', paddingLeft:20, fontFamily:'Baloo2_600SemiBold', fontSize:16}}>
