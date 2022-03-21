@@ -1,29 +1,51 @@
 import { View,Text, StyleSheet, StatusBar,Modal, Image, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
 import React, { useState } from "react";
-import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const BookDetails = ({route, navigation}) => {
 
-  const {title, thumbnail, description, author} = route.params;
-  const Tab = createMaterialTopTabNavigator();
-  const [modalVisible, setModalVisible] = useState(false);
+const {title, thumbnail, description, author} = route.params;
+const Tab = createMaterialTopTabNavigator();
+const [modalVisible, setModalVisible] = useState(false);
 
-  const Description = () => {
-    return (
-      <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor:'white', flex:1}}>
-        <Text style={{lineHeight:25, paddingTop:10, textAlign:'justify', paddingHorizontal:10}}>{description}</Text>
-      </ScrollView>
-    )
-  };
-  
-  const BookReviews = () => {
-    return (
-      <View style={{backgroundColor:'white', flex:1}}>
-        <Text>Reviews</Text>
-      </View>
-    )
-  };
+const [currentlyReading, setCurrentlyReading] = useState (false);
+const [finished, setFinished] = useState (false);
+const [toRead, setToRead] = useState (false);
+
+{/*Description component*/}
+const Description = () => {
+  return (
+    <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor:'white', flex:1}}>
+      <Text style={{lineHeight:25, paddingTop:10, textAlign:'justify', paddingHorizontal:10}}>{description}</Text>
+    </ScrollView>
+  )
+};
+
+{/*Book Reviews component*/}
+const BookReviews = () => {
+  return (
+    <View style={{backgroundColor:'white', flex:1}}>
+      <Text>Reviews</Text>
+    </View>
+)
+};
+
+{/*Change state of currently reading*/}
+const toggleCurrentlyReading = () => {
+  setCurrentlyReading(!currentlyReading);
+}
+
+{/*Change state of to read*/}
+const toggleToRead = () => {
+  setToRead(!toRead);
+}
+
+{/*Change state of finished*/}
+const toggleFinished = () => {
+  setFinished(!finished);
+}
+    
   
   return (
     <SafeAreaView style={styles.container}>
@@ -40,24 +62,30 @@ const BookDetails = ({route, navigation}) => {
         onRequestClose={() => setModalVisible(false)}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <View style={{flexDirection:'row', alignItems:'center'}}>
-                <Entypo name="add-to-list" size={18} color="#6886C5"/>
+              <TouchableOpacity onPress={() => toggleCurrentlyReading()} style={{flexDirection:'row', alignItems:'center'}}>
+                {currentlyReading ? (<MaterialCommunityIcons name="bookmark" size={19} color="#6886C5" />) 
+                : (<Feather name="bookmark" size={18} color="#6886C5" />)}
                 <Text style={styles.modalText}>Currently reading</Text>
-              </View>
+              </TouchableOpacity>
 
-              <View style={{flexDirection:'row', alignItems:'center'}}>
-                <Entypo name="add-to-list" size={18} color="#6886C5"/>
+              <TouchableOpacity onPress={() => toggleToRead()} style={{flexDirection:'row', alignItems:'center'}}>
+                {toRead ? (<MaterialCommunityIcons name="bookmark" size={19} color="#6886C5" />) 
+                : (<Feather name="bookmark" size={18} color="#6886C5" />)}
                 <Text style={styles.modalText}>To read</Text>
-              </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => toggleFinished()} style={{flexDirection:'row', alignItems:'center'}}>
+                {finished ? (<MaterialCommunityIcons name="bookmark" size={19} color="#6886C5" />) 
+                : (<Feather name="bookmark" size={18} color="#6886C5" />)}
+                <Text style={styles.modalText}>Finished</Text>
+              </TouchableOpacity>
 
               <View style={{flexDirection:'row', alignItems:'center'}}>
-                <Entypo name="add-to-list" size={18} color="#6886C5"/>
-                <Text style={styles.modalText}>Finished</Text>
+                <MaterialCommunityIcons name="comment-text-multiple-outline" size={18} color="#6886C5" />
+                <Text style={styles.modalText}>Write review</Text>
               </View>
-
-              <Text style={styles.modalText}>Write review</Text>
-           
             </View>
+
           </View>
       </Modal>
 
@@ -139,7 +167,6 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width:'45%',
-    justifyContent:'center',
     marginVertical:55,
     marginHorizontal:20,
     backgroundColor: "white",
@@ -158,5 +185,6 @@ const styles = StyleSheet.create({
     color: '#6886C5',
     paddingVertical:5,
     borderBottomColor:'#6886C5',
+    marginLeft:8
   }
 });
