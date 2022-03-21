@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, StatusBar, Image, TouchableOpacity, SafeAreaView} from 'react-native';
+import { View, Text, StyleSheet, StatusBar, Image, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
 import React from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -7,8 +7,25 @@ const BookDetails = ({route, navigation}) => {
 
   const {title, thumbnail, description, author} = route.params;
   const Tab = createMaterialTopTabNavigator();
+
+  const Description = () => {
+    return (
+      <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor:'white', flex:1}}>
+        <Text style={{lineHeight:25, paddingTop:10, textAlign:'justify'}}>{description}</Text>
+      </ScrollView>
+    )
+  };
+  
+  const BookReviews = () => {
+    return (
+      <View style={{backgroundColor:'white', flex:1}}>
+        <Text>Reviews</Text>
+      </View>
+    )
+  };
+  
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#6886C5" barStyle="light-content" />
 
       {/*Header sec*/}
@@ -46,26 +63,11 @@ const BookDetails = ({route, navigation}) => {
           <Tab.Screen name="Reviews" component={BookReviews} />
         </Tab.Navigator>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 export default BookDetails;
-
-export const Description = ({description}) => {
-  return (
-    <View style={{backgroundColor:'white', flex:1}}>
-      <Text>{description}</Text>
-    </View>
-  )
-};
-
-export const BookReviews = () => {
-  return (
-    <Text>Reviews</Text>
-  )
-};
-
 
 const styles = StyleSheet.create({
   container: {
