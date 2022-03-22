@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import {useFonts, Baloo2_800ExtraBold, Baloo2_600SemiBold} from '@expo-google-fonts/baloo-2';
+import {Roboto_300Light, Roboto_300Light_Italic} from '@expo-google-fonts/roboto'
 import SplashScreen from './screens/Splash';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
@@ -18,7 +19,9 @@ function App() {
 
   const [fontsLoaded] = useFonts({
     Baloo2_800ExtraBold,
-    Baloo2_600SemiBold
+    Baloo2_600SemiBold,
+    Roboto_300Light,
+    Roboto_300Light_Italic
   });
 
   if (!fontsLoaded){

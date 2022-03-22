@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   },
   modalText: {
     color: '#6886C5',
-    paddingVertical:5,
+    paddingVertical:10,
     borderBottomColor:'#6886C5',
     marginLeft:8
   }

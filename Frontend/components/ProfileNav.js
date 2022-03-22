@@ -2,11 +2,17 @@ import React from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Bookshelf from './Bookshelf';
-import ProfileReviews from './ProfileReviews';
+import ProfileReview from './ProfileReview';
 
 const ProfileNav = () => {
   const Tab = createMaterialTopTabNavigator();
 
+  const Review = () => {
+    return(
+      <Text>Reviews</Text>
+    )
+  }
+  
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -17,7 +23,7 @@ const ProfileNav = () => {
         tabBarLabelStyle: { fontSize: 14, fontWeight:'bold'},
       })}>
       <Tab.Screen name="Bookshelf" component={Bookshelf} />
-      <Tab.Screen name="Reviews" component={ProfileReviews} />
+      <Tab.Screen name="Reviews" component={Review} />
     </Tab.Navigator>
   );
 };

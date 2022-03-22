@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
 import { Searchbar } from 'react-native-paper';
-import { BookSearch } from '../components/BookSearch';
+import BookSearch from '../components/BookSearch';
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = React.useState('');

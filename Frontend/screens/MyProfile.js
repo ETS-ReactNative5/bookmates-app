@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import {ProfileBody} from '../components/ProfileBody';
+import ProfileBody from '../components/ProfileBody';
 import ProfileNav from '../components/ProfileNav';
 
 const Profile = () => {

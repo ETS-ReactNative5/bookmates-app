@@ -1,7 +1,8 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-export const ProfileBody = ({name,profileImage,followers,following,bio, email}) => {
+
+const ProfileBody = ({name,profileImage,followers,following,bio, email}) => {
     const navigation = useNavigation(); 
     return (
       <SafeAreaView>
@@ -50,6 +51,7 @@ export const ProfileBody = ({name,profileImage,followers,following,bio, email}) 
         </View>
         <Text style={{paddingVertical: 15, paddingLeft:10}}>{bio}</Text>
     </SafeAreaView>
-
   );
 };
+
+export default ProfileBody;

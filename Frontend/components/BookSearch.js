@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-export const BookSearch = ({title, description, thumbnail, author}) => {
+const BookSearch = ({title, description, thumbnail, author}) => {
     const navigation = useNavigation(); 
     return(
         <TouchableOpacity onPress={() => navigation.navigate('BookDetails',{
@@ -20,3 +20,5 @@ export const BookSearch = ({title, description, thumbnail, author}) => {
         </TouchableOpacity>
     )
 }
+
+export default BookSearch;

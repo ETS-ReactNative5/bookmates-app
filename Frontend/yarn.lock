@@ -1103,6 +1103,11 @@
   resolved "https://registry.yarnpkg.com/@expo-google-fonts/baloo-2/-/baloo-2-0.2.2.tgz#ae1c90052697bdfe9fe66be86432bbca213df6bc"
   integrity sha512-q4wSHbwciV+H8kmSTxlXFtzaOo89gy/o5jqhKBBFuADigCBUh1zsMWrsseQRUI1oMk7kY7Oh3527qWWKdRhC2w==
 
+"@expo-google-fonts/roboto@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/roboto/-/roboto-0.2.2.tgz#0a9f4685e8d02bdb0d2d2919c102f531bdb353d4"
+  integrity sha512-qP0oZsR8rTID5T9wEXSt9yCYMnKYKlvIlrJGGpd+t71Obt2J51+51PBpvxd5c8fpABEru3zx6ENmpU9lzwr8zw==
+
 "@expo/config-plugins@4.0.6":
   version "4.0.6"
   resolved "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-4.0.6.tgz"
