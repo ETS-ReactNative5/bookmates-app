@@ -2,6 +2,7 @@ import { View,Text, StyleSheet, StatusBar,Modal, Image, TouchableOpacity, SafeAr
 import React, { useState } from "react";
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import BookReview from './../components/BookReview';
 
 const BookDetails = ({route, navigation}) => {
 
@@ -24,10 +25,32 @@ const Description = () => {
 
 {/*Book Reviews component*/}
 const BookReviews = () => {
-  return (
-    <View style={{backgroundColor:'white', flex:1}}>
-      <Text>Reviews</Text>
-    </View>
+    let book1 = {title:"Me Before You", author:"Jojo Moyes", 
+    thumbnail:require('./../assets/mebeforeyou.jpg')};
+    let user1 = {name:'Claudia Holland', profile_pic:require('./../assets/test_profile_pic.jpg')};
+    return(
+    <SafeAreaView>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <BookReview
+          user = {user1}
+          book = {book1}
+          review_text="I love it. I love its warmth and vibrancy, its heartache and its pain, its humor and meanness, the ugliness, the beauty, the crying, the laughter, the sarcasm.
+          I love Elanor and Park and I love that there's still a tiny chance for them."
+          likes="20"
+          dislikes="3"
+          comments="5"/>
+
+        <BookReview
+          user = {user1}
+          book = {book1}
+          review_text="I love it. I love its warmth and vibrancy, its heartache and its pain, its humor and meanness, the ugliness, the beauty, the crying, the laughter, the sarcasm.
+          I love Elanor and Park and I love that there's still a tiny chance for them."
+          likes="20"
+          dislikes="3"
+          comments="5"/>
+
+      </ScrollView>
+    </SafeAreaView>
 )
 };
 

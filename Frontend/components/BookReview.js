@@ -21,7 +21,7 @@ const ProfileReview = ({ user, book, review_text, likes, dislikes, comments }) =
           flexDirection: 'row',
           alignItems: 'flex-start',
           backgroundColor: 'white',
-          marginBottom: 10,
+          marginVertical: 5,
           flex: 1,
           paddingHorizontal: 15,
         }}
@@ -29,13 +29,7 @@ const ProfileReview = ({ user, book, review_text, likes, dislikes, comments }) =
         <Image style={styles.profile_pic} source={user.profile_pic} />
         <View style={{ flex: 1 }}>
           <Text style={styles.name}>{user.name}</Text>
-          <Text style={styles.book_title}>
-            on {book.title} by {book.author}
-          </Text>
-          <View style={{ flexDirection: 'row' }}>
-            <Image style={styles.book_img} source={book.thumbnail} />
-            <Text style={styles.review_text}>{review_text}</Text>
-          </View>
+          <Text style={styles.review_text}>{review_text}</Text>
 
           {/* Interactions */}
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10 }}>
@@ -90,19 +84,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginTop: 10,
   },
-  book_title: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    fontFamily: 'Roboto_300Light_Italic',
-    fontSize: 14,
-  },
-  book_img: {
-    height: 85,
-    width: 60,
-    marginHorizontal: 10,
-    borderRadius: 6,
-    marginTop:4
-  },
   review_text: {
     textAlign: 'justify',
     fontFamily: 'Roboto_300Light',
@@ -110,5 +91,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexGrow: 1,
     lineHeight: 18,
-  },
+    paddingHorizontal:10
+  }
 });
