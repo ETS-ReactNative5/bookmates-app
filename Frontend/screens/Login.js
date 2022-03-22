@@ -60,7 +60,7 @@ const Login = ({ navigation }) => {
         {/*Sign in button*/}
         <View style={styles.button}>
           <TouchableOpacity style={[styles.signIn, { backgroundColor: '#6886C5', marginTop: 5, borderRadius: 30 }]}>
-            <Text onPress={() => navigation.navigate('Home')} style={[styles.textSign, { color: '#ffffff' }]}>SIGN IN</Text>
+            <Text onPress={() => navigation.navigate('BookmatesMap')} style={[styles.textSign, { color: '#ffffff' }]}>SIGN IN</Text>
           </TouchableOpacity>
         </View>
 

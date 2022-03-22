@@ -7,7 +7,7 @@ import Login from './screens/Login';
 import Signup from './screens/Signup';
 import ForgotPW from './screens/ForgotPW';
 import ChangePW from './screens/ChangePW';
-import Home from './screens/Home';
+import BookmatesMap from './screens/BookmatesMap';
 import MyTabs from './screens/Tabs';
 import EditProfile from './screens/EditProfile';
 import BookDetails from './screens/BookDetails';
@@ -38,7 +38,7 @@ function App() {
         <Stack.Screen name="Signup" component = {Signup} />
         <Stack.Screen name="ForgotPW" component = {ForgotPW} />
         <Stack.Screen name="ChangePW" component = {ChangePW} />
-        <Stack.Screen name="Home" component = {MyTabs} />
+        <Stack.Screen name="BookmatesMap" component = {MyTabs} />
         <Stack.Screen name="EditProfile" component = {EditProfile} />
         <Stack.Screen name="BookDetails" component = {BookDetails} />
       </Stack.Navigator>
