@@ -26,6 +26,10 @@ export default function BookmatesMap() {
 
   return (
     <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.logo}>Find bookmates nearby</Text>
+        </View>
+
       <MapView
         style={styles.map}
         initialRegion={{
@@ -61,4 +65,18 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
   },
+  header:{
+    paddingVertical:15,
+    paddingHorizontal:15,
+    backgroundColor:'white',
+    elevation: 10,
+    borderBottomLeftRadius:15,
+    borderBottomRightRadius:15
+  },
+  logo:{
+    fontFamily:'Baloo2_800ExtraBold',
+    color:'#6886C5',
+    textAlign:'center',
+    fontSize:18
+  }
 });

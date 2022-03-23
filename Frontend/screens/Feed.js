@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     paddingHorizontal:15,
     backgroundColor:'white',
     elevation: 10,
-    borderBottomLeftRadius:10,
-    borderBottomRightRadius:10
+    borderBottomLeftRadius:15,
+    borderBottomRightRadius:15
   },
   logo:{
     fontFamily:'Baloo2_800ExtraBold',
