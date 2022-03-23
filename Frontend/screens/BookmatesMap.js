@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import MapView, { Callout, Marker } from "react-native-maps";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
+import webview from 'react-native-webview'
+
 
 export default function BookmatesMap() {
+
   const [user, setUser] = useState({
     name:'Laurena Fayad',
-    profile_pic:require('./../assets/test_profile_pic'),
+    profile_pic:require('./../assets/test_profile_pic.jpg'),
     bio:'I love books♥'
   })
   
@@ -20,6 +23,7 @@ export default function BookmatesMap() {
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   });
+
   return (
     <View style={styles.container}>
       <MapView
@@ -37,10 +41,11 @@ export default function BookmatesMap() {
           coordinate={pin}
           pinColor="red"
         >
-          <Callout>
-
-            <Text>{pin.user.name}</Text>
-          
+          <Callout style={{borderRadius:100, width:200, height:100}}>
+            <View style={{flexDirection:'row'}}>
+              <Text style={{width:50, height:50, borderRadius:100}}><Image  source={require('./../assets/test_profile_pic.jpg')}/></Text>
+              <Text>{pin.user.name}</Text>
+            </View>
           </Callout>
         </Marker>
       </MapView>
