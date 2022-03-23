@@ -9,10 +9,24 @@ const Notifications = () => {
         <View style={styles.header}>
           <Text style={styles.logo}>Notifications</Text>
         </View>
-      <CommentNotification></CommentNotification>
-      <ReactionNotification></ReactionNotification>
-      <FollowNotification></FollowNotification>
-      <FollowBackNotification></FollowBackNotification>
+      <CommentNotification
+        name='Laurena Fayad'
+        profile_pic={require('./../assets/test_profile_pic.jpg')}
+        comment_text="Totally agreed!😍"
+      />
+      <ReactionNotification
+        name='Laurena Fayad'
+        profile_pic={require('./../assets/test_profile_pic.jpg')}
+      />
+        
+      <FollowNotification
+        name='Laurena Fayad'
+        profile_pic={require('./../assets/test_profile_pic.jpg')}
+      />
+      <FollowBackNotification
+        name='Laurena Fayad'
+        profile_pic={require('./../assets/test_profile_pic.jpg')}
+      />
       </ScrollView>
     </SafeAreaView>
   )
