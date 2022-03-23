@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const BookmateProfileBody = ({name,profile_pic,followers,following,bio}) => {
+const BookmateProfileBody = ({name,profileImage,followers,following,bio}) => {
 
     const [followed, setFollowed] = useState(false);
 
@@ -20,7 +20,7 @@ const BookmateProfileBody = ({name,profile_pic,followers,following,bio}) => {
         }}>
             <View>
                 <Image
-                    source={profile_pic}
+                    source={profileImage}
                     style={{
                     resizeMode: 'cover',
                     width: 70,

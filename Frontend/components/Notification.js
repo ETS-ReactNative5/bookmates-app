@@ -1,21 +1,23 @@
 import { StyleSheet, Text, View , Image, TouchableOpacity, TouchableOpacityBase} from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 export const FollowNotification = ({name, profile_pic}) => {
-  return (
-    <View style={styles.notification}>
-        <Image style={styles.profile_pic} source={profile_pic}/>
-        <View>
-            <View style={styles.text}>
-                <Text style={styles.name}>{name}</Text>
-                <Text style={styles.action}> followed you.</Text>
+    const navigation = useNavigation();
+    return (
+        <TouchableOpacity style={styles.notification} onPress={()=>navigation.navigate('BookmateProfile', {name, profile_pic})}>
+            <Image style={styles.profile_pic} source={profile_pic}/>
+            <View>
+                <View style={styles.text}>
+                    <Text style={styles.name}>{name}</Text>
+                    <Text style={styles.action}> followed you.</Text>
+                </View>
+                <TouchableOpacity style={styles.button}>
+                        <Text style={styles.button_text}>Follow Back</Text>
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.button}>
-                    <Text style={styles.button_text}>Follow Back</Text>
-            </TouchableOpacity>
-        </View>
-    </View>
-  )
+        </TouchableOpacity>
+    )
 }
 
 export const FollowBackNotification = ({name, profile_pic, comment_text}) => {

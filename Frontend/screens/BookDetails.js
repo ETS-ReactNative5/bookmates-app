@@ -83,6 +83,12 @@ const toggleFinished = () => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}>
+
+          <TouchableOpacity
+            onPress={() => setModalVisible(false)}
+            style={styles.modalContainerStyle}
+          >
+
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <TouchableOpacity onPress={() => toggleCurrentlyReading()} style={{flexDirection:'row', alignItems:'center'}}>
@@ -110,6 +116,7 @@ const toggleFinished = () => {
             </View>
 
           </View>
+        </TouchableOpacity>
       </Modal>
 
         {/*Navigation buttons*/}
@@ -209,5 +216,12 @@ const styles = StyleSheet.create({
     paddingVertical:10,
     borderBottomColor:'#6886C5',
     marginLeft:8
-  }
+  },
+  modalContainerStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'flex-start',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+  },
 });

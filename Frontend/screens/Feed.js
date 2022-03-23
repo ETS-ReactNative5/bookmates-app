@@ -12,9 +12,6 @@ const Feed = () => {
   let book3 = {title:"To Kill A Mockingbird", author:"Harper Lee", 
   thumbnail:require('./../assets/mockingbird.jpg')};
 
-  let user1 = {name:'Jane Dow', profile_pic:require('./../assets/test_profile_pic.jpg')};
-  let user2 = {name:'Claudia Holland', profile_pic:require('./../assets/test_profile_pic.jpg')};
-  let user3 = {name:'Julia Collins', profile_pic:require('./../assets/test_profile_pic.jpg')};
   return (
     <SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
@@ -22,7 +19,8 @@ const Feed = () => {
           <Text style={styles.logo}>bookmates</Text>
         </View>
         <ProfileReview
-            user = {user1}
+            name='Jane Dow'
+            profile_pic = {require('./../assets/test_profile_pic.jpg')}
             book = {book1}
             review_text="I love it. I love its warmth and vibrancy, its heartache and its pain, its humor and meanness, the ugliness, the beauty, the crying, the laughter, the sarcasm.
             I love Elanor and Park and I love that there's still a tiny chance for them."
@@ -31,7 +29,8 @@ const Feed = () => {
             comments="5"/>
 
             <ProfileReview
-            user = {user2}
+            name='Claudia Holland' 
+            profile_pic={require('./../assets/test_profile_pic.jpg')}
             book = {book2}
             review_text="I love it. I love its warmth and vibrancy, its heartache and its pain, its humor and meanness, the ugliness, the beauty, the crying, the laughter, the sarcasm.
             I love Elanor and Park and I love that there's still a tiny chance for them."
@@ -40,7 +39,8 @@ const Feed = () => {
             comments="5"/>
 
             <ProfileReview
-            user = {user3}
+            name='Julia Collins'
+            profile_pic={require('./../assets/test_profile_pic.jpg')}
             book = {book3}
             review_text="I love it. I love its warmth and vibrancy, its heartache and its pain, its humor and meanness, the ugliness, the beauty, the crying, the laughter, the sarcasm.
             I love Elanor and Park and I love that there's still a tiny chance for them."
@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     elevation: 10,
     borderBottomLeftRadius:15,
-    borderBottomRightRadius:15
+    borderBottomRightRadius:15,
+    marginBottom:-15
   },
   logo:{
     fontFamily:'Baloo2_800ExtraBold',
