@@ -33,16 +33,16 @@ function App() {
       <Stack.Navigator initialRouteName="Splash" screenOptions={{
     headerShown: false
   }}>
-        <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="Login" component = {Login} />
-        <Stack.Screen name="Signup" component = {Signup} />
-        <Stack.Screen name="ForgotPW" component = {ForgotPW} />
-        <Stack.Screen name="ChangePW" component = {ChangePW} />
-        <Stack.Screen name="BookmatesMap" component = {MyTabs} />
-        <Stack.Screen name="EditProfile" component = {EditProfile} />
-        <Stack.Screen name="BookDetails" component = {BookDetails} />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <Stack.Screen name="Splash" component={SplashScreen} />
+      <Stack.Screen name="Login" component = {Login} />
+      <Stack.Screen name="Signup" component = {Signup} />
+      <Stack.Screen name="ForgotPW" component = {ForgotPW} />
+      <Stack.Screen name="ChangePW" component = {ChangePW} />
+      <Stack.Screen name="BookmatesMap" component = {MyTabs} />
+      <Stack.Screen name="EditProfile" component = {EditProfile} />
+      <Stack.Screen name="BookDetails" component = {BookDetails} />
+    </Stack.Navigator>
+  </NavigationContainer>
   );
 }
 

@@ -12,7 +12,7 @@ const Tab = createMaterialBottomTabNavigator();
 const MyTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Map"
       activeColor="#6886C5"
       barStyle={{ 
       backgroundColor: '#FFFFFF', 
@@ -23,7 +23,7 @@ const MyTabs = () => {
     }}
     >
       <Tab.Screen
-        name="Home"
+        name="Map"
         component={BookmatesMap}
         options={{
           tabBarLabel: 'bookmates',

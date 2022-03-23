@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     paddingVertical:15,
     paddingHorizontal:15,
     backgroundColor:'white',
-    elevation: 5,
+    elevation: 10,
     borderBottomLeftRadius:10,
     borderBottomRightRadius:10
   },
