@@ -1,9 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, TextInput, StyleSheet, StatusBar, Image, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Logo from '../assets/Vectorbook-logo.png';
 
 const Signup = ({ navigation }) => {
+
+  const [email, setEmail] = useState('');
+  const [first_name, setFirstName] = useState('');
+  const [last_name, setLastName] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [message, setMessage] = useState('');
+
+  // Handle showing/hiding password inputs
   const [data, setData] = React.useState({
     check_textInputChange: false,
     secureTextEntry1: true,
@@ -24,6 +33,38 @@ const Signup = ({ navigation }) => {
     });
   };
 
+  const onSubmitHandler = () => {
+    const payload = {
+        first_name,
+        last_name,
+        email,
+        password,
+    };
+    fetch('http://10.0.2.2:3000/api/user/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+    })
+    .then(async res => { 
+        try {
+            const jsonRes = await res.json();
+            if (res.status !== 200) {
+                setMessage(jsonRes.message);
+            } else {
+                setMessage(jsonRes.message);
+                navigation.navigate('Login')
+            }
+        } catch (err) {
+            console.log(err);
+        };
+    })
+    .catch(err => {
+        console.log(err);
+    });
+};
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#5A7FCC" barStyle="light-content" />
@@ -43,6 +84,7 @@ const Signup = ({ navigation }) => {
             placeholderTextColor="#BDBDBD"
             style={[styles.textInput, { color: '#BDBDBD' }]}
             autoCapitalize="none"
+            onChangeText={setFirstName}
           />
         </View>
 
@@ -54,6 +96,7 @@ const Signup = ({ navigation }) => {
             placeholderTextColor="#BDBDBD"
             style={[styles.textInput, { color: '#BDBDBD' }]}
             autoCapitalize="none"
+            onChangeText={setLastName}
           />
         </View>
 
@@ -65,6 +108,7 @@ const Signup = ({ navigation }) => {
             placeholderTextColor="#BDBDBD"
             style={[styles.textInput, { color: '#BDBDBD' }]}
             autoCapitalize="none"
+            onChangeText={setEmail}
           />
         </View>
 
@@ -74,9 +118,10 @@ const Signup = ({ navigation }) => {
           <TextInput
             placeholder="Choose a password"
             placeholderTextColor="#BDBDBD"
-            secureTextEntry1={data.secureTextEntry1 ? true : false}
+            secureTextEntry={data.secureTextEntry1 ? true : false}
             style={[styles.textInput, { color: '#BDBDBD' }]}
             autoCapitalize="none"
+            onChangeText={setPassword}
           />
           <TouchableOpacity onPress={updateSecureTextEntry1}>
             {data.secureTextEntry1 ? (
@@ -96,6 +141,7 @@ const Signup = ({ navigation }) => {
             secureTextEntry={data.secureTextEntry2 ? true : false}
             style={[styles.textInput, { color: '#BDBDBD' }]}
             autoCapitalize="none"
+            onChangeText={setPasswordConfirmation}            
           />
           <TouchableOpacity onPress={updateSecureTextEntry2}>
             {data.secureTextEntry2 ? (
@@ -108,7 +154,7 @@ const Signup = ({ navigation }) => {
 
         {/*Sign up button*/}
         <View style={styles.button}>
-          <TouchableOpacity style={[styles.signIn, { backgroundColor: '#5A7FCC', marginTop: 15, borderRadius: 30 }]}>
+          <TouchableOpacity onPress={onSubmitHandler} style={[styles.signIn, { backgroundColor: '#5A7FCC', marginTop: 15, borderRadius: 30 }]}>
             <Text style={[styles.textSign, { color: '#ffffff' }]}>SIGN UP</Text>
           </TouchableOpacity>
         </View>
