@@ -8,7 +8,7 @@ export default function BookmatesMap({ navigation }) {
     longitude: 35.72789,
   });
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedBookmate, setSelectedBookmate] = useState("");
+  const [selectedBookmate, setSelectedBookmate] = useState('');
   const [bookmates, setBookmates] = useState([
     {
       id: 1,
@@ -18,7 +18,7 @@ export default function BookmatesMap({ navigation }) {
       followers: 200,
       following: 150,
       longitude: 35.5411,
-      latitude: 33.8938
+      latitude: 33.8938,
     },
     {
       id: 2,
@@ -78,38 +78,41 @@ export default function BookmatesMap({ navigation }) {
           setModalVisible(!modalVisible);
         }}
       >
-        <TouchableOpacity
-            onPress={() => setModalVisible(false)}
-            style={styles.modalContainerStyle}
-        >
-
-        <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center', marginBottom: 60 }}>
+        <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.modalContainerStyle}>
+          <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', marginBottom: 60 }}>
             <View
               style={{
-                borderRadius:20,
+                borderRadius: 20,
                 padding: 20,
                 width: 300,
                 alignItems: 'center',
-                justifyContent:'center',
+                justifyContent: 'center',
                 flexDirection: 'row',
                 backgroundColor: '#FFFFFFFF',
               }}
             >
-              <View style={{justifyContent:'center'}}>
-                <Image style={{width:70, height:70, borderRadius:100}} source={selectedBookmate && selectedBookmate.profile_pic}/>
+              <View style={{ justifyContent: 'center' }}>
+                <Image
+                  style={{ width: 70, height: 70, borderRadius: 100 }}
+                  source={selectedBookmate && selectedBookmate.profile_pic}
+                />
               </View>
-              <View style={{ marginLeft:10, alignItems:'center'}}>
-                <Text style={{fontFamily:'Baloo2_600SemiBold', fontSize:16, marginBottom:8}}>{selectedBookmate && selectedBookmate.name}</Text>
-                <TouchableOpacity style={styles.button} 
+              <View style={{ marginLeft: 10, alignItems: 'center' }}>
+                <Text style={{ fontFamily: 'Baloo2_600SemiBold', fontSize: 16, marginBottom: 8 }}>
+                  {selectedBookmate && selectedBookmate.name}
+                </Text>
+                <TouchableOpacity
+                  style={styles.button}
                   onPress={() => {
-                  navigation.navigate('BookmateProfile', {user:selectedBookmate});
+                    navigation.navigate('BookmateProfile', { user: selectedBookmate });
                     setModalVisible(!modalVisible);
-                  }}>
+                  }}
+                >
                   <Text style={styles.button_text}>View Profile</Text>
                 </TouchableOpacity>
               </View>
             </View>
-        </View>
+          </View>
         </TouchableOpacity>
       </Modal>
     </View>
@@ -135,7 +138,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     fontFamily: 'Baloo2_800ExtraBold',
-    color: '#6886C5',
+    color: '#5A7FCC',
     textAlign: 'center',
     fontSize: 18,
   },
@@ -147,16 +150,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
   },
   button: {
-    width:100, 
-    height:30,
-    backgroundColor:'#6886C5', 
-    borderRadius:20,
-    justifyContent:'center'
+    width: 100,
+    height: 30,
+    backgroundColor: '#5A7FCC',
+    borderRadius: 20,
+    justifyContent: 'center',
   },
-  button_text:{
-    color:'white', 
-    fontFamily:'Baloo2_600SemiBold',
-    textAlign:'center',
-  }
+  button_text: {
+    color: 'white',
+    fontFamily: 'Baloo2_600SemiBold',
+    textAlign: 'center',
+  },
 });
-

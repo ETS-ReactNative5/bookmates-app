@@ -1,7 +1,6 @@
 import { StyleSheet, Text, SafeAreaView, Image, View, TouchableWithoutFeedback } from 'react-native';
 import Logo from '../assets/Vectorbook-logo.png';
 export default function SplashScreen({ navigation }) {
-
   return (
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={() => navigation.navigate('Login')}>
@@ -17,7 +16,7 @@ export default function SplashScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#6886C5',
+    backgroundColor: '#5A7FCC',
     color: 'white',
     alignItems: 'center',
     justifyContent: 'center',
@@ -25,6 +24,6 @@ const styles = StyleSheet.create({
   titleText: {
     color: 'white',
     fontSize: 28,
-    fontFamily:'Baloo2_800ExtraBold',
+    fontFamily: 'Baloo2_800ExtraBold',
   },
 });

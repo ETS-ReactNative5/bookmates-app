@@ -35,31 +35,31 @@ const ProfileReview = ({ user, book, review_text, likes, dislikes, comments }) =
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10 }}>
             <TouchableOpacity onPress={() => likeReview()}>
               {like_status ? (
-                <Text style={{ color: '#6886C5' }}>
-                  {likes} <AntDesign name="like1" size={18} color="#6886C5" />
+                <Text style={{ color: '#5A7FCC' }}>
+                  {likes} <AntDesign name="like1" size={18} color="#5A7FCC" />
                 </Text>
               ) : (
-                <Text style={{ color: '#6886C5' }}>
-                  {likes} <AntDesign name="like2" size={18} color="#6886C5" />
+                <Text style={{ color: '#5A7FCC' }}>
+                  {likes} <AntDesign name="like2" size={18} color="#5A7FCC" />
                 </Text>
               )}
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => dislikeReview()}>
               {dislike_status ? (
-                <Text style={{ color: '#6886C5' }}>
-                  {dislikes} <AntDesign name="dislike1" size={18} color="#6886C5" />
+                <Text style={{ color: '#5A7FCC' }}>
+                  {dislikes} <AntDesign name="dislike1" size={18} color="#5A7FCC" />
                 </Text>
               ) : (
-                <Text style={{ color: '#6886C5' }}>
-                  {dislikes} <AntDesign name="dislike2" size={18} color="#6886C5" />
+                <Text style={{ color: '#5A7FCC' }}>
+                  {dislikes} <AntDesign name="dislike2" size={18} color="#5A7FCC" />
                 </Text>
               )}
             </TouchableOpacity>
 
             <TouchableOpacity>
-              <Text style={{ color: '#6886C5' }}>
-                {comments} <FontAwesome name="commenting-o" size={18} color="#6886C5" />
+              <Text style={{ color: '#5A7FCC' }}>
+                {comments} <FontAwesome name="commenting-o" size={18} color="#5A7FCC" />
               </Text>
             </TouchableOpacity>
           </View>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   name: {
-    fontFamily:'Roboto_700Bold',
+    fontFamily: 'Roboto_700Bold',
     fontSize: 16,
     paddingHorizontal: 10,
     marginTop: 10,
@@ -91,6 +91,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexGrow: 1,
     lineHeight: 18,
-    paddingHorizontal:10
-  }
+    paddingHorizontal: 10,
+  },
 });

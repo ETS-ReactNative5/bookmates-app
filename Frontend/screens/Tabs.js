@@ -13,22 +13,21 @@ const MyTabs = () => {
   return (
     <Tab.Navigator
       initialRouteName="Map"
-      activeColor="#6886C5"
-      barStyle={{ 
-      backgroundColor: '#FFFFFF', 
-      elevation:10
-      // borderTopLeftRadius: 20,
-      // borderTopRightRadius: 20,
-      // overflow: 'hidden'
-    }}
+      activeColor="#5A7FCC"
+      barStyle={{
+        backgroundColor: '#FFFFFF',
+        elevation: 10,
+        // borderTopLeftRadius: 20,
+        // borderTopRightRadius: 20,
+        // overflow: 'hidden'
+      }}
     >
       <Tab.Screen
         name="Map"
         component={BookmatesMap}
         options={{
           tabBarLabel: 'bookmates',
-          tabBarIcon: ({ color }) => (
-            <Feather name="map" size={24} color={color} />)
+          tabBarIcon: ({ color }) => <Feather name="map" size={24} color={color} />,
         }}
       />
       <Tab.Screen
@@ -36,8 +35,7 @@ const MyTabs = () => {
         component={Search}
         options={{
           tabBarLabel: 'Search',
-          tabBarIcon: ({ color }) => (
-          <Feather name="search" size={24} color={color} />),
+          tabBarIcon: ({ color }) => <Feather name="search" size={24} color={color} />,
         }}
       />
       <Tab.Screen
@@ -45,9 +43,8 @@ const MyTabs = () => {
         component={Feed}
         options={{
           tabBarLabel: 'Feed',
-          tabBarIcon: ({ color }) => (
-            <Feather name="home" size={24} color={color}/>),
-          }}
+          tabBarIcon: ({ color }) => <Feather name="home" size={24} color={color} />,
+        }}
       />
       <Tab.Screen
         name="Notifications"
@@ -55,8 +52,7 @@ const MyTabs = () => {
         options={{
           tabBarLabel: 'Notifications',
           tabBarBadge: 5,
-          tabBarIcon: ({ color }) => (
-          <Ionicons name="notifications-outline" size={24} color={color} />),
+          tabBarIcon: ({ color }) => <Ionicons name="notifications-outline" size={24} color={color} />,
         }}
       />
       <Tab.Screen
@@ -64,12 +60,11 @@ const MyTabs = () => {
         component={MyProfile}
         options={{
           tabBarLabel: 'Profile',
-          tabBarIcon: ({ color }) => (
-          <Ionicons name="person-outline" size={24} color={color} />),
+          tabBarIcon: ({ color }) => <Ionicons name="person-outline" size={24} color={color} />,
         }}
       />
     </Tab.Navigator>
   );
-}
+};
 
 export default MyTabs;

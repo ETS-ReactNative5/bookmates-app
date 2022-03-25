@@ -4,7 +4,6 @@ import Feather from 'react-native-vector-icons/Feather';
 import Logo from '../assets/Vectorbook-logo.png';
 
 const Login = ({ navigation }) => {
-
   const [data, setData] = React.useState({
     check_textInputChange: false,
     secureTextEntry: true,
@@ -18,7 +17,7 @@ const Login = ({ navigation }) => {
   };
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#6886C5" barStyle="light-content" />
+      <StatusBar backgroundColor="#5A7FCC" barStyle="light-content" />
 
       {/*Header part*/}
       <View style={styles.header}>
@@ -59,20 +58,20 @@ const Login = ({ navigation }) => {
 
         {/*Sign in button*/}
         <View style={styles.button}>
-          <TouchableOpacity style={[styles.signIn, { backgroundColor: '#6886C5', marginTop: 5, borderRadius: 30 }]}>
-            <Text onPress={() => navigation.navigate('BookmatesMap')} style={[styles.textSign, { color: '#ffffff' }]}>SIGN IN</Text>
+          <TouchableOpacity style={[styles.signIn, { backgroundColor: '#5A7FCC', marginTop: 5, borderRadius: 30 }]}>
+            <Text onPress={() => navigation.navigate('BookmatesMap')} style={[styles.textSign, { color: '#ffffff' }]}>
+              SIGN IN
+            </Text>
           </TouchableOpacity>
         </View>
 
         {/*Forgot password?*/}
         <TouchableOpacity onPress={() => navigation.navigate('ForgotPW')}>
-          <Text style={styles.forgot}>
-            Forgot password?
-          </Text>
+          <Text style={styles.forgot}>Forgot password?</Text>
         </TouchableOpacity>
 
         {/*Sign up prompt*/}
-        <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', paddingVertical:30}}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 30 }}>
           <Text style={{ color: '#606060', textAlign: 'center' }}>Don't have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
             <Text style={styles.prompt}>SIGN UP</Text>
@@ -87,7 +86,7 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#6886C5',
+    backgroundColor: '#5A7FCC',
   },
   header: {
     flex: 1,
@@ -106,7 +105,7 @@ const styles = StyleSheet.create({
   text_header: {
     color: 'white',
     fontSize: 28,
-    fontFamily:'Baloo2_800ExtraBold',
+    fontFamily: 'Baloo2_800ExtraBold',
   },
   form_text: {
     color: '#BDBDBD',
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#f2f2f2',
     paddingBottom: 5,
     width: '90%',
-    alignSelf:'center',
+    alignSelf: 'center',
   },
   textInput: {
     flex: 1,
@@ -140,18 +139,18 @@ const styles = StyleSheet.create({
   },
   textSign: {
     fontSize: 18,
-    fontFamily:'Baloo2_600SemiBold',
+    fontFamily: 'Baloo2_600SemiBold',
   },
   prompt: {
-    fontFamily:'Baloo2_600SemiBold',
-    color: '#6886C5', 
-    fontSize:16
+    fontFamily: 'Baloo2_600SemiBold',
+    color: '#5A7FCC',
+    fontSize: 16,
   },
-  forgot: { 
-    color: '#6886C5', 
-    marginTop:30, 
+  forgot: {
+    color: '#5A7FCC',
+    marginTop: 30,
     textAlign: 'center',
-    fontFamily:'Baloo2_600SemiBold',
-    fontSize: 16
-  }
+    fontFamily: 'Baloo2_600SemiBold',
+    fontSize: 16,
+  },
 });
