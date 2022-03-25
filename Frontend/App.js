@@ -12,6 +12,7 @@ import MyTabs from './screens/Tabs';
 import EditProfile from './screens/EditProfile';
 import BookDetails from './screens/BookDetails';
 import BookmateProfile from './screens/BookmateProfile';
+import WriteReview from './screens/WriteReview';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +44,7 @@ function App() {
       <Stack.Screen name="EditProfile" component = {EditProfile} />
       <Stack.Screen name="BookDetails" component = {BookDetails} />
       <Stack.Screen name="BookmateProfile" component = {BookmateProfile} />
+      <Stack.Screen name="WriteReview" component = {WriteReview} />
     </Stack.Navigator>
   </NavigationContainer>
   );

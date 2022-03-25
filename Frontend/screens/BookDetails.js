@@ -109,10 +109,10 @@ const toggleFinished = () => {
                 <Text style={styles.modalText}>Finished</Text>
               </TouchableOpacity>
 
-              <View style={{flexDirection:'row', alignItems:'center'}}>
+              <TouchableOpacity onPress={() => navigation.navigate('WriteReview')} style={{flexDirection:'row', alignItems:'center'}}>
                 <MaterialCommunityIcons name="comment-text-multiple-outline" size={18} color="#6886C5" />
                 <Text style={styles.modalText}>Write review</Text>
-              </View>
+              </TouchableOpacity>
             </View>
 
           </View>
