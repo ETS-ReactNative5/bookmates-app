@@ -1,17 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, StatusBar, Image, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Logo from '../assets/Vectorbook-logo.png';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import axios from 'axios';
 
 const Signup = ({ navigation }) => {
-
-  const [email, setEmail] = useState('');
-  const [first_name, setFirstName] = useState('');
-  const [last_name, setLastName] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [message, setMessage] = useState('');
-
   // Handle showing/hiding password inputs
   const [data, setData] = React.useState({
     check_textInputChange: false,
@@ -33,141 +28,196 @@ const Signup = ({ navigation }) => {
     });
   };
 
-  const onSubmitHandler = () => {
-    const payload = {
-        first_name,
-        last_name,
-        email,
-        password,
+  // Handle showing backend errors
+  const [error_message, setErrorMessage] = useState('');
+  const [isError, setIsError] = useState(false);
+
+  // API linking
+  const onSubmitHandler = async (values, { resetForm }) => {
+    const user = {
+      first_name: values.first_name,
+      last_name: values.last_name,
+      email: values.email,
+      password: values.password,
     };
-    fetch('http://10.0.2.2:3000/api/user/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-    })
-    .then(async res => { 
-        try {
-            const jsonRes = await res.json();
-            if (res.status !== 200) {
-                setMessage(jsonRes.message);
-            } else {
-                setMessage(jsonRes.message);
-                navigation.navigate('Login')
-            }
-        } catch (err) {
-            console.log(err);
-        };
-    })
-    .catch(err => {
-        console.log(err);
-    });
-};
+
+    try {
+      axios
+        .post('http://10.0.2.2:3000/api/user/register', user)
+        .then(({ data }) => {
+          resetForm();
+          navigation.navigate('Login');
+        })
+        .catch((err) => {
+          setErrorMessage(err.response.data);
+          setIsError(true);
+          resetForm();
+        });
+    } catch (error) {
+      console.warn('error');
+    }
+  };
 
   return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor="#5A7FCC" barStyle="light-content" />
+    //Formik to handle form actions
+    <Formik
+      initialValues={{
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+      }}
+      onSubmit={onSubmitHandler}
+      //Yup to handle schema creation
+      validationSchema={yup.object().shape({
+        first_name: yup
+          .string()
+          .required('First name is required.')
+          .min(3, 'First name must be at least 3 characters.'),
+        last_name: yup.string().required('Last name is required.').min(3, 'Last name must be at least 3 characters.'),
+        email: yup.string().email('Email must be valid').required('Email is required.'),
+        password: yup.string().min(8, 'Password must be at least 8 characters.').required('Password is required.'),
+        password_confirmation: yup.string().oneOf([yup.ref('password'), null], 'Passwords do not match.')
+      })}
+    >
+      {({ values, errors, setFieldTouched, touched, handleChange, isValid, handleSubmit }) => (
+        <View style={styles.container}>
+          <StatusBar backgroundColor="#5A7FCC" barStyle="light-content" />
 
-      {/*Header part*/}
-      <View style={styles.header}>
-        <Image source={Logo} style={{ marginBottom: 20 }} />
-        <Text style={styles.text_header}>bookmates</Text>
-      </View>
+          //Header part
+          <View style={styles.header}>
+            <Image source={Logo} style={{ marginBottom: 20 }} />
+            <Text style={styles.text_header}>bookmates</Text>
+          </View>
 
-      <View style={[styles.form, { backgroundColor: '#ffffff' }]}>
-        {/*First Name Input Field*/}
-        <View style={styles.action}>
-          <Feather name="user" size={24} color="#BDBDBD" style={{ marginTop: 15 }} />
-          <TextInput
-            placeholder="Enter your first name"
-            placeholderTextColor="#BDBDBD"
-            style={[styles.textInput, { color: '#BDBDBD' }]}
-            autoCapitalize="none"
-            onChangeText={setFirstName}
-          />
-        </View>
+          // Display error message from backend at the top
+          <View style={[styles.form, { backgroundColor: '#ffffff' }]}>
+            {isError && <Text style={{ fontSize: 14, color: 'red', textAlign: 'center' }}>{error_message}</Text>}
 
-        {/*Last Name Input Field*/}
-        <View style={styles.action}>
-          <Feather name="user" size={24} color="#BDBDBD" style={{ marginTop: 15 }} />
-          <TextInput
-            placeholder="Enter your last name"
-            placeholderTextColor="#BDBDBD"
-            style={[styles.textInput, { color: '#BDBDBD' }]}
-            autoCapitalize="none"
-            onChangeText={setLastName}
-          />
-        </View>
+            // First Name Input Field
+            <View style={styles.action}>
+              <Feather name="user" size={24} color="#BDBDBD" style={{ marginTop: 15 }} />
+              <TextInput
+                placeholder="Enter your first name"
+                placeholderTextColor="#BDBDBD"
+                style={[styles.textInput, { color: '#242424' }]}
+                autoCapitalize="none"
+                onBlur={() => setFieldTouched('first_name')}
+                onChangeText={handleChange('first_name')}
+              />
+            </View>
 
-        {/*Email Input Field*/}
-        <View style={styles.action}>
-          <Feather name="mail" color="#BDBDBD" size={20} style={{ marginTop: 15 }} />
-          <TextInput
-            placeholder="Enter your email address"
-            placeholderTextColor="#BDBDBD"
-            style={[styles.textInput, { color: '#BDBDBD' }]}
-            autoCapitalize="none"
-            onChangeText={setEmail}
-          />
-        </View>
-
-        {/*Password Input Field*/}
-        <View style={styles.action}>
-          <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: 15 }} />
-          <TextInput
-            placeholder="Choose a password"
-            placeholderTextColor="#BDBDBD"
-            secureTextEntry={data.secureTextEntry1 ? true : false}
-            style={[styles.textInput, { color: '#BDBDBD' }]}
-            autoCapitalize="none"
-            onChangeText={setPassword}
-          />
-          <TouchableOpacity onPress={updateSecureTextEntry1}>
-            {data.secureTextEntry1 ? (
-              <Feather name="eye-off" color="grey" size={20} style={{ marginTop: 15 }} />
-            ) : (
-              <Feather name="eye" color="grey" size={20} style={{ marginTop: 15 }} />
+            // Display error based on schema after every input
+            {touched.first_name && errors.first_name && (
+              <Text style={{ fontSize: 11, color: 'red', paddingLeft: 20 }}>{errors.first_name}</Text>
             )}
-          </TouchableOpacity>
-        </View>
 
-        {/*Confirm Password Input Field*/}
-        <View style={styles.action}>
-          <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: 15 }} />
-          <TextInput
-            placeholder="Confirm password"
-            placeholderTextColor="#BDBDBD"
-            secureTextEntry={data.secureTextEntry2 ? true : false}
-            style={[styles.textInput, { color: '#BDBDBD' }]}
-            autoCapitalize="none"
-            onChangeText={setPasswordConfirmation}            
-          />
-          <TouchableOpacity onPress={updateSecureTextEntry2}>
-            {data.secureTextEntry2 ? (
-              <Feather name="eye-off" color="grey" size={20} style={{ marginTop: 15 }} />
-            ) : (
-              <Feather name="eye" color="grey" size={20} style={{ marginTop: 15 }} />
+            // Last Name Input Field
+            <View style={styles.action}>
+              <Feather name="user" size={24} color="#BDBDBD" style={{ marginTop: 15 }} />
+              <TextInput
+                placeholder="Enter your last name"
+                placeholderTextColor="#BDBDBD"
+                style={[styles.textInput, { color: '#242424' }]}
+                autoCapitalize="none"
+                onBlur={() => setFieldTouched('last_name')}
+                onChangeText={handleChange('last_name')}
+              />
+            </View>
+
+            {touched.last_name && errors.last_name && (
+              <Text style={{ fontSize: 11, color: 'red', paddingLeft: 20 }}>{errors.last_name}</Text>
             )}
-          </TouchableOpacity>
-        </View>
 
-        {/*Sign up button*/}
-        <View style={styles.button}>
-          <TouchableOpacity onPress={onSubmitHandler} style={[styles.signIn, { backgroundColor: '#5A7FCC', marginTop: 15, borderRadius: 30 }]}>
-            <Text style={[styles.textSign, { color: '#ffffff' }]}>SIGN UP</Text>
-          </TouchableOpacity>
-        </View>
+            // Email Input Field
+            <View style={styles.action}>
+              <Feather name="mail" color="#BDBDBD" size={20} style={{ marginTop: 15 }} />
+              <TextInput
+                placeholder="Enter your email address"
+                placeholderTextColor="#BDBDBD"
+                style={[styles.textInput, { color: '#242424' }]}
+                autoCapitalize="none"
+                onBlur={() => setFieldTouched('email')}
+                onChangeText={handleChange('email')}
+              />
+            </View>
 
-        {/*Sign in prompt*/}
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 30 }}>
-          <Text style={{ color: '#606060', textAlign: 'center' }}>Already have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.prompt}>SIGN IN</Text>
-          </TouchableOpacity>
+            {touched.email && errors.email && (
+              <Text style={{ fontSize: 11, color: 'red', paddingLeft: 20 }}>{errors.email}</Text>
+            )}
+
+            // Password Input Field
+            <View style={styles.action}>
+              <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: 15 }} />
+              <TextInput
+                placeholder="Choose a password"
+                placeholderTextColor="#BDBDBD"
+                secureTextEntry={data.secureTextEntry1 ? true : false}
+                style={[styles.textInput, { color: '#242424' }]}
+                autoCapitalize="none"
+                onBlur={() => setFieldTouched('password')}
+                onChangeText={handleChange('password')}
+              />
+              <TouchableOpacity onPress={updateSecureTextEntry1}>
+                {data.secureTextEntry1 ? (
+                  <Feather name="eye-off" color="grey" size={20} style={{ marginTop: 15 }} />
+                ) : (
+                  <Feather name="eye" color="grey" size={20} style={{ marginTop: 15 }} />
+                )}
+              </TouchableOpacity>
+            </View>
+
+            {touched.password && errors.password && (
+              <Text style={{ fontSize: 11, color: 'red', paddingLeft: 20 }}>{errors.password}</Text>
+            )}
+
+            // Confirm Password Input Field
+            <View style={styles.action}>
+              <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: 15 }} />
+              <TextInput
+                placeholder="Confirm password"
+                placeholderTextColor="#BDBDBD"
+                secureTextEntry={data.secureTextEntry2 ? true : false}
+                style={[styles.textInput, { color: '#242424' }]}
+                autoCapitalize="none"
+                onBlur={() => setFieldTouched('password_confirmation')}
+                onChangeText={handleChange('password_confirmation')}
+              />
+              <TouchableOpacity onPress={updateSecureTextEntry2}>
+                {data.secureTextEntry2 ? (
+                  <Feather name="eye-off" color="grey" size={20} style={{ marginTop: 15 }} />
+                ) : (
+                  <Feather name="eye" color="grey" size={20} style={{ marginTop: 15 }} />
+                )}
+              </TouchableOpacity>
+            </View>
+
+            {touched.password_confirmation && errors.password_confirmation && (
+              <Text style={{ fontSize: 11, color: 'red', paddingLeft: 20 }}>{errors.password_confirmation}</Text>
+            )}
+
+            // Sign up button
+            <View style={styles.button}>
+              <TouchableOpacity
+                onPress={() => handleSubmit()}
+                style={[styles.signIn, { backgroundColor: '#5A7FCC', marginTop: 15, borderRadius: 30 }]}
+              >
+                <Text style={[styles.textSign, { color: '#ffffff' }]}>SIGN UP</Text>
+              </TouchableOpacity>
+            </View>
+
+            // Sign in prompt
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 30 }}>
+              <Text style={{ color: '#606060', textAlign: 'center' }}>Already have an account? </Text>
+              <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                <Text style={styles.prompt}>SIGN IN</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
-      </View>
-    </View>
+      )}
+    </Formik>
   );
 };
 export default Signup;
