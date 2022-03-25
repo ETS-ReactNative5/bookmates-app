@@ -93,7 +93,7 @@ const Signup = ({ navigation }) => {
 
           // Display error message from backend at the top
           <View style={[styles.form, { backgroundColor: '#ffffff' }]}>
-            {isError && <Text style={{ fontSize: 14, color: 'red', textAlign: 'center' }}>{error_message}</Text>}
+            {!! isError && <Text style={{ fontSize: 14, color: 'red', textAlign: 'center' }}>{error_message}</Text>}
 
             // First Name Input Field
             <View style={styles.action}>
