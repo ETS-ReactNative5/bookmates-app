@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     notification:{
         flexDirection:'row',
         backgroundColor:'white',
-        paddingVertical:15,
+        paddingVertical:20,
         paddingHorizontal:15,
         marginVertical:3
     },

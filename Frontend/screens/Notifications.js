@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     elevation: 10,
     borderBottomLeftRadius:15,
-    borderBottomRightRadius:15
+    borderBottomRightRadius:15,
+    marginBottom:-10
   },
   logo:{
     fontFamily:'Baloo2_800ExtraBold',

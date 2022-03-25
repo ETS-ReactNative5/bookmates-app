@@ -16,7 +16,9 @@ const Profile = () => {
           email="claudiaholland@gmail.com"
         />
       </View>
-      <ProfileNav />
+      <ProfileNav 
+        name="Claudia Holland"
+        profileImage={require('./../assets/test_profile_pic.jpg')} />
     </View>
   );
 };
