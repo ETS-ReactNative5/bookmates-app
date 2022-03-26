@@ -90,8 +90,23 @@ const dislikeReview = async (req, res) => {
       }
 }
 
+const getUserReviews = async (req, res) => {
+
+    try{
+        const reviews = await Review.find({user_id: req.body.user_id});
+        if (reviews.length) {
+            return res.status(200).send(reviews);
+        }else {
+            return res.status(400).send("No reviews");
+        }   
+    } catch (error) {
+        return res.status(500).send(err)   
+    }
+}
+
 module.exports.addReview = addReview;
 module.exports.editReview = editReview;
 module.exports.deleteReview = deleteReview;
 module.exports.likeReview = likeReview;
 module.exports.dislikeReview = dislikeReview;
+module.exports.getUserReviews = getUserReviews;
