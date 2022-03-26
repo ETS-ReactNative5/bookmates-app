@@ -132,8 +132,20 @@ const getUserReviews = async (req, res) => {
 }
 
 const getFeedReviews = async (req, res) => {
+    try {
+        const currentUser = await User.findById(req.body.user_id);
+        const userReviews = await Review.find({ user_id: currentUser._id });
+        const bookmatesReviews = await Promise.all(
+          currentUser.following.map((bookmateId) => {
+            return Review.find({ user_id: bookmateId });
+          })
+        );
+        res.status(200).send(userReviews.concat(...bookmatesReviews))
+    } catch (err) {
+        res.status(500).json(err);
+    }
+};
 
-}
 
 module.exports.addReview = addReview;
 module.exports.editReview = editReview;
@@ -141,4 +153,4 @@ module.exports.deleteReview = deleteReview;
 module.exports.likeReview = likeReview;
 module.exports.dislikeReview = dislikeReview;
 module.exports.getUserReviews = getUserReviews;
-module.exports.getFeedReviews = getUserReviews;
+module.exports.getFeedReviews = getFeedReviews;
