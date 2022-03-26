@@ -78,6 +78,6 @@ const loginValidation = async (req, res) => {
     res.header('access_token', token).status(200).send({token: token, user: current_user});
 };
 
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
-
