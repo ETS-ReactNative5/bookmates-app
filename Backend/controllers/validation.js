@@ -50,7 +50,7 @@ const registerValidation = async (req, res) => {
 };
 
 //Login Validation
-const loginValidation = data => {
+const loginValidation = async (req, res) => {
     const schema = Joi.object({
         email: Joi.string()
             .email({minDomainSegments: 2}),
@@ -58,7 +58,24 @@ const loginValidation = data => {
             .min(6),
     });
 
-    return schema.validate(data);
+    //Validate request data based on schema
+    const {error} = schema.validate(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+    
+    //Check if user is already registered
+    const user = await User.findOne({email: req.body.email});
+    if(!user) return res.status(400).send('Email does not exist');
+    
+    //Check if password is correct
+    const valid_password = await bcrypt.compare (req.body.password, user.password);
+    if(!valid_password) return res.status(401).send('Incorrect password');
+
+    //Create a JWT token
+    const token = jwt.sign({_id: user._id}, process.env.SECRET_KEY);
+
+    //Return token and user info
+    const current_user = await User.findById(user._id);
+    res.header('access_token', token).status(200).send({token: token, user: current_user});
 };
 
 module.exports.registerValidation = registerValidation;
