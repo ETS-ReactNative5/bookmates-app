@@ -39,12 +39,27 @@ const userSchema = new mongoose.Schema({
     ref: 'User'
   }],
 
-  finished_books: Array,
-  currently_reading_books: Array,
-  to_read_books: Array,
+  finished_books: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Book'
+  }],
+  currently_reading_books: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Book'
+  }],
+  to_read_books: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Book'
+  }],
 
-  genres_preferences: Array,
-  reviews: Array,
+  genres_preferences: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Genre'
+  }],
+  reviews: [{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Review'
+  }],
   birth_date: Date,
 });
 

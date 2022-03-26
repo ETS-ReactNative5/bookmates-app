@@ -14,7 +14,10 @@ const authorSchema = new mongoose.Schema({
     max: 100,
   },
   biography: String,
-  books: Array,
+  books: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Book'
+  }],
   birth_date: Date,
   death_date: Date,
 });
