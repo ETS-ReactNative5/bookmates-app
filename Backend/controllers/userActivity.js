@@ -86,11 +86,6 @@ const editProfile = async (req, res) => {
   }
 };
 
-const addReview = async (req, res) => {
-    res.status(200).send ('add review working');
-};
-
 module.exports.follow = follow;
 module.exports.unfollow = unfollow;
 module.exports.editProfile = editProfile;
-module.exports.addReview = addReview;

@@ -13,9 +13,9 @@ const cors = (req, res, next) => {
 
 //Import Routes
 const authRoute = require ('./routes/auth');
+const userActivityRoute = require ('./routes/userActivity')
 const reviewRoute = require ('./routes/reviews');
 const searchRoute = require ('./routes/searchBook');
-const userActivityRoute = require ('./routes/userActivity')
 
 //Connect to DB
 mongoose.connect(process.env.DB_CONNECT,
