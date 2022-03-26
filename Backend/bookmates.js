@@ -15,6 +15,7 @@ const cors = (req, res, next) => {
 const authRoute = require ('./routes/auth');
 const reviewRoute = require ('./routes/reviews');
 const searchRoute = require ('./routes/searchBook');
+const userActivityRoute = require ('./routes/userActivity')
 
 //Connect to DB
 mongoose.connect(process.env.DB_CONNECT,
@@ -25,7 +26,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
 //Route Middlewares
-app.use('/api/user', authRoute);
+app.use('/api/user', authRoute, userActivityRoute);
 app.use('/api/review', reviewRoute);
 app.use('/api/search', searchRoute);
 app.use(cors);

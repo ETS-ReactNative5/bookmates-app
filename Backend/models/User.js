@@ -30,8 +30,14 @@ const userSchema = new mongoose.Schema({
     default: "",
   },
   profile_image_URL: String,
-  followers: Array,
-  following: Array,
+  followers: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+  following: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
 
   finished_books: Array,
   currently_reading_books: Array,
