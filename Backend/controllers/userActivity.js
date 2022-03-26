@@ -16,7 +16,7 @@ const follow = async (req, res) => {
             res.status(403).send("You already follow this user!");
           }
         } catch (err) {
-          res.status(500).json(err);
+          res.status(500).send(err);
         }
     } else {
         res.status(403).send("You can't follow yourself.");
@@ -24,8 +24,26 @@ const follow = async (req, res) => {
 
 
 const unfollow = async (req, res) => {
-    res.send('Unfollowed')
-}
 
+    //Make sure the current user and user being unfollowed are not the same
+    if (req.body.userId !== req.params.id) {
+        try {
+          const user = await User.findById(req.params.id);
+          const currentUser = await User.findById(req.body.userId);
+          //Make sure current user is trying to unfollow a user they follow and update lists accordingly
+          if (user.followers.includes(req.body.userId)) {
+            await user.updateOne({ $pull: { followers: req.body.userId } });
+            await currentUser.updateOne({ $pull: { following: req.params.id } });
+            res.status(200).send("User successfully unfollowed!");
+          } else {
+            res.status(403).send("You don't follow this user.");
+          }
+        } catch (err) {
+          res.status(500).send(err);
+        }
+    } else {
+        res.status(403).send("You can't unfollow yourself.");
+    }}
+    
 module.exports.follow = follow;
 module.exports.unfollow = unfollow;
