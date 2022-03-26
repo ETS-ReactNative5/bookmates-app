@@ -146,7 +146,6 @@ const getFeedReviews = async (req, res) => {
     }
 };
 
-
 module.exports.addReview = addReview;
 module.exports.editReview = editReview;
 module.exports.deleteReview = deleteReview;
