@@ -4,6 +4,13 @@ const express = require("express");
 const mongoose = require('mongoose');
 const app = express();
 
+const cors = (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+    next();
+}
+
 //Import Routes
 const authRoute = require ('./routes/auth');
 const reviewRoute = require ('./routes/reviews');
@@ -14,12 +21,14 @@ mongoose.connect(process.env.DB_CONNECT,
 () => console.log("Connected to database"));
 
 //Middleware
+app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
 //Route Middlewares
 app.use('/api/user', authRoute);
 app.use('/api/review', reviewRoute);
 app.use('/api/search', searchRoute);
+app.use(cors);
 
 
 app.listen(3000, () => console.log('Listening on port: 3000'));
