@@ -28,7 +28,7 @@ const Signup = ({ navigation }) => {
     });
   };
 
-  // Handle showing backend errors
+  //  Handle showing backend errors
   const [error_message, setErrorMessage] = useState('');
   const [isError, setIsError] = useState(false);
 
@@ -59,7 +59,7 @@ const Signup = ({ navigation }) => {
   };
 
   return (
-    //Formik to handle form actions
+    // Formik to handle form actions
     <Formik
       initialValues={{
         first_name: '',
@@ -69,7 +69,7 @@ const Signup = ({ navigation }) => {
         password_confirmation: '',
       }}
       onSubmit={onSubmitHandler}
-      //Yup to handle schema creation
+      // Yup to handle schema creation
       validationSchema={yup.object().shape({
         first_name: yup
           .string()
@@ -85,17 +85,17 @@ const Signup = ({ navigation }) => {
         <View style={styles.container}>
           <StatusBar backgroundColor="#5A7FCC" barStyle="light-content" />
 
-          //Header part
+          {/* Header part */}
           <View style={styles.header}>
             <Image source={Logo} style={{ marginBottom: 20 }} />
             <Text style={styles.text_header}>bookmates</Text>
           </View>
 
-          // Display error message from backend at the top
+          {/* Display error message from backend at the top */}
           <View style={[styles.form, { backgroundColor: '#ffffff' }]}>
             {!! isError && <Text style={{ fontSize: 14, color: 'red', textAlign: 'center' }}>{error_message}</Text>}
 
-            // First Name Input Field
+            {/* First Name Input Field */}
             <View style={styles.action}>
               <Feather name="user" size={24} color="#BDBDBD" style={{ marginTop: 15 }} />
               <TextInput
@@ -108,12 +108,12 @@ const Signup = ({ navigation }) => {
               />
             </View>
 
-            // Display error based on schema after every input
+            {/* Display error based on schema after every input */}
             {touched.first_name && errors.first_name && (
               <Text style={{ fontSize: 11, color: 'red', paddingLeft: 20 }}>{errors.first_name}</Text>
             )}
 
-            // Last Name Input Field
+            {/* Last Name Input Field */}
             <View style={styles.action}>
               <Feather name="user" size={24} color="#BDBDBD" style={{ marginTop: 15 }} />
               <TextInput
@@ -130,7 +130,7 @@ const Signup = ({ navigation }) => {
               <Text style={{ fontSize: 11, color: 'red', paddingLeft: 20 }}>{errors.last_name}</Text>
             )}
 
-            // Email Input Field
+            {/* Email Input Field */}
             <View style={styles.action}>
               <Feather name="mail" color="#BDBDBD" size={20} style={{ marginTop: 15 }} />
               <TextInput
@@ -147,7 +147,7 @@ const Signup = ({ navigation }) => {
               <Text style={{ fontSize: 11, color: 'red', paddingLeft: 20 }}>{errors.email}</Text>
             )}
 
-            // Password Input Field
+            {/* Password Input Field */}
             <View style={styles.action}>
               <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: 15 }} />
               <TextInput
@@ -172,7 +172,7 @@ const Signup = ({ navigation }) => {
               <Text style={{ fontSize: 11, color: 'red', paddingLeft: 20 }}>{errors.password}</Text>
             )}
 
-            // Confirm Password Input Field
+            {/* Confirm Password Input Field */}
             <View style={styles.action}>
               <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: 15 }} />
               <TextInput
@@ -197,7 +197,7 @@ const Signup = ({ navigation }) => {
               <Text style={{ fontSize: 11, color: 'red', paddingLeft: 20 }}>{errors.password_confirmation}</Text>
             )}
 
-            // Sign up button
+            {/* Sign up button */}
             <View style={styles.button}>
               <TouchableOpacity
                 onPress={() => handleSubmit()}
@@ -207,7 +207,7 @@ const Signup = ({ navigation }) => {
               </TouchableOpacity>
             </View>
 
-            // Sign in prompt
+            {/* Sign in prompt */}
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 30 }}>
               <Text style={{ color: '#606060', textAlign: 'center' }}>Already have an account? </Text>
               <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   form: {
-    flex: 2.5,
+    flex: 2.6,
     backgroundColor: '#fff',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
