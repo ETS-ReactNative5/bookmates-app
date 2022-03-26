@@ -1,4 +1,5 @@
 const User = require ('../models/User');
+const bcrypt = require ("bcryptjs")
 
 const follow = async (req, res) => {
 
@@ -44,6 +45,33 @@ const unfollow = async (req, res) => {
     } else {
         res.status(403).send("You can't unfollow yourself.");
     }}
-    
+
+const editProfile = async (req, res) => {
+
+    //Verify that the user is updating their own profile
+    if (req.body.userId === req.params.id) {
+        //If the pw is being updated, hash it before storing in DB
+        if (req.body.password) {
+          try {
+            const salt = await bcrypt.genSalt(10);
+            req.body.password = await bcrypt.hash(req.body.password, salt);
+          } catch (err) {
+            return res.status(500).send(err);
+          }
+        }
+        try {
+          const user = await User.findByIdAndUpdate(req.params.id, {
+            $set: req.body,
+          });
+          res.status(200).send("Account successfully updated!");
+        } catch (err) {
+          return res.status(500).send(err);
+        }
+      } else {
+        return res.status(403).json("You are not authorized to update others' profiles.");
+      }
+}
+
 module.exports.follow = follow;
 module.exports.unfollow = unfollow;
+module.exports.editProfile = editProfile;
