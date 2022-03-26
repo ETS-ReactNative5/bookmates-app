@@ -3,13 +3,13 @@ const bcrypt = require("bcryptjs");
 
 const follow = async (req, res) => {
   //Make sure the current user and user being followed are not the same
-  if (req.body.userId !== req.params.id) {
+  if (req.body.user_id !== req.params.id) {
     try {
       const user = await User.findById(req.params.id);
-      const currentUser = await User.findById(req.body.userId);
+      const currentUser = await User.findById(req.body.user_id);
       //Make sure current user is trying to follow a new user and update lists accordingly
-      if (!user.followers.includes(req.body.userId)) {
-        await user.updateOne({ $push: { followers: req.body.userId } });
+      if (!user.followers.includes(req.body.user_id)) {
+        await user.updateOne({ $push: { followers: req.body.user_id } });
         await currentUser.updateOne({ $push: { following: req.params.id } });
         res.status(200).send("User successfully followed!");
       } else {
@@ -25,13 +25,13 @@ const follow = async (req, res) => {
 
 const unfollow = async (req, res) => {
   //Make sure the current user and user being unfollowed are not the same
-  if (req.body.userId !== req.params.id) {
+  if (req.body.user_id !== req.params.id) {
     try {
       const user = await User.findById(req.params.id);
-      const currentUser = await User.findById(req.body.userId);
+      const currentUser = await User.findById(req.body.user_id);
       //Make sure current user is trying to unfollow a user they follow and update lists accordingly
-      if (user.followers.includes(req.body.userId)) {
-        await user.updateOne({ $pull: { followers: req.body.userId } });
+      if (user.followers.includes(req.body.user_id)) {
+        await user.updateOne({ $pull: { followers: req.body.user_id } });
         await currentUser.updateOne({ $pull: { following: req.params.id } });
         res.status(200).send("User successfully unfollowed!");
       } else {
@@ -47,7 +47,7 @@ const unfollow = async (req, res) => {
 
 const editProfile = async (req, res) => {
   //Verify that the user is updating their own profile
-  if (req.body.userId === req.params.id) {
+  if (req.body.user_id === req.params.id) {
     //If the pw is being updated, hash it before storing in DB
     if (req.body.password) {
       try {
@@ -63,7 +63,7 @@ const editProfile = async (req, res) => {
       try {
         const email_match = await User.findOne({ email: req.body.email });
 
-        if (email_match && !email_match._id.equals(req.body.userId)) {
+        if (email_match && !email_match._id.equals(req.body.user_id)) {
           return res.status(400).send("Email already exists");
         }
       } catch (err) {

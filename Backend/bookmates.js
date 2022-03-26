@@ -26,7 +26,8 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
 //Route Middlewares
-app.use('/api/user', authRoute, userActivityRoute);
+app.use('/api/auth', authRoute);
+app.use('/api/user', userActivityRoute);
 app.use('/api/review', reviewRoute);
 app.use('/api/search', searchRoute);
 app.use(cors);
