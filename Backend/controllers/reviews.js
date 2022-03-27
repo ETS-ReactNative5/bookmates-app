@@ -107,15 +107,15 @@ const dislikeReview = async (req, res) => {
 const comment = async (req, res) => {
   const comment = {
     text: req.body.text,
-    postedBy: req.body.user_id
+    postedBy: req.user._id
   }
 
-  await Review.findByIdAndUpdate(req.params.id, {$push: {comments: comment}}, {new:true}).populate("comments.postedBy", "_id first_name last_name")
+  await Review.findByIdAndUpdate(req.body.review_id, {$push: {comments: comment}}, {new:true}).populate("comments.postedBy", "_id first_name last_name")
   .exec((err, result) => {
     if(err){
       return res.status(400).send(err);
     }else{
-      return res.status(200).send("Commented successfully.");
+      return res.status(200).send({Message:"Commented successfully.", result});
     }
   })
 }

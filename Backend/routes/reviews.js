@@ -8,7 +8,7 @@ router.put('/edit/:id', requireLogin, editReview);
 router.delete('/delete/:id', requireLogin, deleteReview);
 router.put('/like', requireLogin, likeReview);
 router.put('/dislike', requireLogin, dislikeReview);
-router.put('/comment/:id', requireLogin, comment);
+router.put('/comment', requireLogin, comment);
 router.get('/getuserreviews', requireLogin, getUserReviews);
 router.get('/getfeedreviews', requireLogin, getFeedReviews);
 
