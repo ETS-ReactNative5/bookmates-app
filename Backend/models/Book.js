@@ -9,12 +9,15 @@ const bookSchema = new mongoose.Schema({
   },
   isbn: {
     type: Number,
-    max: 13,
+    min: 13,
     max: 13,
   },
   cover_URL: String,
   description: String,
-  author_id: String,
+  author_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author'
+  },
   reviews: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Review'
