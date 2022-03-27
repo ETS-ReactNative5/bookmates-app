@@ -111,19 +111,14 @@ const comment = async (req, res) => {
 
 const getUserReviews = async (req, res) => {
     try{
-        const user_match = await User.findOne({ _id: req.body.user_id });
-        if (user_match){
-            const reviews = await Review.find({user_id: req.body.user_id});
-            if (reviews.length) {
-                return res.status(200).send(reviews);
-            }else {
-                return res.status(400).send("No reviews");
-            }   
-        }else {
-            return res.status(401).send("Invalid user")
-        }
+      const reviews = await Review.find({user_id: req.user._id});
+      if (reviews.length) {
+        return res.status(200).send(reviews);
+      }else {
+        return res.status(400).send("No reviews");
+      }   
     }catch (err) {
-        return res.status(500).send(err)   
+      return res.status(500).send(err)   
     }
 }
 
