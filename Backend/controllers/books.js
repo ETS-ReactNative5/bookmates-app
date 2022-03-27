@@ -103,10 +103,10 @@ const addCurrently = async (req, res) => {
 
       // Remove book from other lists
       if (user.toReadBooks.includes(req.body.book_id)){
-        await user.UpdateOne({ $pull: { toReadBooks: req.body.book_id } })
+        await user.updateOne({ $pull: { toReadBooks: req.body.book_id } })
       }
       if (user.finishedBooks.includes(req.body.book_id)){
-        await user.UpdateOne({ $pull: { finishedBooks: req.body.book_id } })
+        await user.updateOne({ $pull: { finishedBooks: req.body.book_id } })
       }
       return res.status(200).send({message: "Lists successfully updated."})
     }else{
@@ -119,6 +119,32 @@ const addCurrently = async (req, res) => {
 }
 
 
+const addFinished = async (req, res) => { 
+  const user = await User.findById(req.body.user_id);
+  try{
+    //Update finished reading list
+    if (!user.finishedBooks.includes(req.body.book_id)){
+      await user.updateOne({ $push: { finishedBooks: req.body.book_id} })
+
+      // Remove book from other lists
+      if (user.toReadBooks.includes(req.body.book_id)){
+        await user.updateOne({ $pull: { toReadBooks: req.body.book_id } })
+      }
+      if (user.currentlyReadingBooks.includes(req.body.book_id)){
+        await user.updateOne({ $pull: { currentlyReadingBooks: req.body.book_id } })
+      }
+      return res.status(200).send({message: "Lists successfully updated."})
+    }else{
+      await user.updateOne({ $pull: { finishedBooks: req.body.book_id } })
+      return res.status(200).send({message: "Book removed from finished books."})
+    }
+  }catch(err){
+    return res.status(400).send(err)
+  }
+}
+
+
 module.exports.search = search;
 module.exports.saveBook = saveBook;
 module.exports.addCurrently = addCurrently;
+module.exports.addFinished = addFinished;
