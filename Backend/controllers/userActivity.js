@@ -25,14 +25,14 @@ const follow = async (req, res) => {
 
 const unfollow = async (req, res) => {
   //Make sure the current user and user being unfollowed are not the same
-  if (req.body.user_id !== req.params.id) {
+  if (req.body.user_id !== req.user._id) {
     try {
-      const user = await User.findById(req.params.id);
-      const currentUser = await User.findById(req.body.user_id);
+      const user = await User.findById(req.body.user_id);
+      const currentUser = await User.findById(req.user._id);
       //Make sure current user is trying to unfollow a user they follow and update lists accordingly
-      if (user.followers.includes(req.body.user_id)) {
-        await user.updateOne({ $pull: { followers: req.body.user_id } });
-        await currentUser.updateOne({ $pull: { following: req.params.id } });
+      if (user.followers.includes(currentUser._id)) {
+        await user.updateOne({ $pull: { followers: currentUser._id } });
+        await currentUser.updateOne({ $pull: { following: user._id } });
         res.status(200).send("User successfully unfollowed!");
       } else {
         res.status(403).send("You don't follow this user.");
