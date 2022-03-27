@@ -60,7 +60,7 @@ const loginValidation = async (req, res) => {
 
     //Validate request data based on schema
     const {error} = schema.validate(req.body);
-    if(error) return res.status(400).send(error.details[0].message);
+    if(error) return res.status(400).send("Error. Please try again.");
     
     //Check if user is already registered
     const user = await User.findOne({email: req.body.email});

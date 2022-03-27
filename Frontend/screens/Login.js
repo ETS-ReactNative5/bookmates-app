@@ -32,7 +32,7 @@ const Login = ({ navigation }) => {
   
       try {
         axios
-          .post('http://10.0.2.2:3000/api/user/login', user)
+          .post('http://10.0.2.2:3000/api/auth/login', user)
           .then(({ data }) => {
             console.log(data)
             navigation.navigate('BookmatesMap');
