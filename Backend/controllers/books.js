@@ -38,6 +38,16 @@ const search = async (req, res) => {
 };
 
 const saveBook = async (req, res) => {
+
+  const bookExists = await Book.findOne({isbn: req.body.isbn});
+
+  if (bookExists){
+    return res
+    .status(400)
+    .send({
+      message: "Book is already saved.",
+    });
+  }
   const book = new Book(req.body);
 
   try {
