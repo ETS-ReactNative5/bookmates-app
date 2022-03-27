@@ -8,11 +8,7 @@ const addReview = async (req, res) => {
     return res.status(422).send("Error: missing fields.")
   }
 
-  //To avoid sending the password with the response
-  req.user.password = undefined;
-
   const newReview = new Review({text, book_id, user_id: req.user})
-
   try {
     const savedReview = await newReview.save();
     await User.findByIdAndUpdate(
@@ -154,8 +150,8 @@ const getUserReviews = async (req, res) => {
 
 const getFeedReviews = async (req, res) => {
     try {
-        const currentUser = await User.findById(req.body.user_id);
-        const userReviews = await Review.find({ user_id: currentUser._id });
+        const currentUser = await User.findById(req.user._id);
+        const userReviews = await Review.find({ user_id: req.user._id });
         const bookmatesReviews = await Promise.all(
           currentUser.following.map((bookmateId) => {
             return Review.find({ user_id: bookmateId });
