@@ -4,7 +4,7 @@ const requireLogin = require('../middleware/requireLogin')
 
 //requireLogin will make sure that the user posting reviews is authorized (Protected route)
 router.post('/add', requireLogin, addReview);
-router.put('/edit/:id', requireLogin, editReview);
+router.put('/edit', requireLogin, editReview);
 router.delete('/delete/:id', requireLogin, deleteReview);
 router.put('/like', requireLogin, likeReview);
 router.put('/dislike', requireLogin, dislikeReview);

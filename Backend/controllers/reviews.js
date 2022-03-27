@@ -27,22 +27,17 @@ const addReview = async (req, res) => {
 
 const editReview = async (req, res) => {
     try {
-        const user_match = await User.findOne( {_id: req.body.user_id});
-        if (user_match){
-            const review = await Review.findById(req.params.id);
-            //Verify that the review belongs to the user then update
-            if (review.user_id.equals(req.body.user_id)){
-              await review.updateOne({ $set: {text: req.body.text}});
-              const edited_review = await Review.findById(req.params.id);
-              res.status(200).send({message:"Review successfully edited!", review: edited_review});
-            } else {
-              res.status(403).send("You are not allowed to edit others' reviews.");
-            }
-        }else{
-            res.status(401).send("Invalid user.");
-        }
-    } catch (err) {
-        res.status(500).send(err);
+      const review = await Review.findById(req.body.review_id);
+      //Verify that the review belongs to the user then update
+      if (review.user_id.equals(req.user._id)){
+        await review.updateOne({ $set: {text: req.body.text}});
+        const edited_review = await Review.findById(req.body.review_id);
+        res.status(200).send({message:"Review successfully edited!", review: edited_review});
+      } else {
+        res.status(403).send("You are not allowed to edit others' reviews.");
+      }
+    }catch (err) {
+      res.status(500).send(err);
     }
 };  
 
