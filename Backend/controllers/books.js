@@ -71,7 +71,7 @@ const saveBook = async (req, res) => {
     } else {
       const newAuthor = new Author({ name: req.body.author });
       try {
-        const savedAuthor = await newAuthor.save();
+        await newAuthor.save();
         const updatedAuthor = await Author.findOneAndUpdate(
           { name: req.body.author },
           { $push: { books: savedBook._id } },
@@ -95,7 +95,7 @@ const saveBook = async (req, res) => {
 };
 
 const addCurrently = async (req, res) => { 
-  const user = await User.findById(req.body.user_id);
+  const user = await User.findById(req.user._id);
   try{
     //Update currently reading list
     if (!user.currentlyReadingBooks.includes(req.body.book_id)){
@@ -119,7 +119,7 @@ const addCurrently = async (req, res) => {
 };
 
 const addFinished = async (req, res) => { 
-  const user = await User.findById(req.body.user_id);
+  const user = await User.findById(req.user._id);
   try{
     //Update finished reading list
     if (!user.finishedBooks.includes(req.body.book_id)){
@@ -143,7 +143,7 @@ const addFinished = async (req, res) => {
 };
 
 const addToRead = async (req, res) => {
-  const user = await User.findById(req.body.user_id);
+  const user = await User.findById(req.user._id);
   try{
     //Update to-read list
     if (!user.toReadBooks.includes(req.body.book_id)){
@@ -166,7 +166,7 @@ const addToRead = async (req, res) => {
   }
 };
 
-const displayBookshelf = async (req, res) => {
+const displayBookmatesBookshelf = async (req, res) => {
   try{
     const user = await User.findById(req.body.user_id);
   
@@ -209,4 +209,4 @@ module.exports.saveBook = saveBook;
 module.exports.addCurrently = addCurrently;
 module.exports.addFinished = addFinished;
 module.exports.addToRead = addToRead;
-module.exports.displayBookshelf = displayBookshelf;
+module.exports.displayBookmatesBookshelf = displayBookmatesBookshelf;

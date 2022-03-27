@@ -71,10 +71,9 @@ const editProfile = async (req, res) => {
 
     //Update user info
     try {
-      const user = await User.findByIdAndUpdate(req.user._id, {
+      const updated_user = await User.findByIdAndUpdate(req.user._id, {
         $set: req.body,
-      });
-      const updated_user = await User.findById(req.user._id);
+      }, {new: true});
       res.status(200).send({message:"Account successfully updated!", user: updated_user});
     } catch (err) {
       return res.status(500).send(err);
