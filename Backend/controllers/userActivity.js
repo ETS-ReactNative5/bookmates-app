@@ -3,14 +3,14 @@ const bcrypt = require("bcryptjs");
 
 const follow = async (req, res) => {
   //Make sure the current user and user being followed are not the same
-  if (req.body.user_id !== req.params.id) {
+  if (req.user._id !== req.body.user_id) {
     try {
-      const user = await User.findById(req.params.id);
-      const currentUser = await User.findById(req.body.user_id);
+      const user = await User.findById(req.body.user_id);
+      const currentUser = await User.findById(req.user._id);
       //Make sure current user is trying to follow a new user and update lists accordingly
-      if (!user.followers.includes(req.body.user_id)) {
-        await user.updateOne({ $push: { followers: req.body.user_id } });
-        await currentUser.updateOne({ $push: { following: req.params.id } });
+      if (!user.followers.includes(currentUser._id)) {
+        await user.updateOne({ $push: { followers: currentUser._id } });
+        await currentUser.updateOne({ $push: { following: user._id } });
         res.status(200).send("User successfully followed!");
       } else {
         res.status(403).send("You already follow this user!");

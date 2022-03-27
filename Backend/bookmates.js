@@ -25,7 +25,7 @@ mongoose.connect(process.env.DB_CONNECT,
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
-//Route Middlewares
+//Routes Prefixes
 app.use('/api/auth', authRoute);
 app.use('/api/user', userActivityRoute);
 app.use('/api/review', reviewRoute);

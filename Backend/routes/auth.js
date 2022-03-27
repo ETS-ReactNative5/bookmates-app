@@ -1,5 +1,5 @@
 const router = require ('express').Router();
-const {registerValidation, loginValidation} = require('../controllers/validation');
+const {registerValidation, loginValidation} = require('../controllers/auth');
 
 
 router.post('/register', registerValidation);

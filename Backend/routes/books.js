@@ -1,6 +1,6 @@
 const router = require ('express').Router();
 const {search, saveBook, addCurrently, addFinished, addToRead, displayBookshelf} = require ('./../controllers/books');
-const requireLogin = require('../middleware/requireLogin')
+const requireLogin = require('../middlewares/requireLogin')
 
 router.get('/search/:keyword', requireLogin, search);
 router.post('/savebook', requireLogin, saveBook);

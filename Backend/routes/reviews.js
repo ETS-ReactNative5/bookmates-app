@@ -1,6 +1,6 @@
 const router = require ('express').Router();
 const { addReview, editReview, deleteReview, likeReview, dislikeReview, getUserReviews, getFeedReviews, comment} = require('../controllers/reviews');
-const requireLogin = require('../middleware/requireLogin')
+const requireLogin = require('../middlewares/requireLogin')
 
 //requireLogin will make sure that the user posting reviews is authorized (Protected route)
 router.post('/add', requireLogin, addReview);
