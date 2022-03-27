@@ -46,8 +46,6 @@ const unfollow = async (req, res) => {
 };
 
 const editProfile = async (req, res) => {
-  //Verify that the user is updating their own profile
-  if (req.body.user_id === req.params.id) {
     //If the pw is being updated, hash it before storing in DB
     if (req.body.password) {
       try {
@@ -63,7 +61,7 @@ const editProfile = async (req, res) => {
       try {
         const email_match = await User.findOne({ email: req.body.email });
 
-        if (email_match && !email_match._id.equals(req.body.user_id)) {
+        if (email_match && !email_match._id.equals(req.user._id)) {
           return res.status(400).send("Email already exists");
         }
       } catch (err) {
@@ -73,18 +71,15 @@ const editProfile = async (req, res) => {
 
     //Update user info
     try {
-      const user = await User.findByIdAndUpdate(req.params.id, {
+      const user = await User.findByIdAndUpdate(req.user._id, {
         $set: req.body,
       });
-      const updated_user = await User.findById(req.params.id);
+      const updated_user = await User.findById(req.user._id);
       res.status(200).send({message:"Account successfully updated!", user: updated_user});
     } catch (err) {
       return res.status(500).send(err);
     }
-  } else {
-    return res.status(403).send("You are not allowed to update others' profiles.");
-  }
-};
+  } 
 
 const getAllUsers = async (req, res) => {
   try {
