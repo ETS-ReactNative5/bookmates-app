@@ -9,7 +9,7 @@ router.delete('/delete/:id', requireLogin, deleteReview);
 router.put('/like/:id', requireLogin, likeReview);
 router.put('/dislike/:id', requireLogin, dislikeReview);
 router.put('/comment/:id', requireLogin, comment);
-router.get('/getUserReviews', requireLogin, getUserReviews);
-router.get('/getFeedReviews', requireLogin, getFeedReviews);
+router.get('/getuserreviews', requireLogin, getUserReviews);
+router.get('/getfeedreviews', requireLogin, getFeedReviews);
 
 module.exports = router;

@@ -3,22 +3,27 @@ const Review = require("../models/Review");
 const Book = require("../models/Book");
 
 const addReview = async (req, res) => {
-  const newReview = new Review(req.body);
+  const {book_id, text} = req.body;
+  if (!book_id || !text){
+    return res.status(422).send("Error: missing fields.")
+  }
+
+  //To avoid sending the password with the response
+  req.user.password = undefined;
+
+  const newReview = new Review({text, book_id, user_id: req.user})
 
   try {
     const savedReview = await newReview.save();
-    const user = await User.findByIdAndUpdate(
-      req.body.user_id,
+    await User.findByIdAndUpdate(
+      req.user._id,
       { $push: { reviews: savedReview._id } },
       { new: true }
     );
-    res
-      .status(200)
-      .send({
-        message: "Review posted successfully",
-        user: user,
-        review: savedReview,
-      });
+    await Book.findByIdAndUpdate(
+      book_id, {$push: {reviews: savedReview._id}}
+    )
+    res.status(200).send({message: "Review posted successfully"});
   } catch (err) {
     return res.status(500).send(err);
   }

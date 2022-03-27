@@ -3,11 +3,11 @@ const {search, saveBook, addCurrently, addFinished, addToRead, displayBookshelf}
 const requireLogin = require('../middleware/requireLogin')
 
 router.get('/search/:keyword', requireLogin, search);
-router.post('/saveBook', requireLogin, saveBook);
-router.put('/addCurrently', requireLogin, addCurrently);
-router.put('/addFinished', requireLogin, addFinished);
-router.put('/addToRead', requireLogin, addToRead);
-router.get('/displayBookshelf', requireLogin, displayBookshelf);
+router.post('/savebook', requireLogin, saveBook);
+router.put('/addcurrently', requireLogin, addCurrently);
+router.put('/addfinished', requireLogin, addFinished);
+router.put('/addtoread', requireLogin, addToRead);
+router.get('/displaybookshelf', requireLogin, displayBookshelf);
 
 
 module.exports = router;
