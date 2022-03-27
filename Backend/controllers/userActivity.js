@@ -86,6 +86,19 @@ const editProfile = async (req, res) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    const bookmatesIds = users.map((user) => user._id)
+
+    return res.status(200).send(bookmatesIds)
+  } catch (error) {
+    return res.status(400).send(error);    
+  }
+
+}
+
 module.exports.follow = follow;
 module.exports.unfollow = unfollow;
 module.exports.editProfile = editProfile;
+module.exports.getAllUsers = getAllUsers;
