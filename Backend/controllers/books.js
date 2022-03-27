@@ -116,8 +116,7 @@ const addCurrently = async (req, res) => {
   }catch(err){
     return res.status(400).send(err)
   }
-}
-
+};
 
 const addFinished = async (req, res) => { 
   const user = await User.findById(req.body.user_id);
@@ -141,7 +140,7 @@ const addFinished = async (req, res) => {
   }catch(err){
     return res.status(400).send(err)
   }
-}
+};
 
 const addToRead = async (req, res) => {
   const user = await User.findById(req.body.user_id);
@@ -165,10 +164,49 @@ const addToRead = async (req, res) => {
   }catch(err){
     return res.status(400).send(err)
   }
-}
+};
+
+const displayBookshelf = async (req, res) => {
+  try{
+    const user = await User.findById(req.body.user_id);
+  
+    if(user){
+      const currentlyReadingIds = await user.currentlyReadingBooks;
+      const toReadIds = await user.toReadBooks;
+      const finishedIds = await user.finishedBooks;
+
+      const currentlyReadingBooks = await Promise.all(
+        currentlyReadingIds.map((book_id) => {
+          return Book.find({ _id: book_id });
+        })
+      );
+      const toReadBooks = await Promise.all(
+        toReadIds.map((book_id) => {
+          return Book.find({ _id: book_id });
+        })
+      );
+
+      const finishedBooks = await Promise.all(
+        finishedIds.map((book_id) => {
+          return Book.find({ _id: book_id });
+        })
+      );
+
+      const bookshelf = {currentlyReadingBooks, toReadBooks, finishedBooks};
+
+      return res.status(200).send(bookshelf);
+    }else{
+      return res.status(401).send("Invalid user");
+    }
+  }catch(err){
+    return res.status(400).send(err);
+  }
+
+};
 
 module.exports.search = search;
 module.exports.saveBook = saveBook;
 module.exports.addCurrently = addCurrently;
 module.exports.addFinished = addFinished;
 module.exports.addToRead = addToRead;
+module.exports.displayBookshelf = displayBookshelf;
