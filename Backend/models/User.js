@@ -39,20 +39,20 @@ const userSchema = new mongoose.Schema({
     ref: 'User'
   }],
 
-  finished_books: [{
+  finishedBooks: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Book'
   }],
-  currently_reading_books: [{
+  currentlyReadingBooks: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Book'
   }],
-  to_read_books: [{
+  toReadBooks: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Book'
   }],
 
-  genres_preferences: [{
+  genresPreferences: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Genre'
   }],
@@ -60,7 +60,6 @@ const userSchema = new mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:'Review'
   }],
-  birth_date: Date,
 });
 
 module.exports = mongoose.model("User", userSchema);

@@ -52,7 +52,7 @@ const saveBook = async (req, res) => {
 
   try {
     const savedBook = await book.save();
-    
+
     const authorExists = await Author.findOne({ name: req.body.author });
     if (authorExists) {
       const author = await Author.findOneAndUpdate(
@@ -94,5 +94,31 @@ const saveBook = async (req, res) => {
   }
 };
 
+const addCurrently = async (req, res) => { 
+  const user = await User.findById(req.body.user_id);
+  try{
+    //Update currently reading list
+    if (!user.currentlyReadingBooks.includes(req.body.book_id)){
+      await user.updateOne({ $push: { currentlyReadingBooks: req.body.book_id} })
+
+      // Remove book from other lists
+      if (user.toReadBooks.includes(req.body.book_id)){
+        await user.UpdateOne({ $pull: { toReadBooks: req.body.book_id } })
+      }
+      if (user.finishedBooks.includes(req.body.book_id)){
+        await user.UpdateOne({ $pull: { finishedBooks: req.body.book_id } })
+      }
+      return res.status(200).send({message: "Lists successfully updated."})
+    }else{
+      await user.updateOne({ $pull: { currentlyReadingBooks: req.body.book_id } })
+      return res.status(200).send({message: "Book removed from currently reading."})
+    }
+  }catch(err){
+    return res.status(400).send(err)
+  }
+}
+
+
 module.exports.search = search;
 module.exports.saveBook = saveBook;
+module.exports.addCurrently = addCurrently;
