@@ -6,7 +6,7 @@ const requireLogin = require('../middleware/requireLogin')
 router.post('/add', requireLogin, addReview);
 router.put('/edit/:id', requireLogin, editReview);
 router.delete('/delete/:id', requireLogin, deleteReview);
-router.put('/like/:id', requireLogin, likeReview);
+router.put('/like', requireLogin, likeReview);
 router.put('/dislike/:id', requireLogin, dislikeReview);
 router.put('/comment/:id', requireLogin, comment);
 router.get('/getuserreviews', requireLogin, getUserReviews);

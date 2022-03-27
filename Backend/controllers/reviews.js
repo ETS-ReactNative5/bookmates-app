@@ -69,26 +69,21 @@ const deleteReview =  async (req, res) => {
 };
 
 const likeReview = async (req, res) => {
-    try {
-        const user_match = await User.findOne( {_id: req.body.user_id});
-
-        if(user_match){
-            const review = await Review.findById(req.params.id);
-            if (!review.likes.includes(req.body.user_id)) {
-              await review.updateOne({ $push: { likes: req.body.user_id } });
-              const liked_review = await Review.findById(req.params.id);
-              res.status(200).send({message:"Review liked successfully!", review:liked_review});
-            } else {
-              await review.updateOne({ $pull: { likes: req.body.user_id } });
-              const liked_review = await Review.findById(req.params.id);
-              res.status(200).send({message:"Like removed", review:liked_review});
-            }
-        }else{
-            res.status(401).send("Invalid user.");
-        }
-      } catch (err) {
-        res.status(500).send(err);
+  
+  try {
+      const review = await Review.findById(req.body.review_id);
+      if (!review.likes.includes(req.user._id)) {
+        await review.updateOne({ $push: { likes: req.user._id } });
+        const liked_review = await Review.findById(req.body.review_id);
+        res.status(200).send({message:"Review liked successfully!", review:liked_review});
+      } else {
+        await review.updateOne({ $pull: { likes: req.user._id } });
+        const liked_review = await Review.findById(req.body.review_id);
+        res.status(200).send({message:"Like removed", review:liked_review});
       }
+  }catch (err) {
+  res.status(500).send(err);
+  }
 }
 
 const dislikeReview = async (req, res) => {
