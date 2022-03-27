@@ -1,25 +1,16 @@
 const mongoose = require("mongoose");
 
 const authorSchema = new mongoose.Schema({
-  first_name: {
+    name: {
     type: String,
     required: true,
     min: 2,
     max: 100,
   },
-  last_name: {
-    type: String,
-    required: true,
-    min: 2,
-    max: 100,
-  },
-  biography: String,
   books: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Book'
   }],
-  birth_date: Date,
-  death_date: Date,
 });
 
-module.exports = mongoose.model("Author", bookSchema);
+module.exports = mongoose.model("Author", authorSchema);

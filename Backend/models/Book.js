@@ -8,11 +8,11 @@ const bookSchema = new mongoose.Schema({
     max: 100,
   },
   isbn: {
-    type: Number,
+    type: String,
     min: 13,
     max: 13,
   },
-  cover_URL: String,
+  thumbnail: String,
   description: String,
   author_id: {
     type: mongoose.Schema.Types.ObjectId,
