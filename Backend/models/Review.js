@@ -28,9 +28,11 @@ const reviewSchema = new mongoose.Schema({
         ref: 'User'
     }],
     comments: [{
-        default:[],
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        text: String,
+        postedBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
     }],
 });
 

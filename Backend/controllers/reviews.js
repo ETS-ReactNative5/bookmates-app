@@ -113,6 +113,22 @@ const dislikeReview = async (req, res) => {
       }
 }
 
+const comment = async (req, res) => {
+  const comment = {
+    text: req.body.text,
+    postedBy: req.body.user_id
+  }
+
+  await Review.findByIdAndUpdate(req.params.id, {$push: {comments: comment}}, {new:true}).populate("comments.postedBy", "_id first_name last_name")
+  .exec((err, result) => {
+    if(err){
+      return res.status(400).send(err);
+    }else{
+      return res.status(200).send("Commented successfully.");
+    }
+  })
+}
+
 const getUserReviews = async (req, res) => {
     try{
         const user_match = await User.findOne({ _id: req.body.user_id });
@@ -151,5 +167,6 @@ module.exports.editReview = editReview;
 module.exports.deleteReview = deleteReview;
 module.exports.likeReview = likeReview;
 module.exports.dislikeReview = dislikeReview;
+module.exports.comment = comment;
 module.exports.getUserReviews = getUserReviews;
 module.exports.getFeedReviews = getFeedReviews;
