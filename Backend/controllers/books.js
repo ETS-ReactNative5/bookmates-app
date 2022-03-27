@@ -52,6 +52,7 @@ const saveBook = async (req, res) => {
 
   try {
     const savedBook = await book.save();
+    
     const authorExists = await Author.findOne({ name: req.body.author });
     if (authorExists) {
       const author = await Author.findOneAndUpdate(
@@ -59,12 +60,13 @@ const saveBook = async (req, res) => {
         { $push: { books: savedBook._id } },
         { new: true }
       );
+      const updatedBook = await Book.findByIdAndUpdate(savedBook._id, {$push: {author_id: author._id}}, {new: true})
       return res
         .status(200)
         .send({
           message: "Book saved successfully",
           author: author,
-          book: savedBook,
+          book: updatedBook,
         });
     } else {
       const newAuthor = new Author({ name: req.body.author });
@@ -75,12 +77,13 @@ const saveBook = async (req, res) => {
           { $push: { books: savedBook._id } },
           { new: true }
         );
+        const updatedBook = await Book.findByIdAndUpdate(savedBook._id, {$push: {author_id: updatedAuthor._id}}, {new: true})
         return res
           .status(200)
           .send({
             message: "Book saved successfully",
             author: updatedAuthor,
-            book: savedBook,
+            book: updatedBook,
           });
       } catch (err) {
         return res.status(500).send(err);
