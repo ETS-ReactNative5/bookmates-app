@@ -1,15 +1,11 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
+import {Image, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-const BookSearch = ({title, description, thumbnail, author}) => {
+const BookSearch = ({book}) => {
     const navigation = useNavigation(); 
     return(
-        <TouchableOpacity onPress={() => navigation.navigate('BookDetails',{
-            title: title,
-            thumbnail: thumbnail,
-            description: description,
-            author: author})}>
-            <Image source={thumbnail}
+        <TouchableOpacity onPress={() => navigation.navigate('BookDetails',{book: book})}>
+            <Image source={{uri: `${book.thumbnail}`}}
             style={{
                 resizeMode: 'cover',
                 width: 94,

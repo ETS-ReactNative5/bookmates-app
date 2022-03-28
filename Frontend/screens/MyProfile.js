@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import ProfileBody from '../components/ProfileBody';
-import ProfileNav from '../components/ProfileNav';
-
+import MyProfileNav from '../components/MyProfileNav';
 
 const Profile = () => {
   
@@ -26,7 +25,7 @@ const Profile = () => {
       <View style={{width: '100%', padding: 10}}>
         <ProfileBody user={user}/>
       </View>
-      <ProfileNav user={user}/>
+      <MyProfileNav user={user}/>
     </View>
   );
 };

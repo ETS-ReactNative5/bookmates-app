@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import BookmateProfileBody from '../components/BookmateProfileBody';
-import ProfileNav from '../components/ProfileNav';
+import BookmateProfileNav from '../components/BookmateProfileNav';
 
 const BookmateProfile = ({route}) => {
   let {user} = route.params
@@ -16,7 +16,7 @@ const BookmateProfile = ({route}) => {
           bio={user?.bio}
         />
       </View>
-      <ProfileNav name={user?.name} profileImage={user?.profile_pic}/>
+      <BookmateProfileNav name={user?.name} profileImage={user?.profile_pic}/>
     </View>
   );
 };

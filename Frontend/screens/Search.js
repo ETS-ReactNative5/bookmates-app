@@ -40,7 +40,7 @@ const Search = () => {
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <BookSearch
+          {/* <BookSearch
             thumbnail={require('./../assets/mebeforeyou.jpg')}
             title="Me Before You"
             author="Jojo Moyes"
@@ -49,7 +49,7 @@ const Search = () => {
           A Love Story for this generation and perfect for fans of John Greens The Fault in Our Stars, Me Before You brings to life two people who couldnt have less in common—a heartbreakingly romantic novel that asks, What do you do when making the person you love happy also means breaking your own heart?"
           />
           <BookSearch thumbnail={require('./../assets/mockingbird.jpg')} />
-          <BookSearch thumbnail={require('./../assets/EE.jpg')} />
+          <BookSearch thumbnail={require('./../assets/EE.jpg')} /> */}
         </View>
 
         <View
@@ -64,9 +64,9 @@ const Search = () => {
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <BookSearch thumbnail={require('./../assets/Whomovedmycheese.jpg')} />
+          {/* <BookSearch thumbnail={require('./../assets/Whomovedmycheese.jpg')} />
           <BookSearch thumbnail={require('./../assets/RichDadPoorDad.jpg')} />
-          <BookSearch thumbnail={require('./../assets/awakenthegiant.jpg')} />
+          <BookSearch thumbnail={require('./../assets/awakenthegiant.jpg')} /> */}
         </View>
 
         <View
@@ -81,9 +81,9 @@ const Search = () => {
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <BookSearch thumbnail={require('./../assets/Zerotoone.jpg')} />
+          {/* <BookSearch thumbnail={require('./../assets/Zerotoone.jpg')} />
           <BookSearch thumbnail={require('./../assets/Bigquestions.jpg')} />
-          <BookSearch thumbnail={require('./../assets/AtomicHabits.jpg')} />
+          <BookSearch thumbnail={require('./../assets/AtomicHabits.jpg')} /> */}
         </View>
 
         <View
@@ -98,9 +98,9 @@ const Search = () => {
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <BookSearch thumbnail={require('./../assets/mebeforeyou.jpg')} />
+          {/* <BookSearch thumbnail={require('./../assets/mebeforeyou.jpg')} />
           <BookSearch thumbnail={require('./../assets/mockingbird.jpg')} />
-          <BookSearch thumbnail={require('./../assets/EE.jpg')} />
+          <BookSearch thumbnail={require('./../assets/EE.jpg')} /> */}
         </View>
 
         <View
@@ -115,9 +115,9 @@ const Search = () => {
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <BookSearch thumbnail={require('./../assets/Whomovedmycheese.jpg')} />
+          {/* <BookSearch thumbnail={require('./../assets/Whomovedmycheese.jpg')} />
           <BookSearch thumbnail={require('./../assets/RichDadPoorDad.jpg')} />
-          <BookSearch thumbnail={require('./../assets/awakenthegiant.jpg')} />
+          <BookSearch thumbnail={require('./../assets/awakenthegiant.jpg')} /> */}
         </View>
       </ScrollView>
     </SafeAreaView>
