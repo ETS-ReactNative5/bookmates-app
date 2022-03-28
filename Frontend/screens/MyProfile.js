@@ -9,6 +9,7 @@ const Profile = () => {
   const [user, setUser] = useState('')
 
   useEffect(()=>{
+    //Testing
       fetch('http://10.0.2.2:3000/api/user/getprofile',{
           headers:{
             "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0"
@@ -23,15 +24,7 @@ const Profile = () => {
   return (
     <View style={{width: '100%', height: '100%', backgroundColor: 'white'}}>
       <View style={{width: '100%', padding: 10}}>
-        <ProfileBody
-          first_name= {user.first_name}
-          last_name = {user.last_name}
-          profileImage={user.profile_image_URL}
-          followers={(user && user.followers && user.followers.length) || 0}
-          following={(user && user.following && user.following.length) || 0}
-          bio={user.profile_bio}
-          email={user.email}
-        />
+        <ProfileBody user={user}/>
       </View>
       <ProfileNav 
         first_name = {user.first_name}

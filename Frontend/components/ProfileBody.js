@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 
-const ProfileBody = ({ first_name, last_name, profileImage, followers, following, bio, email }) => {
+const ProfileBody = ({user}) => {
   const navigation = useNavigation();
   return (
     <SafeAreaView>
@@ -11,13 +11,13 @@ const ProfileBody = ({ first_name, last_name, profileImage, followers, following
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          paddingVertical: 20,
+          paddingVertical: 25,
           paddingLeft: 10,
         }}
       >
         <View>
           <Image
-            source={{uri: `${profileImage}`}}
+            source={{uri: `${user.profile_image_URL}`}}
             style={{
               resizeMode: 'cover',
               width: 70,
@@ -27,11 +27,11 @@ const ProfileBody = ({ first_name, last_name, profileImage, followers, following
           />
         </View>
         <View style={{ alignItems: 'center' }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{followers}</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{(user.followers && user.followers.length) || 0}</Text>
           <Text>Followers</Text>
         </View>
         <View style={{ alignItems: 'center' }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 18, paddingRight: 15 }}>{following}</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 18, paddingRight: 15 }}>{(user.following && user.following.length) || 0}</Text>
           <Text style={{ paddingRight: 15 }}>Following</Text>
         </View>
       </View>
@@ -43,7 +43,7 @@ const ProfileBody = ({ first_name, last_name, profileImage, followers, following
             fontWeight: 'bold',
           }}
         >
-          {first_name} {last_name}
+          {user.first_name} {user.last_name}
         </Text>
         <TouchableOpacity
           onPress={() =>
@@ -63,7 +63,7 @@ const ProfileBody = ({ first_name, last_name, profileImage, followers, following
           </Text>
         </TouchableOpacity>
       </View>
-      <Text style={{ paddingVertical: 15, paddingLeft: 10 }}>{bio}</Text>
+      <Text style={{ paddingVertical: 15, paddingLeft: 10 }}>{user.profile_bio}</Text>
     </SafeAreaView>
   );
 };
