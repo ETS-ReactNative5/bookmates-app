@@ -1,8 +1,15 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { View, Text, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import BookSearch from '../components/BookSearch';
 
-const Bookshelf = () => {
+const Bookshelf = ({user}) => {
+
+  let currentlyReadingIds = user.currentlyReadingBooks;
+  let toReadIds = user.toReadBooks;
+  let finishedIds = user.finishedBooks;
+
+  
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <ScrollView style={{ flex: 1 }}>
@@ -18,9 +25,10 @@ const Bookshelf = () => {
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <BookSearch thumbnail={require('./../assets/mebeforeyou.jpg')} />
+         <Text>{currentlyReadingIds}</Text> 
+          {/* <BookSearch thumbnail={require('./../assets/mebeforeyou.jpg')} />
           <BookSearch thumbnail={require('./../assets/mockingbird.jpg')} />
-          <BookSearch thumbnail={require('./../assets/EE.jpg')} />
+          <BookSearch thumbnail={require('./../assets/EE.jpg')} /> */}
         </View>
 
         <View
@@ -35,9 +43,10 @@ const Bookshelf = () => {
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <BookSearch thumbnail={require('./../assets/Whomovedmycheese.jpg')} />
+          <Text>{toReadIds}</Text> 
+          {/* <BookSearch thumbnail={require('./../assets/Whomovedmycheese.jpg')} />
           <BookSearch thumbnail={require('./../assets/RichDadPoorDad.jpg')} />
-          <BookSearch thumbnail={require('./../assets/awakenthegiant.jpg')} />
+          <BookSearch thumbnail={require('./../assets/awakenthegiant.jpg')} /> */}
         </View>
 
         <View
@@ -52,9 +61,10 @@ const Bookshelf = () => {
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <BookSearch thumbnail={require('./../assets/Zerotoone.jpg')} />
+          <Text>{finishedIds}</Text> 
+          {/* <BookSearch thumbnail={require('./../assets/Zerotoone.jpg')} />
           <BookSearch thumbnail={require('./../assets/Bigquestions.jpg')} />
-          <BookSearch thumbnail={require('./../assets/AtomicHabits.jpg')} />
+          <BookSearch thumbnail={require('./../assets/AtomicHabits.jpg')} /> */}
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions, Image, Modal, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Image, Modal, TouchableOpacity, SafeAreaView } from 'react-native';
 
 export default function BookmatesMap({ navigation }) {
   const [region, setRegion] = useState({
@@ -33,7 +33,7 @@ export default function BookmatesMap({ navigation }) {
   ]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.logo}>Find bookmates nearby</Text>
       </View>
@@ -115,7 +115,7 @@ export default function BookmatesMap({ navigation }) {
           </View>
         </TouchableOpacity>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 }
 

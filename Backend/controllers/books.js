@@ -204,9 +204,44 @@ const displayBookmatesBookshelf = async (req, res) => {
 
 };
 
+const displayMyBookshelf = async (req, res) => {
+  try{
+    const user = await User.findById(req.user._id);
+  
+    const currentlyReadingIds = await user.currentlyReadingBooks;
+    const toReadIds = await user.toReadBooks;
+    const finishedIds = await user.finishedBooks;
+
+    const currentlyReadingBooks = await Promise.all(
+      currentlyReadingIds.map((book_id) => {
+        return Book.find({ _id: book_id });
+      })
+    );
+    const toReadBooks = await Promise.all(
+      toReadIds.map((book_id) => {
+        return Book.find({ _id: book_id });
+      })
+    );
+
+    const finishedBooks = await Promise.all(
+      finishedIds.map((book_id) => {
+        return Book.find({ _id: book_id });
+      })
+    );
+
+    const bookshelf = {currentlyReadingBooks, toReadBooks, finishedBooks};
+
+    return res.status(200).send(bookshelf);
+  }catch(err){
+    return res.status(400).send(err);
+  }
+
+};
+
 module.exports.search = search;
 module.exports.saveBook = saveBook;
 module.exports.addCurrently = addCurrently;
 module.exports.addFinished = addFinished;
 module.exports.addToRead = addToRead;
 module.exports.displayBookmatesBookshelf = displayBookmatesBookshelf;
+module.exports.displayMyBookshelf = displayMyBookshelf;

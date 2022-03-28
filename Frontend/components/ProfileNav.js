@@ -15,7 +15,7 @@ const ProfileNav = ({user}) => {
         tabBarLabelStyle: { fontSize: 14, fontWeight: 'bold' },
       })}
     >
-      <Tab.Screen name="Bookshelf" component={Bookshelf} />
+      <Tab.Screen name="Bookshelf" children={() => <Bookshelf user={user}/>}  />
       <Tab.Screen name="Reviews" children={() => <ReviewsSection user={user}/>} />
     </Tab.Navigator>
   );
