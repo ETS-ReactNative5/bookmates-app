@@ -5,6 +5,12 @@ import Logo from '../assets/Vectorbook-logo.png';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
+
+async function save(key, value) {
+  await SecureStore.setItemAsync(key, value).
+  catch(err => setErrorMessage(err))
+}
 
 const Login = ({ navigation }) => {
   const [data, setData] = React.useState({
@@ -34,7 +40,8 @@ const Login = ({ navigation }) => {
         axios
           .post('http://10.0.2.2:3000/api/auth/login', user)
           .then(({ data }) => {
-            console.log(data)
+            console.log(data.token);
+            save("token", data.token);
             navigation.navigate('BookmatesMap');
           })
           .catch((err) => {
