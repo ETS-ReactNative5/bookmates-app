@@ -35,13 +35,16 @@ const EditProfile = ({route, navigation}) => {
             source={{uri: `${profileImage}`}}
             style={{width: 80, height: 80, borderRadius: 100}}
           />
-          <Text
-            style={{
-              color: '#3493D9',
-              paddingTop:10
-            }}>
-            Change Profile Picture
-          </Text>
+          <TouchableOpacity>
+            <Text
+              style={{
+                color: '#3493D9',
+                paddingTop:10,
+                fontSize:16
+              }}>
+              Change Profile Picture
+            </Text>
+          </TouchableOpacity>
         </View>
         <View style={{paddingHorizontal: 20}}>
         <View style={{paddingTop: 10}}>
@@ -113,13 +116,27 @@ const EditProfile = ({route, navigation}) => {
             />
           </View>
         </View>
-        <Text
-            style={{
-              color: '#3493D9',
-              padding:20
-            }}>
-            Change Password
-          </Text>
+        <TouchableOpacity>
+          <Text
+              style={{
+                color: '#3493D9',
+                paddingTop:30,
+                paddingHorizontal:20,
+                fontSize:16
+              }}>
+              Change Password
+            </Text>
+        </TouchableOpacity>
+          <TouchableOpacity>
+            <Text
+              style={{
+                color: '#3493D9',
+                padding:20,
+                fontSize:16
+              }}>
+              Sign out
+            </Text>
+          </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
