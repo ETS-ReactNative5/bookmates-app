@@ -92,7 +92,12 @@ const getAllUsers = async (req, res) => {
 
 }
 
+const getProfile = async (req, res) => {
+  return res.status(200).send(req.user);
+}
+
 module.exports.follow = follow;
 module.exports.unfollow = unfollow;
 module.exports.editProfile = editProfile;
 module.exports.getAllUsers = getAllUsers;
+module.exports.getProfile = getProfile;

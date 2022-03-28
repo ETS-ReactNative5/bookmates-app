@@ -29,7 +29,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  profile_image_URL: String,
+  profile_image_URL: {
+    type: String,
+    default: "https://holyspiritchurch.us/wp-content/uploads/avatar-1577909_1280.png"
+  },
   followers: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

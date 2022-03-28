@@ -9,14 +9,14 @@ const BookmateProfile = ({route}) => {
     <View style={{width: '100%', height: '100%', backgroundColor: 'white'}}>
       <View style={{width: '100%', padding: 10}}>
         <BookmateProfileBody
-          name={user.name}
-          profileImage={user.profile_pic}
-          followers={user.followers}
-          following={user.following}
-          bio={user.bio}
+          name={user?.name}
+          profileImage={user?.profile_pic}
+          followers={user?.followers}
+          following={user?.following}
+          bio={user?.bio}
         />
       </View>
-      <ProfileNav name={user.name} profileImage={user.profile_pic}/>
+      <ProfileNav name={user?.name} profileImage={user?.profile_pic}/>
     </View>
   );
 };

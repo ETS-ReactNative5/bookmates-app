@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const ProfileBody = ({ name, profileImage, followers, following, bio, email }) => {
+const ProfileBody = ({ first_name, last_name, profileImage, followers, following, bio, email }) => {
   const navigation = useNavigation();
   return (
     <SafeAreaView>
@@ -16,7 +16,7 @@ const ProfileBody = ({ name, profileImage, followers, following, bio, email }) =
       >
         <View>
           <Image
-            source={profileImage}
+            source={{uri: `${profileImage}`}}
             style={{
               resizeMode: 'cover',
               width: 70,
@@ -42,12 +42,12 @@ const ProfileBody = ({ name, profileImage, followers, following, bio, email }) =
             fontWeight: 'bold',
           }}
         >
-          {name}
+          {first_name} {last_name}
         </Text>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('EditProfile', {
-              name: name,
+              name: first_name + " " + last_name,
               profileImage: profileImage,
               email: email,
               bio: bio,

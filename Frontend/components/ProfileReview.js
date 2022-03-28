@@ -2,7 +2,7 @@ import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'r
 import React, { useState } from 'react';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 
-const ProfileReview = ({ name, profile_pic, book, review_text, likes, dislikes, comments }) => {
+const ProfileReview = ({ first_name, last_name, profileImage, book, review_text, likes, dislikes, comments }) => {
   const [like_status, setLikeStatus] = useState(false);
   const [dislike_status, setDislikeStatus] = useState(false);
 
@@ -27,9 +27,9 @@ const ProfileReview = ({ name, profile_pic, book, review_text, likes, dislikes, 
           paddingVertical: 15,
         }}
       >
-        <Image style={styles.profile_pic} source={profile_pic} />
+        <Image style={styles.profile_pic} source={{uri: `${profileImage}`}} />
         <View style={{ flex: 1 }}>
-          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.name}>{first_name} {last_name}</Text>
           <Text style={styles.book_title}>
             on {book.title} by {book.author}
           </Text>

@@ -1,24 +1,42 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import ProfileBody from '../components/ProfileBody';
 import ProfileNav from '../components/ProfileNav';
 
+
 const Profile = () => {
+  
+  const [user, setUser] = useState('')
+
+  useEffect(()=>{
+      fetch('http://10.0.2.2:3000/api/user/getprofile',{
+          headers:{
+            "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0"
+          }
+      }).then(res=>res.json())
+      .then(result=>{
+        setUser(result);
+      })
+      .catch(err => console.log(err))
+  },[])
+
   return (
     <View style={{width: '100%', height: '100%', backgroundColor: 'white'}}>
       <View style={{width: '100%', padding: 10}}>
         <ProfileBody
-          name="Claudia Holland"
-          profileImage={require('./../assets/test_profile_pic.jpg')}
-          followers="220"
-          following="220"
-          bio="So many books, so little time📚"
-          email="claudiaholland@gmail.com"
+          first_name= {user.first_name}
+          last_name = {user.last_name}
+          profileImage={user.profile_image_URL}
+          followers={(user && user.followers && user.followers.length) || 0}
+          following={(user && user.following && user.following.length) || 0}
+          bio={user.profile_bio}
+          email={user.email}
         />
       </View>
       <ProfileNav 
-        name="Claudia Holland"
-        profileImage={require('./../assets/test_profile_pic.jpg')} />
+        first_name = {user.first_name}
+        last_name = {user.last_name}
+        profileImage={user.profile_image_URL} />
     </View>
   );
 };

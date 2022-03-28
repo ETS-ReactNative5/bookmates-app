@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios  from 'axios';
 import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import BookSearch from '../components/BookSearch';
@@ -6,7 +7,9 @@ import BookSearch from '../components/BookSearch';
 const Search = () => {
   const [searchQuery, setSearchQuery] = React.useState('');
 
-  const onChangeSearch = (query) => setSearchQuery(query);
+  const onChangeSearch = (query) => {
+    setSearchQuery(query);
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
