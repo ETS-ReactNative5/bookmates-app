@@ -24,7 +24,7 @@ const EditProfile = ({route, navigation}) => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionic name="close-outline" style={{fontSize: 35}} />
           </TouchableOpacity>
-          <Text style={{fontSize: 16, fontWeight: 'bold'}}>Edit Profile</Text>
+          <Text style={{fontSize: 16, fontWeight: 'bold'}}>Profile Settings</Text>
           <TouchableOpacity
             onPress={() => {navigation.goBack();}}>
             <Ionic name="checkmark" style={{fontSize: 35, color: '#3493D9'}} />

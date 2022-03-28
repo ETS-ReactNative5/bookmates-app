@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Feather } from '@expo/vector-icons';
 
 const ProfileBody = ({ first_name, last_name, profileImage, followers, following, bio, email }) => {
   const navigation = useNavigation();
@@ -54,9 +55,12 @@ const ProfileBody = ({ first_name, last_name, profileImage, followers, following
               bio: bio,
             })
           }
-          style={{ width: 100, height: 30, justifyContent: 'center', backgroundColor: '#5A7FCC', borderRadius: 20 }}
+          style={{ width: 100, height: 30, flexDirection:'row', justifyContent: 'center', alignItems:'center', backgroundColor: '#5A7FCC', borderRadius: 20 }}
         >
-          <Text style={{ textAlign: 'center', color: '#FFF', fontWeight: 'bold' }}>Edit Profile</Text>
+          <Feather name="settings" size={18} color="#FFF" />
+          <Text style={{ textAlign: 'center', color: '#FFF', fontWeight: 'bold', marginLeft:5 }}> 
+            Settings
+          </Text>
         </TouchableOpacity>
       </View>
       <Text style={{ paddingVertical: 15, paddingLeft: 10 }}>{bio}</Text>
