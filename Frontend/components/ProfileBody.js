@@ -46,7 +46,7 @@ const ProfileBody = ({ first_name, last_name, profileImage, followers, following
         </Text>
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate('EditProfile', {
+            navigation.navigate('EditProfile' ,{
               name: first_name + " " + last_name,
               profileImage: profileImage,
               email: email,

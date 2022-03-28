@@ -14,13 +14,17 @@ import EditProfile from './screens/EditProfile';
 import BookDetails from './screens/BookDetails';
 import BookmateProfile from './screens/BookmateProfile';
 import WriteReview from './screens/WriteReview';
+import { AuthContext } from './context/AuthContext';
 
-
-const Stack = createNativeStackNavigator();
 
 
 function App() {
   
+  const Stack = createNativeStackNavigator();
+  const [authState, setAuthState] = useState({
+    LoggedIn: true,
+  })
+
   const [fontsLoaded] = useFonts({
     Baloo2_800ExtraBold,
     Baloo2_600SemiBold,
@@ -34,25 +38,33 @@ function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash" screenOptions={{
-        headerShown: false
-      }}>
-      <Stack.Screen name="Splash" component={SplashScreen} />
-      
-      <Stack.Screen name="Login" component = {Login} />
-      <Stack.Screen name="Signup" component = {Signup} />
-      <Stack.Screen name="ForgotPW" component = {ForgotPW} />
-      <Stack.Screen name="ChangePW" component = {ChangePW} />
+    <AuthContext.Provider>
 
-      <Stack.Screen name="BookmatesMap" component = {MyTabs} />
-      <Stack.Screen name="EditProfile" component = {EditProfile} />
-      <Stack.Screen name="BookDetails" component = {BookDetails} />
-      <Stack.Screen name="BookmateProfile" component = {BookmateProfile} />
-      <Stack.Screen name="WriteReview" component = {WriteReview} />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Splash" screenOptions={{
+          headerShown: false
+        }}>
+        {authState.LoggedIn ? (
+          <>
+            <Stack.Screen name="BookmatesMap" component = {MyTabs} />
+            <Stack.Screen name="EditProfile" component = {EditProfile} />
+            <Stack.Screen name="BookDetails" component = {BookDetails} />
+            <Stack.Screen name="BookmateProfile" component = {BookmateProfile} />
+            <Stack.Screen name="WriteReview" component = {WriteReview} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="Splash" component={SplashScreen} />
+            <Stack.Screen name="Login" component = {Login} />
+            <Stack.Screen name="Signup" component = {Signup} />
+            <Stack.Screen name="ForgotPW" component = {ForgotPW} />
+            <Stack.Screen name="ChangePW" component = {ChangePW} />
+          </>
+        )}
 
-    </Stack.Navigator>
-  </NavigationContainer>
+      </Stack.Navigator>
+    </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
 
