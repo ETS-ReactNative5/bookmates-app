@@ -48,11 +48,11 @@ const ProfileBody = ({user}) => {
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('EditProfile' ,{
-              first_name: first_name,
-              last_name: last_name,
-              profileImage: profileImage,
-              email: email,
-              bio: bio,
+              first_name: user.first_name,
+              last_name: user.last_name,
+              profileImage: user.profile_image_URL,
+              email: user.email,
+              bio: user.profile_bio,
             })
           }
           style={{ width: 100, height: 30, flexDirection:'row', justifyContent: 'center', alignItems:'center', backgroundColor: '#5A7FCC', borderRadius: 20 }}

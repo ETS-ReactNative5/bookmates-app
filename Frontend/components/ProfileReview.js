@@ -31,10 +31,10 @@ const ProfileReview = ({ first_name, last_name, profileImage, book, review_text,
         <View style={{ flex: 1 }}>
           <Text style={styles.name}>{first_name} {last_name}</Text>
           <Text style={styles.book_title}>
-            on {book.title} by {book.author}
+            on {book?.title} by {book?.author}
           </Text>
           <View style={{ flexDirection: 'row' }}>
-            <Image style={styles.book_img} source={book.thumbnail} />
+            <Image style={styles.book_img} source={book?.thumbnail} />
             <Text style={styles.review_text}>{review_text}</Text>
           </View>
 

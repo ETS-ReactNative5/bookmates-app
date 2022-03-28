@@ -26,10 +26,7 @@ const Profile = () => {
       <View style={{width: '100%', padding: 10}}>
         <ProfileBody user={user}/>
       </View>
-      <ProfileNav 
-        first_name = {user.first_name}
-        last_name = {user.last_name}
-        profileImage={user.profile_image_URL} />
+      <ProfileNav user={user}/>
     </View>
   );
 };
