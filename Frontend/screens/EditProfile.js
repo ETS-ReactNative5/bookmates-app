@@ -3,7 +3,7 @@ import {View,Text,TouchableOpacity,ToastAndroid,Image,TextInput,SafeAreaView} fr
 import Ionic from 'react-native-vector-icons/Ionicons';
 
 const EditProfile = ({route, navigation}) => {
-  const {name, profileImage, email, bio} = route.params;
+  const {first_name, last_name, profileImage, email, bio} = route.params;
 
   return (
     <SafeAreaView>
@@ -43,17 +43,17 @@ const EditProfile = ({route, navigation}) => {
             Change Profile Picture
           </Text>
         </View>
-        <View style={{padding: 10}}>
-          <View>
+        <View style={{paddingHorizontal: 20}}>
+        <View style={{paddingTop: 10}}>
             <Text
               style={{
                 opacity: 0.5,
               }}>
-              Name
+              First name
             </Text>
             <TextInput
-              placeholder="name"
-              defaultValue={name}
+              placeholder="First name"
+              defaultValue={first_name}
               style={{
                 fontSize: 16,
                 borderBottomWidth: 1,
@@ -61,7 +61,24 @@ const EditProfile = ({route, navigation}) => {
               }}
             />
           </View>
-          <View style={{paddingVertical: 20}}>
+          <View style={{paddingTop: 20}}>
+            <Text
+              style={{
+                opacity: 0.5,
+              }}>
+              Last name
+            </Text>
+            <TextInput
+              placeholder="Last name"
+              defaultValue={last_name}
+              style={{
+                fontSize: 16,
+                borderBottomWidth: 1,
+                borderColor: '#CDCDCD',
+              }}
+            />
+          </View>
+          <View style={{paddingTop: 20}}>
             <Text
               style={{
                 opacity: 0.5,
@@ -78,7 +95,7 @@ const EditProfile = ({route, navigation}) => {
               }}
             />
           </View>
-          <View style={{paddingVertical: 10}}>
+          <View style={{paddingTop: 20}}>
           <Text
               style={{
                 opacity: 0.5,
@@ -99,7 +116,7 @@ const EditProfile = ({route, navigation}) => {
         <Text
             style={{
               color: '#3493D9',
-              padding:10
+              padding:20
             }}>
             Change Password
           </Text>

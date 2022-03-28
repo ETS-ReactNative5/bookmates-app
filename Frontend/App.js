@@ -16,8 +16,6 @@ import BookmateProfile from './screens/BookmateProfile';
 import WriteReview from './screens/WriteReview';
 import { AuthContext } from './context/AuthContext';
 
-
-
 function App() {
   
   const Stack = createNativeStackNavigator();
