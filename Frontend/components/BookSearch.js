@@ -5,7 +5,7 @@ const BookSearch = ({book}) => {
     const navigation = useNavigation(); 
     return(
         <TouchableOpacity onPress={() => navigation.navigate('BookDetails', {book: book})}>
-            <Image source={{uri: `${book.thumbnail}`}}
+            <Image source={{uri: `${book?.thumbnail}`}}
             style={{
                 resizeMode: 'cover',
                 width: 94,

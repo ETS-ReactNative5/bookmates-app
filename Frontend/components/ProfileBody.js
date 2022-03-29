@@ -17,7 +17,7 @@ const ProfileBody = ({user}) => {
       >
         <View>
           <Image
-            source={{uri: `${user.profile_image_URL}`}}
+            source={{uri: `${user?.profile_image_URL}`}}
             style={{
               resizeMode: 'cover',
               width: 70,

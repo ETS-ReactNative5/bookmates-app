@@ -14,7 +14,7 @@ const MyReviewsSection = () => {
   
     const loadReviews = async () => {
       //Testing
-      fetch('http://10.0.2.2:3000/api/review/myreviews',{
+      fetch('http://192.168.1.10:3000/api/review/myreviews',{
           headers:{
             Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0"
           }

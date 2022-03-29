@@ -22,6 +22,7 @@ mongoose.connect(process.env.DB_CONNECT,
 () => console.log("Connected to database"));
 
 //Middleware
+app.use('/uploads', express.static('uploads'));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 

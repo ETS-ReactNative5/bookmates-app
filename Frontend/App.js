@@ -36,7 +36,7 @@ function App() {
   }
 
   return (
-    <AuthContext.Provider>
+    <AuthContext.Provider value={authState.LoggedIn}>
 
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Splash" screenOptions={{

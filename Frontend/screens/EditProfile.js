@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {View,Text,TouchableOpacity,ToastAndroid,Image,TextInput,SafeAreaView, ScrollView} from 'react-native';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
+import * as ImagePicker from 'expo-image-picker';
 
 const EditProfile = ({route, navigation}) => {
 
@@ -13,6 +14,45 @@ const EditProfile = ({route, navigation}) => {
   const [bioText, setBioText] = useState(bio);
   const [emailAddress, setEmailAddress] = useState(email);
 
+  // Pick image from phone gallery
+  const pickImage = async () => {
+    
+    let permission = await ImagePicker.requestCameraPermissionsAsync();
+    
+    if(!permission.granted){
+      return;
+    }
+    
+    let data = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes:ImagePicker.MediaTypeOptions.Images
+    });
+    if (data.cancelled){
+      return;
+    }
+    
+    let selectedImage = {
+      uri:data.uri,
+      type:`test/${data.uri.split(".")[1]}`,
+      name:`test.${data.uri.split(".")[1]}`};
+      console.log(selectedImage);
+      handleUpload(selectedImage);
+    }
+    
+  // Upload to Cloudinary
+  const handleUpload = (image)=>{
+    const data = new FormData(); 
+    data.append('file',image);  
+    data.append('upload_preset','bookmates-SEF');
+    data.append('cloud_name','dhgvftljk');
+    fetch("https://api.cloudinary.com/v1_1/dhgvftljk/image/upload",{ 
+      method:'post',
+      body:data
+    }).then(res=>res.json())
+    .then(data=>{  
+      setProfileImageURL(data.url)
+    })
+  }
+  
   async function editData(){
     try {
         const { data } = await axios({
@@ -20,12 +60,13 @@ const EditProfile = ({route, navigation}) => {
             headers:{
               "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0"
             },
-            url: 'http://10.0.2.2:3000/api/user/editprofile',
+            url: 'http://192.168.1.10:3000/api/user/editprofile',
             data: {
               first_name: fname,
               last_name: lname,
               email: emailAddress,
               profile_bio: bioText,
+              profile_image_URL: profileImageURL
             }
         });
 
@@ -71,7 +112,7 @@ const EditProfile = ({route, navigation}) => {
               source={{uri: `${profileImageURL}`}}
               style={{width: 80, height: 80, borderRadius: 100}}
             />
-            <TouchableOpacity>
+            <TouchableOpacity onPress={pickImage}>
               <Text
                 style={{
                   color: '#3493D9',

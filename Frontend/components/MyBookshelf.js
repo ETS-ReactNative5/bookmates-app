@@ -12,7 +12,7 @@ const MyBookshelf = () => {
   },[])
 
   const loadBookshelf = async () => {
-    fetch('http://10.0.2.2:3000/api/book/displaymybookshelf',{
+    fetch('http://192.168.1.10:3000/api/book/displaymybookshelf',{
         headers:{
           Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0"
         }
@@ -26,7 +26,6 @@ const MyBookshelf = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      {refreshing ? <ActivityIndicator /> : null}
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadBookshelf}/>}>
         <View
           style={{ flexDirection: 'row', paddingVertical: 20, justifyContent: 'space-between', alignItems: 'center' }}
@@ -58,7 +57,7 @@ const MyBookshelf = () => {
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
           {bookshelf?.toReadBooks?.map((result) => {         
-            return ( <BookSearch key={result[0]._id} book= {result[0]} />)})
+            return ( <BookSearch key={result[0]?._id} book= {result[0]} />)})
           }
         </View>
 
