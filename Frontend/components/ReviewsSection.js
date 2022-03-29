@@ -8,7 +8,7 @@ const ReviewsSection = ({user}) => {
     return (
       <SafeAreaView>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <ProfileReview
+          <ProfileReview 
             first_name={user.first_name}
             last_name={user.last_name}
             profileImage={user.profile_image_URL}

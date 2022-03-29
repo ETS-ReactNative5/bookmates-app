@@ -109,9 +109,22 @@ const comment = async (req, res) => {
   })
 }
 
-const getUserReviews = async (req, res) => {
+const getMyReviews = async (req, res) => {
     try{
-      const reviews = await Review.find({user_id: req.user._id});
+      const reviews = await Review.find({ user_id: req.user._id }).populate({
+        path: "book_id",
+        populate: [
+          {
+            path: "author_id",
+            model: "Author",
+          },
+          {
+            path: "reviews",
+            model: "Review",
+          },
+        ],
+      });
+
       if (reviews.length) {
         return res.status(200).send(reviews);
       }else {
@@ -143,5 +156,5 @@ module.exports.deleteReview = deleteReview;
 module.exports.likeReview = likeReview;
 module.exports.dislikeReview = dislikeReview;
 module.exports.comment = comment;
-module.exports.getUserReviews = getUserReviews;
+module.exports.getMyReviews = getMyReviews;
 module.exports.getFeedReviews = getFeedReviews;
