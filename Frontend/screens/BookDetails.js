@@ -14,60 +14,51 @@ import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import BookReview from './../components/BookReview';
 
+{
+  /*Description component*/
+}
+const Description = ({book}) => {
+  return (
+    <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: 'white', flex: 1 }}>
+      <Text style={{ lineHeight: 25, paddingTop: 10, textAlign: 'justify', paddingHorizontal: 10 }}>
+        {book.description}
+      </Text>
+    </ScrollView>
+  );
+};
+{
+  /*Book Reviews component*/
+}
+const BookReviews = () => {
+  let book1 = { title: 'Me Before You', author: 'Jojo Moyes', thumbnail: require('./../assets/mebeforeyou.jpg') };
+  let user1 = { name: 'Claudia Holland', profile_pic: require('./../assets/test_profile_pic.jpg') };
+  return (
+    <SafeAreaView>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <BookReview
+          user={user1}
+          book={book1}
+          review_text="I love it. I love its warmth and vibrancy, its heartache and its pain, its humor and meanness, the ugliness, the beauty, the crying, the laughter, the sarcasm.
+        I love Elanor and Park and I love that there's still a tiny chance for them."
+          likes="20"
+          dislikes="3"
+          comments="5"
+        />
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
 const BookDetails = ({ route, navigation }) => {
-  const { title, thumbnail, description, author } = route.params;
+
+  const book = route.params;
+
   const Tab = createMaterialTopTabNavigator();
   const [modalVisible, setModalVisible] = useState(false);
 
   const [currentlyReading, setCurrentlyReading] = useState(false);
   const [finished, setFinished] = useState(false);
   const [toRead, setToRead] = useState(false);
-
-  {
-    /*Description component*/
-  }
-  const Description = () => {
-    return (
-      <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: 'white', flex: 1 }}>
-        <Text style={{ lineHeight: 25, paddingTop: 10, textAlign: 'justify', paddingHorizontal: 10 }}>
-          {description}
-        </Text>
-      </ScrollView>
-    );
-  };
-
-  {
-    /*Book Reviews component*/
-  }
-  const BookReviews = () => {
-    let book1 = { title: 'Me Before You', author: 'Jojo Moyes', thumbnail: require('./../assets/mebeforeyou.jpg') };
-    let user1 = { name: 'Claudia Holland', profile_pic: require('./../assets/test_profile_pic.jpg') };
-    return (
-      <SafeAreaView>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <BookReview
-            user={user1}
-            book={book1}
-            review_text="I love it. I love its warmth and vibrancy, its heartache and its pain, its humor and meanness, the ugliness, the beauty, the crying, the laughter, the sarcasm.
-          I love Elanor and Park and I love that there's still a tiny chance for them."
-            likes="20"
-            dislikes="3"
-            comments="5"
-          />
-
-          <BookReview
-            user={user1}
-            book={book1}
-            review_text="I love it. I love its warmth and vibrancy, its heartache and its pain, its humor and meanness, the ugliness, the beauty, the crying, the laughter, the sarcasm.
-          I love Elanor and Park and I love that there's still a tiny chance for them."
-            likes="20"
-            dislikes="3"
-            comments="5"
-          />
-        </ScrollView>
-      </SafeAreaView>
-    );
-  };
 
   {
     /*Change state of currently reading*/
@@ -163,9 +154,9 @@ const BookDetails = ({ route, navigation }) => {
 
         {/*Book thumbnail, title and author*/}
         <View style={{ alignSelf: 'center' }}>
-          <Image style={{ width: 131, height: 191, borderRadius: 10 }} source={thumbnail} />
-          <Text style={styles.book_title}>{title}</Text>
-          <Text style={styles.book_author}>By {author}</Text>
+          <Image style={{ width: 131, height: 191, borderRadius: 10 }} source={{uri: `${book.thumbnail}`}} />
+          <Text style={styles.book_title}>{book.title}</Text>
+          <Text style={styles.book_author}>By {book.author}</Text>
         </View>
       </View>
 
@@ -180,7 +171,7 @@ const BookDetails = ({ route, navigation }) => {
             tabBarLabelStyle: { fontSize: 14, fontWeight: 'bold' },
           })}
         >
-          <Tab.Screen name="Description" component={Description} />
+          <Tab.Screen name="Description" children={() => <Description book={book}/>} />
           <Tab.Screen name="Reviews" component={BookReviews} />
         </Tab.Navigator>
       </View>

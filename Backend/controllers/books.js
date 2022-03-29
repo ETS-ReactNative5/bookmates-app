@@ -19,7 +19,7 @@ const search = async (req, res) => {
       const book_results = data.items.map((item) => item.volumeInfo);
       const books = book_results.map((result) => ({
         title: result.title,
-        author: result.authors[0],
+        author: result.authors ? result.authors[0] : "",
         description: result.description,
         isbn: result.industryIdentifiers
           ? result.industryIdentifiers[0].type === "ISBN_13"

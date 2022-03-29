@@ -5,12 +5,9 @@ import BookSearch from '../components/BookSearch';
 const MyBookshelf = () => {
 
   const [bookshelf, setBookshelf] = useState({})
-  const [currently, setCurrently] = useState([])
-  const [toRead, settoRead] = useState([])
-  const [finished, setFinished] = useState([])
 
   //Testing
-  useEffect(()=>{
+  useEffect(async () =>{
     //Testing
     fetch('http://10.0.2.2:3000/api/book/displaymybookshelf',{
         headers:{
@@ -18,10 +15,8 @@ const MyBookshelf = () => {
         }
       }).then(res=>res.json())
       .then(result=>{
-        setCurrently(result.currentlyReadingBooks[0]);
-        setFinished(result.finishedBooks)
-        settoRead(result.toReadBooks[0])
-        console.log(currently, toRead, finished)
+        setBookshelf(result);
+        console.log({bookshelf});
       })
       .catch(err => console.log(err))
   },[])
@@ -41,10 +36,9 @@ const MyBookshelf = () => {
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          {currently.map((result) =>
-          { return(
-            <BookSearch key={result._id} book= {result} />
-          )})}
+          {bookshelf?.currentlyReadingBooks?.map((result) => {         
+            return ( <BookSearch key={result[0]._id} book= {result[0]} />)})
+          }
         </View>
 
         <View
@@ -59,10 +53,9 @@ const MyBookshelf = () => {
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          {toRead.map((result) =>
-          { return(
-            <BookSearch book= {result} />
-          )})}
+          {bookshelf?.toReadBooks?.map((result) => {         
+            return ( <BookSearch key={result[0]._id} book= {result[0]} />)})
+          }
         </View>
 
         <View
@@ -77,10 +70,9 @@ const MyBookshelf = () => {
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          {finished.map((result) =>
-          { return(
-            <BookSearch book= {result} />
-          )})}
+          {bookshelf?.finishedBooks?.map((result) => {         
+            return ( <BookSearch key={result[0]._id} book= {result[0]} />)})
+          }
         </View>
 
       </ScrollView>
