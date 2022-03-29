@@ -108,6 +108,7 @@ const EditProfile = ({route, navigation}) => {
             <TextInput
               placeholder="Bio"
               defaultValue={bio}
+              multiline="3"
               style={{
                 fontSize: 16,
                 borderBottomWidth: 1,
