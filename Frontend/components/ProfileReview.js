@@ -2,7 +2,7 @@ import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'r
 import React, { useState } from 'react';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 
-const ProfileReview = ({ first_name, last_name, profileImage, book, review_text, likes, dislikes, comments }) => {
+const ProfileReview = ({ review }) => {
   const [like_status, setLikeStatus] = useState(false);
   const [dislike_status, setDislikeStatus] = useState(false);
 
@@ -27,15 +27,15 @@ const ProfileReview = ({ first_name, last_name, profileImage, book, review_text,
           paddingVertical: 15,
         }}
       >
-        <Image style={styles.profile_pic} source={{uri: `${profileImage}`}} />
+        <Image style={styles.profile_pic} source={{uri: `${review.user_id.profile_image_URL}`}} />
         <View style={{ flex: 1 }}>
-          <Text style={styles.name}>{first_name} {last_name}</Text>
+          <Text style={styles.name}>{review.user_id.first_name} {review.user_id.last_name}</Text>
           <Text style={styles.book_title}>
-            on {book?.title} by {book?.author}
+            on {review.book_id.title} by {review.book_id.author_id.name}
           </Text>
           <View style={{ flexDirection: 'row' }}>
-            <Image style={styles.book_img} source={book?.thumbnail} />
-            <Text style={styles.review_text}>{review_text}</Text>
+            <Image style={styles.book_img} source={{uri: `${review.book_id.thumbnail}`}} />
+            <Text style={styles.review_text}>{review.text}</Text>
           </View>
 
           {/* Interactions */}
@@ -43,11 +43,11 @@ const ProfileReview = ({ first_name, last_name, profileImage, book, review_text,
             <TouchableOpacity onPress={() => likeReview()}>
               {like_status ? (
                 <Text style={{ color: '#5A7FCC' }}>
-                  {likes} <AntDesign name="like1" size={18} color="#5A7FCC" />
+                  {review.likes.length} <AntDesign name="like1" size={18} color="#5A7FCC" />
                 </Text>
               ) : (
                 <Text style={{ color: '#5A7FCC' }}>
-                  {likes} <AntDesign name="like2" size={18} color="#5A7FCC" />
+                  {review.likes.length} <AntDesign name="like2" size={18} color="#5A7FCC" />
                 </Text>
               )}
             </TouchableOpacity>
@@ -55,18 +55,18 @@ const ProfileReview = ({ first_name, last_name, profileImage, book, review_text,
             <TouchableOpacity onPress={() => dislikeReview()}>
               {dislike_status ? (
                 <Text style={{ color: '#5A7FCC' }}>
-                  {dislikes} <AntDesign name="dislike1" size={18} color="#5A7FCC" />
+                  {review.dislikes.length} <AntDesign name="dislike1" size={18} color="#5A7FCC" />
                 </Text>
               ) : (
                 <Text style={{ color: '#5A7FCC' }}>
-                  {dislikes} <AntDesign name="dislike2" size={18} color="#5A7FCC" />
+                  {review.dislikes.length} <AntDesign name="dislike2" size={18} color="#5A7FCC" />
                 </Text>
               )}
             </TouchableOpacity>
 
             <TouchableOpacity>
               <Text style={{ color: '#5A7FCC' }}>
-                {comments} <FontAwesome name="commenting-o" size={18} color="#5A7FCC" />
+                {review.comments.length} <FontAwesome name="commenting-o" size={18} color="#5A7FCC" />
               </Text>
             </TouchableOpacity>
           </View>

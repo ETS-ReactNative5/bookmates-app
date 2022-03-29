@@ -112,7 +112,7 @@ const comment = async (req, res) => {
 const getMyReviews = async (req, res) => {
     try{
       const reviews = await Review.find({ user_id: req.user._id }).populate({
-        path: "book_id",
+        path: "book_id", 
         populate: [
           {
             path: "author_id",
@@ -123,7 +123,7 @@ const getMyReviews = async (req, res) => {
             model: "Review",
           },
         ],
-      });
+      }).populate('user_id');
 
       if (reviews.length) {
         return res.status(200).send(reviews);
