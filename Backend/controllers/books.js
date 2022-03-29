@@ -214,18 +214,18 @@ const displayMyBookshelf = async (req, res) => {
 
     const currentlyReadingBooks = await Promise.all(
       currentlyReadingIds.map((book_id) => {
-        return Book.find({ _id: book_id });
+        return Book.find({ _id: book_id }).populate("author_id", "_id name");
       })
     );
     const toReadBooks = await Promise.all(
       toReadIds.map((book_id) => {
-        return Book.find({ _id: book_id });
+        return Book.find({ _id: book_id }).populate("author_id", "_id name");
       })
     );
 
     const finishedBooks = await Promise.all(
       finishedIds.map((book_id) => {
-        return Book.find({ _id: book_id });
+        return Book.find({ _id: book_id }).populate("author_id", "_id name");
       })
     );
 

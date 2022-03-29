@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 const BookSearch = ({book}) => {
     const navigation = useNavigation(); 
     return(
-        <TouchableOpacity onPress={() => navigation.navigate('BookDetails', {book})}>
+        <TouchableOpacity onPress={() => navigation.navigate('BookDetails', {book: book})}>
             <Image source={{uri: `${book.thumbnail}`}}
             style={{
                 resizeMode: 'cover',

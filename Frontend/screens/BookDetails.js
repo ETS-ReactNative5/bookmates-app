@@ -51,7 +51,7 @@ const BookReviews = () => {
 
 const BookDetails = ({ route, navigation }) => {
 
-  const book = route.params;
+  let {book} = route.params;
 
   const Tab = createMaterialTopTabNavigator();
   const [modalVisible, setModalVisible] = useState(false);
@@ -156,7 +156,7 @@ const BookDetails = ({ route, navigation }) => {
         <View style={{ alignSelf: 'center' }}>
           <Image style={{ width: 131, height: 191, borderRadius: 10 }} source={{uri: `${book.thumbnail}`}} />
           <Text style={styles.book_title}>{book.title}</Text>
-          <Text style={styles.book_author}>By {book.author}</Text>
+          <Text style={styles.book_author}>By {book.author_id.name}</Text>
         </View>
       </View>
 
