@@ -1,25 +1,30 @@
 import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import ProfileReview from './ProfileReview';
 
-const MyReviewsSection = ({user}) => {
-    let book1 = { title: 'Me Before You', author: 'Jojo Moyes', thumbnail: require('./../assets/mebeforeyou.jpg') };
+const MyReviewsSection = () => {
 
+  const [reviews, setReviews] = useState([])
+    //Testing
+    useEffect(async () =>{
+      //Testing
+      fetch('http://10.0.2.2:3000/api/review/myreviews',{
+          headers:{
+            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0"
+          }
+        }).then(res=>res.json())
+        .then(result=>{
+          setReviews(result)})
+        .catch(err => console.log(err))
+    },[])
+  
     return (
       <SafeAreaView>
-        {/* <ScrollView showsVerticalScrollIndicator={false}>
-          <ProfileReview 
-            first_name={user.first_name}
-            last_name={user.last_name}
-            profileImage={user.profile_image_URL}
-            book={book1}
-            review_text="I love it. I love its warmth and vibrancy, its heartache and its pain, its humor and meanness, the ugliness, the beauty, the crying, the laughter, the sarcasm.
-          I love Elanor and Park and I love that there's still a tiny chance for them."
-            likes="20"
-            dislikes="3"
-            comments="5"
-          />
-        </ScrollView> */}
+        <ScrollView showsVerticalScrollIndicator={false}>
+        {reviews?.map((result) => {         
+            return ( <ProfileReview key={result._id} review= {result} />)})
+          }
+        </ScrollView>
       </SafeAreaView>
     );
   };

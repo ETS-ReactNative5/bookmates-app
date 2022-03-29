@@ -3,7 +3,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import MyBookshelf from './MyBookshelf';
 import MyReviewsSection from './MyReviewsSection';
 
-const MyProfileNav = ({user}) => {
+const MyProfileNav = () => {
   const Tab = createMaterialTopTabNavigator();
   return (
     <Tab.Navigator
