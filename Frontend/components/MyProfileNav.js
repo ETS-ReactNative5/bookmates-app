@@ -1,7 +1,7 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import MyBookshelf from './MyBookshelf';
-import ReviewsSection from './ReviewsSection';
+import MyReviewsSection from './MyReviewsSection';
 
 const MyProfileNav = ({user}) => {
   const Tab = createMaterialTopTabNavigator();
@@ -16,7 +16,7 @@ const MyProfileNav = ({user}) => {
       })}
     >
       <Tab.Screen name="Bookshelf" children={() => <MyBookshelf/>}  />
-      <Tab.Screen name="Reviews" children={() => <ReviewsSection user={user}/>} />
+      <Tab.Screen name="Reviews" children={() => <MyReviewsSection/>} />
     </Tab.Navigator>
   );
 };

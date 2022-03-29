@@ -2,12 +2,12 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native'
 import React from 'react'
 import ProfileReview from './ProfileReview';
 
-const ReviewsSection = ({user}) => {
+const MyReviewsSection = ({user}) => {
     let book1 = { title: 'Me Before You', author: 'Jojo Moyes', thumbnail: require('./../assets/mebeforeyou.jpg') };
 
     return (
       <SafeAreaView>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        {/* <ScrollView showsVerticalScrollIndicator={false}>
           <ProfileReview 
             first_name={user.first_name}
             last_name={user.last_name}
@@ -19,9 +19,9 @@ const ReviewsSection = ({user}) => {
             dislikes="3"
             comments="5"
           />
-        </ScrollView>
+        </ScrollView> */}
       </SafeAreaView>
     );
   };
 
-export default ReviewsSection;
+export default MyReviewsSection
