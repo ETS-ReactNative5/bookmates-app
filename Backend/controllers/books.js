@@ -158,7 +158,7 @@ const addToRead = async (req, res) => {
       }
       return res.status(200).send({message: "Lists successfully updated."})
     }else{
-      await user.updateOne({ $pull: { finishedBooks: req.body.book_id } })
+      await user.updateOne({ $pull: { toReadBooks: req.body.book_id } })
       return res.status(200).send({message: "Book removed from to-read books."})
     }
   }catch(err){

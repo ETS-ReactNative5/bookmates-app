@@ -1,12 +1,18 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, RefreshControl, ActivityIndicator } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import ProfileReview from './ProfileReview';
 
 const MyReviewsSection = () => {
 
   const [reviews, setReviews] = useState([])
+  const [refreshing, setRefreshing] = useState(true);
+
     //Testing
     useEffect(async () =>{
+      loadReviews();
+    },[])
+  
+    const loadReviews = async () => {
       //Testing
       fetch('http://10.0.2.2:3000/api/review/myreviews',{
           headers:{
@@ -14,13 +20,16 @@ const MyReviewsSection = () => {
           }
         }).then(res=>res.json())
         .then(result=>{
-          setReviews(result)})
+          setReviews(result)
+          setRefreshing(false);
+        })
         .catch(err => console.log(err))
-    },[])
+    }
   
     return (
       <SafeAreaView>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        {refreshing ? <ActivityIndicator /> : null}
+        <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadReviews}/>}>
         {reviews?.map((result) => {         
             return ( <ProfileReview key={result._id} review= {result} />)})
           }

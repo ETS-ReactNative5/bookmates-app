@@ -1,29 +1,33 @@
 import React , {useState, useEffect} from 'react';
-import { View, Text, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
 import BookSearch from '../components/BookSearch';
 
 const MyBookshelf = () => {
 
   const [bookshelf, setBookshelf] = useState({})
+  const [refreshing, setRefreshing] = useState(true);
 
-  //Testing
   useEffect(async () =>{
-    //Testing
+    loadBookshelf();
+  },[])
+
+  const loadBookshelf = async () => {
     fetch('http://10.0.2.2:3000/api/book/displaymybookshelf',{
         headers:{
           Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0"
         }
       }).then(res=>res.json())
       .then(result=>{
+        setRefreshing(false);
         setBookshelf(result);
-        console.log({bookshelf});
       })
       .catch(err => console.log(err))
-  },[])
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <ScrollView style={{ flex: 1 }}>
+      {refreshing ? <ActivityIndicator /> : null}
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadBookshelf}/>}>
         <View
           style={{ flexDirection: 'row', paddingVertical: 20, justifyContent: 'space-between', alignItems: 'center' }}
         >
