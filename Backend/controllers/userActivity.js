@@ -78,7 +78,7 @@ const editProfile = async (req, res) => {
     } catch (err) {
       return res.status(500).send(err);
     }
-  } 
+} 
 
 const getAllUsers = async (req, res) => {
   try {

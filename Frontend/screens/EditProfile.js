@@ -25,8 +25,8 @@ const EditProfile = ({ route, navigation }) => {
   const [profileImageURL, setProfileImageURL] = useState(profileImage);
   const [bioText, setBioText] = useState(bio);
   const [emailAddress, setEmailAddress] = useState(email);
-  const [password, setPassword] = useState(email);
-  const [passwordConfirmation, setPasswordConfirmation] = useState(email);
+  const [password, setPassword] = useState();
+  const [passwordConfirmation, setPasswordConfirmation] = useState();
 
   const [error_message, setErrorMessage] = useState('');
   const [isError, setIsError] = useState(false);
@@ -104,6 +104,7 @@ const EditProfile = ({ route, navigation }) => {
           email: emailAddress,
           profile_bio: bioText,
           profile_image_URL: profileImageURL,
+          password: password
         },
       });
 
@@ -166,7 +167,7 @@ const EditProfile = ({ route, navigation }) => {
                   opacity: 0.5,
                 }}
               >
-                First name
+                First Name
               </Text>
               <TextInput
                 placeholder="First name"
@@ -185,7 +186,7 @@ const EditProfile = ({ route, navigation }) => {
                   opacity: 0.5,
                 }}
               >
-                Last name
+                Last Name
               </Text>
               <TextInput
                 placeholder="Last name"
@@ -258,7 +259,7 @@ const EditProfile = ({ route, navigation }) => {
                 fontSize: 16,
               }}
             >
-              Sign out
+              Sign Out
             </Text>
           </TouchableOpacity>
         </View>
@@ -278,7 +279,10 @@ const EditProfile = ({ route, navigation }) => {
                   password: '',
                   password_confirmation: '',
                 }}
-                // onSubmit={onSubmitHandler}
+                onSubmit={(values)=> {
+                  setPassword(values.password);
+                  setModalVisible(false);
+                }}
                 validationSchema={yup.object().shape({
                   password: yup
                     .string()
@@ -352,15 +356,15 @@ const EditProfile = ({ route, navigation }) => {
                     <View style={{ marginLeft: 10 , flexDirection:'row', justifyContent:'space-around'}}>
                     <TouchableOpacity
                         style={styles.cancelbutton}
-                        onPress={() => setModalVisible(false)}                      >
+                        onPress={() => {
+                          setPassword();
+                          setModalVisible(false)}}>
                         <Text style={{ textAlign: 'center', color: '#FFF', fontWeight: 'bold' }}>Cancel</Text>
                       </TouchableOpacity>
 
                       <TouchableOpacity
                         style={styles.confirmbutton}
-                        onPress={() => {handleSubmit()
-                          // navigation.navigate('BookmateProfile', { user: selectedBookmate });
-                        }}
+                        onPress={() => {handleSubmit()}}
                       >
                         <Text style={{ textAlign: 'center', color: '#FFF', fontWeight: 'bold' }}>Confirm</Text>
                       </TouchableOpacity>
