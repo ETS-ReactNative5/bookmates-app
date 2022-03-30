@@ -238,6 +238,11 @@ const displayMyBookshelf = async (req, res) => {
 
 };
 
+const suggestions = async (req, res) => {
+  let suggestions = await Book.aggregate([{ $sample: { size: 9 } }]);
+  return res.status(200).send(suggestions)
+}
+
 module.exports.search = search;
 module.exports.saveBook = saveBook;
 module.exports.addCurrently = addCurrently;
@@ -245,3 +250,4 @@ module.exports.addFinished = addFinished;
 module.exports.addToRead = addToRead;
 module.exports.displayMyBookshelf = displayMyBookshelf;
 module.exports.displayBookmatesBookshelf = displayBookmatesBookshelf;
+module.exports.suggestions = suggestions;
