@@ -1,15 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-  TextInput,
-  SafeAreaView,
-  Modal,
-  ScrollView,
-} from 'react-native';
+import React, { useState } from 'react';
+import {View, Text, TouchableOpacity, StyleSheet,Image,TextInput,SafeAreaView,Modal,ScrollView,} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Ionic from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
@@ -120,11 +111,10 @@ const EditProfile = ({ route, navigation }) => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <KeyboardAwareScrollView>
         <View
           style={{
             width: '100%',
-            height: '100%',
             backgroundColor: 'white',
             paddingTop: 20,
             paddingHorizontal: 10,
@@ -173,6 +163,7 @@ const EditProfile = ({ route, navigation }) => {
                 placeholder="First name"
                 defaultValue={fname}
                 style={{
+                  marginTop:7,
                   fontSize: 16,
                   borderBottomWidth: 1,
                   borderColor: '#CDCDCD',
@@ -192,6 +183,7 @@ const EditProfile = ({ route, navigation }) => {
                 placeholder="Last name"
                 defaultValue={lname}
                 style={{
+                  marginTop:7,
                   fontSize: 16,
                   borderBottomWidth: 1,
                   borderColor: '#CDCDCD',
@@ -211,6 +203,7 @@ const EditProfile = ({ route, navigation }) => {
                 placeholder="Email"
                 defaultValue={emailAddress}
                 style={{
+                  marginTop:7,
                   fontSize: 16,
                   borderBottomWidth: 1,
                   borderColor: '#CDCDCD',
@@ -231,6 +224,7 @@ const EditProfile = ({ route, navigation }) => {
                 defaultValue={bioText}
                 multiline={true}
                 style={{
+                  marginTop:7,
                   fontSize: 16,
                   borderBottomWidth: 1,
                   borderColor: '#CDCDCD',
@@ -256,6 +250,7 @@ const EditProfile = ({ route, navigation }) => {
               style={{
                 color: '#3493D9',
                 padding: 20,
+                paddingBottom:80,
                 fontSize: 16,
               }}
             >
@@ -375,7 +370,7 @@ const EditProfile = ({ route, navigation }) => {
             </View>
           </View>
         </Modal>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
