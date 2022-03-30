@@ -131,7 +131,9 @@ const BookDetails = ({ route, navigation }) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  onPress={() => navigation.navigate('WriteReview')}
+                  onPress={() => {
+                      setModalVisible(false);
+                      navigation.navigate('WriteReview');}}
                   style={{ flexDirection: 'row', alignItems: 'center' }}
                 >
                   <MaterialCommunityIcons name="comment-text-multiple-outline" size={18} color="#5A7FCC" />
@@ -219,11 +221,11 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   modalView: {
-    width: '45%',
-    marginVertical: 55,
-    marginHorizontal: 20,
+    width: 200,
+    marginVertical: 75,
+    marginHorizontal: 18,
     backgroundColor: 'white',
-    borderRadius: 15,
+    borderRadius: 20,
     padding: 20,
     shadowColor: '#000',
     shadowOffset: {
@@ -232,13 +234,13 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5,
+    elevation: 10,
   },
   modalText: {
     color: '#5A7FCC',
     paddingVertical: 10,
-    borderBottomColor: '#5A7FCC',
     marginLeft: 8,
+    fontFamily:'Roboto_700Bold'
   },
   modalContainerStyle: {
     flex: 1,
