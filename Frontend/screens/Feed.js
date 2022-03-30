@@ -1,55 +1,41 @@
-import React from 'react';
-import { SafeAreaView, View, StyleSheet, Text, ScrollView, Image } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import { SafeAreaView, View, StyleSheet, Text, ScrollView, Image, RefreshControl} from 'react-native';
 import ProfileReview from '../components/ProfileReview';
 import { Ionicons } from '@expo/vector-icons';
+import BookmateReview from '../components/BookmateReview';
 
 const Feed = () => {
-  let book1 = { title: 'Me Before You', author: 'Jojo Moyes', thumbnail: require('./../assets/mebeforeyou.jpg') };
-  let book2 = { title: 'Eleanor & Park', author: 'Rainbow Rowell', thumbnail: require('./../assets/eandp.jpg') };
-  let book3 = {
-    title: 'To Kill A Mockingbird',
-    author: 'Harper Lee',
-    thumbnail: require('./../assets/mockingbird.jpg'),
-  };
+  
+  const [feedReviews, setFeedReviews] = useState([])
+  const [refreshing, setRefreshing] = useState(true);
+
+  useEffect(async () =>{
+    await loadFeed();
+  },[])
+
+  const loadFeed = async () => {
+    await fetch('http://192.168.1.10:3000/api/review/getfeedreviews',{
+        headers:{
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0"
+        }
+    }).then(res=>res.json())
+      .then(result=>{
+        setFeedReviews(result);
+        setRefreshing(false);
+      })
+      .catch(err => console.log(err))
+  }
 
   return (
     <SafeAreaView>
-      <ScrollView showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
+      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadFeed}/>} showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
         <View style={styles.header}>
           <Text style={styles.logo}>bookmates</Text>
         </View>
-        <ProfileReview
-          name="Jane Dow"
-          profile_pic={require('./../assets/test_profile_pic.jpg')}
-          book={book1}
-          review_text="I love it. I love its warmth and vibrancy, its heartache and its pain, its humor and meanness, the ugliness, the beauty, the crying, the laughter, the sarcasm.
-            I love Elanor and Park and I love that there's still a tiny chance for them."
-          likes="20"
-          dislikes="3"
-          comments="5"
-        />
+        {feedReviews.map((result) => { 
+              return ( <BookmateReview key={result._id} review= {result} />)})
+        }
 
-        <ProfileReview
-          name="Claudia Holland"
-          profile_pic={require('./../assets/test_profile_pic.jpg')}
-          book={book2}
-          review_text="I love it. I love its warmth and vibrancy, its heartache and its pain, its humor and meanness, the ugliness, the beauty, the crying, the laughter, the sarcasm.
-            I love Elanor and Park and I love that there's still a tiny chance for them."
-          likes="20"
-          dislikes="3"
-          comments="5"
-        />
-
-        <ProfileReview
-          name="Julia Collins"
-          profile_pic={require('./../assets/test_profile_pic.jpg')}
-          book={book3}
-          review_text="I love it. I love its warmth and vibrancy, its heartache and its pain, its humor and meanness, the ugliness, the beauty, the crying, the laughter, the sarcasm.
-            I love Elanor and Park and I love that there's still a tiny chance for them."
-          likes="20"
-          dislikes="3"
-          comments="5"
-        />
       </ScrollView>
     </SafeAreaView>
   );
@@ -66,6 +52,14 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
     marginBottom: -15,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+
   },
   logo: {
     fontFamily: 'Baloo2_800ExtraBold',

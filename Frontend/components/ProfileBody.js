@@ -1,14 +1,16 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import React, {useState} from 'react';
+import { View, Text, Image, TouchableOpacity, SafeAreaView, RefreshControl,ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 
+
 const ProfileBody = ({user}) => {
+
   const navigation = useNavigation();
+  
   return (
     <SafeAreaView>
       <ScrollView>
-
         <View
           style={{
             flexDirection: 'row',

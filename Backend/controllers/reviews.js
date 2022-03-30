@@ -140,10 +140,34 @@ const getMyReviews = async (req, res) => {
 const getFeedReviews = async (req, res) => {
     try {
         const currentUser = await User.findById(req.user._id);
-        const userReviews = await Review.find({ user_id: req.user._id });
+        const userReviews = await Review.find({ user_id: req.user._id }).populate({
+          path: "book_id", 
+          populate: [
+            {
+              path: "author_id",
+              model: "Author",
+            },
+            {
+              path: "reviews",
+              model: "Review",
+            },
+          ],
+        }).populate('user_id');
         const bookmatesReviews = await Promise.all(
           currentUser.following.map((bookmateId) => {
-            return Review.find({ user_id: bookmateId });
+            return Review.find({ user_id: bookmateId }).populate({
+              path: "book_id", 
+              populate: [
+                {
+                  path: "author_id",
+                  model: "Author",
+                },
+                {
+                  path: "reviews",
+                  model: "Review",
+                },
+              ],
+            }).populate('user_id');
           })
         );
         res.status(200).send(userReviews.concat(...bookmatesReviews))

@@ -1,5 +1,5 @@
 import React , {useState, useEffect} from 'react';
-import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl } from 'react-native';
 import BookSearch from '../components/BookSearch';
 
 const MyBookshelf = () => {

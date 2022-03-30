@@ -6,7 +6,6 @@ import MyProfileNav from '../components/MyProfileNav';
 const Profile = () => {
   
   const [user, setUser] = useState('')
-
   
   //Testing
   useEffect(() => {

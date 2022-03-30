@@ -10,7 +10,6 @@ import Feather from 'react-native-vector-icons/Feather';
 
 const EditProfile = ({ route, navigation }) => {
   const { first_name, last_name, profileImage, email, bio } = route.params;
-
   const [fname, setFName] = useState(first_name);
   const [lname, setLName] = useState(last_name);
   const [profileImageURL, setProfileImageURL] = useState(profileImage);
@@ -18,7 +17,6 @@ const EditProfile = ({ route, navigation }) => {
   const [emailAddress, setEmailAddress] = useState(email);
   const [password, setPassword] = useState();
   const [passwordConfirmation, setPasswordConfirmation] = useState();
-
   const [error_message, setErrorMessage] = useState('');
   const [isError, setIsError] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -60,7 +58,6 @@ const EditProfile = ({ route, navigation }) => {
       type: `test/${data.uri.split('.')[1]}`,
       name: `test.${data.uri.split('.')[1]}`,
     };
-    console.log(selectedImage);
     handleUpload(selectedImage);
   };
 
