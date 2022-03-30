@@ -1,11 +1,17 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Modal } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Modal, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import { AntDesign, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import Ionic from 'react-native-vector-icons/Ionicons';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import axios from 'axios';
 
 const ProfileReview = ({ review }) => {
   const [like_status, setLikeStatus] = useState(false);
   const [dislike_status, setDislikeStatus] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const[editMode, setEditMode] = useState(false);
+  const [reviewText, setReviewText] = useState();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const likeReview = () => {
     setLikeStatus(!like_status);
@@ -14,6 +20,30 @@ const ProfileReview = ({ review }) => {
   const dislikeReview = () => {
     setDislikeStatus(!dislike_status);
   };
+
+  const editReview = async () => {
+    if(reviewText){
+      try {
+        const { data } = await axios({
+          method: 'put',
+          headers: {
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0',
+          },
+          url: 'http://192.168.1.10:3000/api/review/edit',
+          data: {
+            text: reviewText,
+            review_id: review._id,
+          },
+        });
+        setEditMode(false);
+      } catch (err) {
+        setErrorMessage("Error! Please try again later.");
+      }
+    }else{
+      setErrorMessage("Error! Review field is empty.")
+    }
+  }
 
   return (
     <SafeAreaView>
@@ -33,9 +63,17 @@ const ProfileReview = ({ review }) => {
           <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
             <Text style={styles.name}>{review.user_id.first_name} {review.user_id.last_name}</Text>
             
-            <TouchableOpacity style={{marginTop: 10}} onPress={() => setModalVisible(!modalVisible)}>
+            {editMode ? 
+            <View style={{flexDirection:'row'}}>
+              <TouchableOpacity style={styles.confirmbutton} onPress={() => editReview()}>
+                  <Text style={{ textAlign: 'center', color: '#FFF', fontWeight: 'bold' }}>Edit</Text>
+              </TouchableOpacity> 
+            </View>
+            :
+            (<TouchableOpacity style={{marginTop: 10}} onPress={() => setModalVisible(!modalVisible)}>
               <MaterialCommunityIcons name="dots-horizontal" size={25} color="black" />
-            </TouchableOpacity>
+            </TouchableOpacity>)
+            }
           
           </View>
           <Text style={styles.book_title}>
@@ -43,7 +81,21 @@ const ProfileReview = ({ review }) => {
           </Text>
           <View style={{ flexDirection: 'row' }}>
             <Image style={styles.book_img} source={{uri: `${review.book_id.thumbnail}`}} />
-            <Text style={styles.review_text}>{review.text}</Text>
+            {editMode ? 
+              <KeyboardAwareScrollView>
+                <TextInput 
+                        style={{fontSize:14, flexGrow:1, flex:1, flexWrap:'wrap', height:200}}
+                        defaultValue={reviewText}
+                        autoFocus={true}
+                        editable={true}
+                        maxLength={250}
+                        multiline={true}
+                        onChangeText={(e) => setReviewText(e)}>
+                </TextInput>       
+              </KeyboardAwareScrollView> :
+            
+            <Text style={styles.review_text}>{review.text}</Text>}
+          
           </View>
 
           {/* Interactions */}
@@ -93,7 +145,10 @@ const ProfileReview = ({ review }) => {
                   <TouchableOpacity>
                     <Text style={{color:'red', fontSize:20, paddingVertical:9}}>Delete</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={()  => {
+                    setModalVisible(false)
+                    setEditMode(true)
+                  }}>
                     <Text style={{color:'black', fontSize:20, paddingVertical:10}}>Edit</Text>
                   </TouchableOpacity>
               </View>
@@ -170,5 +225,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-  }
+  },
+  confirmbutton:{
+    width: 80,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#5A7FCC',
+    borderRadius: 20,
+  },
 });

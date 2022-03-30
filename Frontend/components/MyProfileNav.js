@@ -2,6 +2,7 @@ import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import MyBookshelf from './MyBookshelf';
 import MyReviewsSection from './MyReviewsSection';
+import { ScrollView } from 'react-native';
 
 const MyProfileNav = () => {
   const Tab = createMaterialTopTabNavigator();

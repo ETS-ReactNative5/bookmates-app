@@ -61,8 +61,6 @@ const WriteReview = ({ route, navigation }) => {
         onChangeText={(e) => setReviewText(e)}>
         </TextInput>
       </View>
-
-
     </SafeAreaView>
   );
 };
