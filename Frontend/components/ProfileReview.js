@@ -106,13 +106,13 @@ const ProfileReview = ({ review }) => {
             {editMode ? 
               <KeyboardAwareScrollView>
                 <TextInput 
-                        style={styles.review_text}
-                        defaultValue={reviewText}
-                        autoFocus={true}
-                        editable={true}
-                        maxLength={250}
-                        multiline={true}
-                        onChangeText={(e) => setReviewText(e)}>
+                      style={{fontSize:14, flexGrow:1, flex:1, flexWrap:'wrap'}}
+                      defaultValue={reviewText}
+                      autoFocus={true}
+                      editable={true}
+                      maxLength={250}
+                      multiline={true}
+                      onChangeText={(e) => setReviewText(e)}>
                 </TextInput>       
               </KeyboardAwareScrollView> :
             
@@ -240,7 +240,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexGrow: 1,
     lineHeight: 18,
-    fontSize:14, flexGrow:1, flex:1, flexWrap:'wrap', height:200
   },
   modalContainerStyle: {
     flex: 1,

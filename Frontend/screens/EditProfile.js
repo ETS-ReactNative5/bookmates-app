@@ -7,7 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import Feather from 'react-native-vector-icons/Feather';
-
+import * as SecureStore from 'expo-secure-store';
 
 const EditProfile = ({ route, navigation }) => {
   const { first_name, last_name, profileImage, email, bio } = route.params;
@@ -38,7 +38,7 @@ const EditProfile = ({ route, navigation }) => {
       secureTextEntry2: !data.secureTextEntry2,
     });
   };
-
+  
   // Pick image from phone gallery
   const pickImage = async () => {
     let permission = await ImagePicker.requestCameraPermissionsAsync();
@@ -78,7 +78,7 @@ const EditProfile = ({ route, navigation }) => {
       });
   };
 
-  async function editData() {
+  const editData = async () => {
     try {
       const { data } = await axios({
         method: 'put',
@@ -106,7 +106,7 @@ const EditProfile = ({ route, navigation }) => {
       }
     }
   }
-
+  
   return (
     <SafeAreaView>
       <KeyboardAwareScrollView>
@@ -243,7 +243,10 @@ const EditProfile = ({ route, navigation }) => {
               Change Password
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={async ()=> {
+            // await SecureStore.deleteItemAsync("token");
+            navigation.navigate('Login');
+          }}>
             <Text
               style={{
                 color: '#3493D9',

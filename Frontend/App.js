@@ -20,19 +20,7 @@ import * as SecureStore from 'expo-secure-store';
 function App() {
   
   const Stack = createNativeStackNavigator();
-  
-  const [authState, setAuthState] = useState({
-    LoggedIn: false,
-  })
-
-  useEffect(() => {  
-      let token = SecureStore.getItemAsync(token);
-      if (token){
-        setAuthState({
-          LoggedIn: true,
-          token: token})
-      }
-    }, [])
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   
   const [fontsLoaded] = useFonts({
     Baloo2_800ExtraBold,
@@ -47,13 +35,11 @@ function App() {
   }
 
   return (
-    <AuthContext.Provider value={authState.LoggedIn}>
-
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Splash" screenOptions={{
           headerShown: false
         }}>
-        {authState.LoggedIn ? (
+        {/* {isLoggedIn ? ( */}
            <>
             <Stack.Screen name="BookmatesMap" component = {MyTabs} />
             <Stack.Screen name="EditProfile" component = {EditProfile} />
@@ -61,7 +47,7 @@ function App() {
             <Stack.Screen name="BookmateProfile" component = {BookmateProfile} />
             <Stack.Screen name="WriteReview" component = {WriteReview} />
           </>
-        ) : 
+        {/* ) :  */}
           <>
             <Stack.Screen name="Splash" component={SplashScreen} />
             <Stack.Screen name="Login" component = {Login} />
@@ -69,11 +55,10 @@ function App() {
             <Stack.Screen name="ForgotPW" component = {ForgotPW} />
             <Stack.Screen name="ChangePW" component = {ChangePW} />
           </>  
-        } 
+        {/* }  */}
 
       </Stack.Navigator>
     </NavigationContainer>
-   </AuthContext.Provider>
   )
 }
 
