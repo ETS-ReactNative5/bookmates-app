@@ -43,11 +43,13 @@ const editReview = async (req, res) => {
 
 const deleteReview =  async (req, res) => {
     try {
-          const review = await Review.findById(req.params.id);
+          const review = await Review.findById(req.body.review_id);
+          const book = await Book.findById(review.book_id)
           const user = await User.findById(review.user_id);
-          if (review.user_id.equals(req.user._id)) {
+          if (user._id.equals(req.user._id)) {
             await review.deleteOne();
-            await user.updateOne({ $pull: { reviews: req.params.id } });
+            await user.updateOne({ $pull: { reviews: req.body.review_id } });
+            await book.updateOne({ $pull: { reviews: req.body.review_id } });            
             res.status(200).send("Review successfully deleted!");
           } else {
             res.status(403).send("You are not allowed to delete others' reviews.");

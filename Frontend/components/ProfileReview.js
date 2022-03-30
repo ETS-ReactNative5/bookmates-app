@@ -44,6 +44,30 @@ const ProfileReview = ({ review }) => {
       setErrorMessage("Error! Review field is empty.")
     }
   }
+  const deleteReview = async () => {
+    if(reviewText){
+      try {
+        const { data } = await axios({
+          method: 'put',
+          headers: {
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0',
+          },
+          url: 'http://192.168.1.10:3000/api/review/edit',
+          data: {
+            text: reviewText,
+            review_id: review._id,
+          },
+        });
+        setEditMode(false);
+      } catch (err) {
+        setErrorMessage("Error! Please try again later.");
+      }
+    }else{
+      setErrorMessage("Error! Review field is empty.")
+    }
+  }
+
 
   return (
     <SafeAreaView>
