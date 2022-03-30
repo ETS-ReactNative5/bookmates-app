@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions, Image, Modal, TouchableOpacity, SafeAreaView } from 'react-native';
 
@@ -7,34 +7,21 @@ export default function BookmatesMap({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedBookmate, setSelectedBookmate] = useState('');
 
-  const [region, setRegion] = useState({
-    latitude: 33.787395,
-    longitude: 35.72789,
-  });
 
-  const [bookmates, setBookmates] = useState([
-    {
-      id: 1,
-      name: 'Laurena Fayad',
-      profile_pic: require('./../assets/test_profile_pic.jpg'),
-      bio: 'I love books♥',
-      followers: 200,
-      following: 150,
-      longitude: 35.5411,
-      latitude: 33.8938,
-    },
-    {
-      id: 2,
-      name: 'John Doe',
-      profile_pic: require('./../assets/test_profile_pic_male.jpg'),
-      bio: 'Chilling',
-      followers: 233,
-      following: 56,
-      longitude: 35.7325,
-      latitude: 34.3244,
-    },
-  ]);
+  const [bookmates, setBookmates] = useState(['']);
 
+  useEffect(() => {
+    fetch('http://192.168.1.10:3000/api/user/all', {
+      headers:{
+        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0",
+      }
+    }).then(res=>res.json())
+    .then(result=>{
+      setBookmates(result);
+    })
+    .catch(err => console.log(err))
+}, [])
+  
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -57,7 +44,7 @@ export default function BookmatesMap({ navigation }) {
         }} /> */}
         {bookmates.map((item) => {
           return (
-            <View key={item.id}>
+            <View key={item._id}>
               <MapView.Marker
                 onPress={() => {
                   setSelectedBookmate(item);
