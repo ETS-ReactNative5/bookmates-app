@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const BookmateProfileBody = ({ name, profileImage, followers, following, bio }) => {
+const BookmateProfileBody = ({ user }) => {
   const [followed, setFollowed] = useState(false);
 
   const follow = () => {
@@ -20,7 +20,7 @@ const BookmateProfileBody = ({ name, profileImage, followers, following, bio }) 
       >
         <View>
           <Image
-            source={profileImage}
+            source={{uri: `${user.profile_image_URL}`}}
             style={{
               resizeMode: 'cover',
               width: 70,
@@ -30,11 +30,11 @@ const BookmateProfileBody = ({ name, profileImage, followers, following, bio }) 
           />
         </View>
         <View style={{ alignItems: 'center' }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{followers}</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{user.followers.length}</Text>
           <Text>Followers</Text>
         </View>
         <View style={{ alignItems: 'center' }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 18, paddingRight: 15 }}>{following}</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 18, paddingRight: 15 }}>{user.following.length}</Text>
           <Text style={{ paddingRight: 15 }}>Following</Text>
         </View>
       </View>
@@ -46,20 +46,20 @@ const BookmateProfileBody = ({ name, profileImage, followers, following, bio }) 
             fontWeight: 'bold',
           }}
         >
-          {name}
+          {user.first_name} {user.last_name} 
         </Text>
         <TouchableOpacity
           onPress={() => follow()}
           style={{ width: 100, height: 30, justifyContent: 'center', backgroundColor: '#5A7FCC', borderRadius: 20 }}
         >
           {followed ? (
-            <Text style={{ textAlign: 'center', color: '#FFF', fontWeight: 'bold' }}>Following</Text>
+            <Text style={{ textAlign: 'center', color: '#FFF', fontWeight: 'bold' }}>Unfollow</Text>
           ) : (
             <Text style={{ textAlign: 'center', color: '#FFF', fontWeight: 'bold' }}>Follow</Text>
           )}
         </TouchableOpacity>
       </View>
-      <Text style={{ paddingVertical: 15, paddingLeft: 10 }}>{bio}</Text>
+      <Text style={{ paddingVertical: 15, paddingLeft: 10 }}>{user.profile_bio}</Text>
     </SafeAreaView>
   );
 };

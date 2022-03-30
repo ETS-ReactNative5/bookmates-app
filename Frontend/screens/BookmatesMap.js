@@ -6,8 +6,6 @@ export default function BookmatesMap({ navigation }) {
   
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedBookmate, setSelectedBookmate] = useState('');
-
-
   const [bookmates, setBookmates] = useState(['']);
 
   useEffect(() => {
@@ -35,13 +33,7 @@ export default function BookmatesMap({ navigation }) {
           latitudeDelta: 2,
           longitudeDelta: 2,
         }}
-        provider={PROVIDER_GOOGLE}
-      >
-        {/* <Marker 
-        coordinate={{ 
-          latitude: region.latitude, 
-          longitude: region.longitude 
-        }} /> */}
+        provider={PROVIDER_GOOGLE}>
         {bookmates.map((item) => {
           return (
             <View key={item._id}>
@@ -84,12 +76,12 @@ export default function BookmatesMap({ navigation }) {
               <View style={{ justifyContent: 'center' }}>
                 <Image
                   style={{ width: 70, height: 70, borderRadius: 100 }}
-                  source={selectedBookmate && selectedBookmate.profile_pic}
+                  source= {{ uri: `${selectedBookmate.profile_image_URL}`}}
                 />
               </View>
               <View style={{ marginLeft: 10, alignItems: 'center' }}>
                 <Text style={{ fontFamily: 'Baloo2_600SemiBold', fontSize: 16, marginBottom: 8 }}>
-                  {selectedBookmate && selectedBookmate.name}
+                  {selectedBookmate && selectedBookmate.first_name} {selectedBookmate && selectedBookmate.last_name}
                 </Text>
                 <TouchableOpacity
                   style={styles.button}
