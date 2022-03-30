@@ -4,11 +4,12 @@ import { StatusBar } from 'expo-status-bar';
 
 const WriteReview = ({ route, navigation }) => {
   let {book} = route.params;
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar/>
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={{fontSize:16}}>
             Cancel
           </Text>
