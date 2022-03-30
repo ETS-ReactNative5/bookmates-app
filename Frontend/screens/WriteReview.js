@@ -56,7 +56,7 @@ const WriteReview = ({ route, navigation }) => {
         placeholder='Thoughts on the book?'
         style={{fontSize:18, flexGrow:1, flex:1, flexWrap:'wrap'}}
         autoFocus={true}
-        maxLength='250'
+        maxLength={250}
         multiline={true}
         onChangeText={(e) => setReviewText(e)}>
         </TextInput>

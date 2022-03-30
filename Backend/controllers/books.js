@@ -168,7 +168,7 @@ const addToRead = async (req, res) => {
 
 const displayBookmatesBookshelf = async (req, res) => {
   try{
-    const user = await User.findById(req.body.user_id);
+    const user = await User.findById(req.params.id);
   
     if(user){
       const currentlyReadingIds = await user.currentlyReadingBooks;
@@ -243,5 +243,5 @@ module.exports.saveBook = saveBook;
 module.exports.addCurrently = addCurrently;
 module.exports.addFinished = addFinished;
 module.exports.addToRead = addToRead;
-module.exports.displayBookmatesBookshelf = displayBookmatesBookshelf;
 module.exports.displayMyBookshelf = displayMyBookshelf;
+module.exports.displayBookmatesBookshelf = displayBookmatesBookshelf;

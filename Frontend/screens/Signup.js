@@ -42,8 +42,8 @@ const Signup = ({ navigation }) => {
     };
 
     try {
-      axios
-        .post('http://10.0.2.2:3000/api/auth/register', user)
+      await axios
+        .post('http://192.168.1.10:3000/api/auth/register', user)
         .then(({ data }) => {
           resetForm();
           navigation.navigate('Login');
@@ -54,7 +54,7 @@ const Signup = ({ navigation }) => {
           resetForm();
         });
     } catch (error) {
-      console.warn('error');
+      console.log('error');
     }
   };
 

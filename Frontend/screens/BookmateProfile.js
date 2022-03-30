@@ -10,7 +10,7 @@ const BookmateProfile = ({route}) => {
       <View style={{width: '100%', padding: 10}}>
         <BookmateProfileBody user={user}/>
       </View>
-      {/* <BookmateProfileNav user_id={user._id}/> */}
+      <BookmateProfileNav user={user}/>
     </View>
   );
 };

@@ -36,7 +36,7 @@ export default function BookmatesMap({ navigation }) {
         provider={PROVIDER_GOOGLE}>
         {bookmates.map((item) => {
           return (
-            <View key={item._id}>
+            <View key={item?._id}>
               <MapView.Marker
                 onPress={() => {
                   setSelectedBookmate(item);
@@ -44,8 +44,8 @@ export default function BookmatesMap({ navigation }) {
                 }}
                 pinColor="red"
                 coordinate={{
-                  latitude: item.latitude,
-                  longitude: item.longitude,
+                  latitude: item?.latitude,
+                  longitude: item?.longitude,
                 }}
               />
             </View>

@@ -7,7 +7,7 @@ router.post('/savebook', requireLogin, saveBook);
 router.put('/addcurrently', requireLogin, addCurrently);
 router.put('/addfinished', requireLogin, addFinished);
 router.put('/addtoread', requireLogin, addToRead);
-router.get('/displaybookmatesbookshelf', requireLogin, displayBookmatesBookshelf);
+router.get('/displaybookmatesbookshelf/:id', requireLogin, displayBookmatesBookshelf);
 router.get('/displaymybookshelf', requireLogin, displayMyBookshelf);
 
 

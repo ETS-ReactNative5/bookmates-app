@@ -7,38 +7,40 @@ import * as yup from 'yup';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 
-async function save(key, value) {
-  await SecureStore.setItemAsync(key, value).
-  catch(err => setErrorMessage(err))
-}
 
 const Login = ({ navigation }) => {
   const [data, setData] = React.useState({
     check_textInputChange: false,
     secureTextEntry: true,
   });
-
+  
   const updateSecureTextEntry = () => {
     setData({
       ...data,
       secureTextEntry: !data.secureTextEntry,
     });
   };
-
-    // Handle showing backend errors
-    const [error_message, setErrorMessage] = useState('');
-    const [isError, setIsError] = useState(false);  
+  
+  // Handle showing backend errors
+  const [error_message, setErrorMessage] = useState('');
+  const [isError, setIsError] = useState(false);  
+  
+  // Store token in local storage
+  async function save(key, value) {
+    await SecureStore.setItemAsync(key, value).
+    catch(err => setErrorMessage(err))
+  }
 
     // API linking
-    const onSubmitHandler = async (values, { resetForm }) => {
+    const onSubmitHandler = async (values) => {
       const user = {
         email: values.email,
         password: values.password,
       };
-  
       try {
+        console.log(user)
         axios
-          .post('http://10.0.2.2:3000/api/auth/login', user)
+          .post('http://192.168.1.10:3000/api/auth/login', user)
           .then(({ data }) => {
             console.log(data.token);
             save("token", data.token);
@@ -49,11 +51,9 @@ const Login = ({ navigation }) => {
             setIsError(true);
           });
       } catch (error) {
-        console.warn('error');
+        console.log('error');
       }
     };
-  
-  
 
   return (
       <Formik       

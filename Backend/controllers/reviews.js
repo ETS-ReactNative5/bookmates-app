@@ -112,29 +112,54 @@ const comment = async (req, res) => {
 }
 
 const getMyReviews = async (req, res) => {
-    try{
-      const reviews = await Review.find({ user_id: req.user._id }).populate({
-        path: "book_id", 
-        populate: [
-          {
-            path: "author_id",
-            model: "Author",
-          },
-          {
-            path: "reviews",
-            model: "Review",
-          },
-        ],
-      }).populate('user_id');
+  try{
+    const reviews = await Review.find({ user_id: req.user._id }).populate({
+      path: "book_id", 
+      populate: [
+        {
+          path: "author_id",
+          model: "Author",
+        },
+        {
+          path: "reviews",
+          model: "Review",
+        },
+      ],
+    }).populate('user_id');
 
-      if (reviews.length) {
-        return res.status(200).send(reviews);
-      }else {
-        return res.status(400).send("No reviews");
-      }   
-    }catch (err) {
-      return res.status(500).send(err)   
-    }
+    if (reviews.length) {
+      return res.status(200).send(reviews);
+    }else {
+      return res.status(400).send("No reviews");
+    }   
+  }catch (err) {
+    return res.status(500).send(err)   
+  }
+}
+const getBookmateReviews = async (req, res) => {
+  try{
+    const reviews = await Review.find({ user_id: req.params.id }).populate({
+      path: "book_id", 
+      populate: [
+        {
+          path: "author_id",
+          model: "Author",
+        },
+        {
+          path: "reviews",
+          model: "Review",
+        },
+      ],
+    }).populate('user_id');
+
+    if (reviews.length) {
+      return res.status(200).send(reviews);
+    }else {
+      return res.status(400).json("No reviews");
+    }   
+  }catch (err) {
+    return res.status(500).send(err)   
+  }
 }
 
 const getFeedReviews = async (req, res) => {
@@ -184,3 +209,4 @@ module.exports.dislikeReview = dislikeReview;
 module.exports.comment = comment;
 module.exports.getMyReviews = getMyReviews;
 module.exports.getFeedReviews = getFeedReviews;
+module.exports.getBookmateReviews = getBookmateReviews;

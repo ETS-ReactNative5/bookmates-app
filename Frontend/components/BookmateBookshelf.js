@@ -12,7 +12,7 @@ const BookmateBookshelf = ({user_id}) => {
   },[])
 
   const loadBookshelf = async () => {
-    fetch('http://192.168.1.10:3000/api/book/displaybookmatesbookshelf',{
+    fetch('http://192.168.1.10:3000/api/book/displaybookmatesbookshelf?id=' + user_id,{
         headers:{
           Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0",
         }

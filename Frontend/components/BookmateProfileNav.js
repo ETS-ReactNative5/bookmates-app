@@ -3,7 +3,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import BookmateBookshelf from './BookmateBookshelf';
 import ReviewsSection from './ReviewsSection';
 
-const BookmateProfileNav = ({user_id}) => {
+const BookmateProfileNav = ({user}) => {
   const Tab = createMaterialTopTabNavigator();
   return (
     <Tab.Navigator
@@ -15,8 +15,8 @@ const BookmateProfileNav = ({user_id}) => {
         tabBarLabelStyle: { fontSize: 14, fontWeight: 'bold' },
       })}
     >
-      {/* <Tab.Screen name="Bookshelf" children={() => <BookmateBookshelf user_id={user_id}/>}  />
-      <Tab.Screen name="Reviews" children={() => <ReviewsSection user_id={user_id}/>} /> */}
+      <Tab.Screen name="Bookshelf" children={() => <BookmateBookshelf user_id={user._id}/>}  />
+      <Tab.Screen name="Reviews" children={() => <ReviewsSection user={{user}}/>} />
     </Tab.Navigator>
   );
 };
