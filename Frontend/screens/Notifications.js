@@ -38,7 +38,15 @@ const styles = StyleSheet.create({
     elevation: 10,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
-    marginBottom: -10,
+    marginBottom: -7,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+
   },
   logo: {
     fontFamily: 'Baloo2_800ExtraBold',
