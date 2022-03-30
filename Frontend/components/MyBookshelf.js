@@ -33,15 +33,14 @@ const MyBookshelf = () => {
           <Text style={{ color: '#5A7FCC', paddingLeft: 20, fontFamily: 'Baloo2_600SemiBold', fontSize: 16 }}>
             Currently Reading
           </Text>
-          <TouchableOpacity>
-            <Text style={{ color: '#5A7FCC', paddingRight: 20 }}>See more</Text>
-          </TouchableOpacity>
         </View>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          {bookshelf?.currentlyReadingBooks?.map((result) => {         
-            return ( <BookSearch key={result[0]._id} book= {result[0]} />)})
-          }
+        <View style={{marginLeft:15}}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {bookshelf?.currentlyReadingBooks?.map((result) => {         
+              return ( <BookSearch key={result[0]._id} book= {result[0]} />)})
+            }
+          </ScrollView>
         </View>
 
         <View
@@ -50,15 +49,14 @@ const MyBookshelf = () => {
           <Text style={{ color: '#5A7FCC', paddingLeft: 20, fontFamily: 'Baloo2_600SemiBold', fontSize: 16 }}>
             To-Read
           </Text>
-          <TouchableOpacity>
-            <Text style={{ color: '#5A7FCC', paddingRight: 20 }}>See more</Text>
-          </TouchableOpacity>
         </View>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          {bookshelf?.toReadBooks?.map((result) => {         
-            return ( <BookSearch key={result[0]?._id} book= {result[0]} />)})
-          }
+        <View style={{marginLeft:15}}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {bookshelf?.toReadBooks?.map((result) => {         
+              return ( <BookSearch key={result[0]._id} book= {result[0]} />)})
+            }
+          </ScrollView>
         </View>
 
         <View
@@ -67,15 +65,14 @@ const MyBookshelf = () => {
           <Text style={{ color: '#5A7FCC', paddingLeft: 20, fontFamily: 'Baloo2_600SemiBold', fontSize: 16 }}>
             Finished
           </Text>
-          <TouchableOpacity>
-            <Text style={{ color: '#5A7FCC', paddingRight: 20 }}>See more</Text>
-          </TouchableOpacity>
         </View>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          {bookshelf?.finishedBooks?.map((result) => {         
-            return ( <BookSearch key={result[0]._id} book= {result[0]} />)})
-          }
+        <View style={{marginLeft:15}}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {bookshelf?.finishedBooks?.map((result) => {         
+              return ( <BookSearch key={result[0]._id} book= {result[0]} />)})
+            }
+          </ScrollView>
         </View>
 
       </ScrollView>

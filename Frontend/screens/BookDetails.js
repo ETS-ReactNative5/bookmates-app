@@ -154,7 +154,7 @@ const BookDetails = ({ route, navigation }) => {
 
         {/*Book thumbnail, title and author*/}
         <View style={{ alignSelf: 'center' }}>
-          <Image style={{ width: 131, height: 191, borderRadius: 10 }} source={{uri: `${book.thumbnail}`}} />
+          <Image style={{ width: 110, height: 160, borderRadius: 5 }} source={{uri: `${book.thumbnail}`}} />
           <Text style={styles.book_title}>{book.title}</Text>
           <Text style={styles.book_author}>By {book.author_id.name}</Text>
         </View>
@@ -166,7 +166,6 @@ const BookDetails = ({ route, navigation }) => {
           screenOptions={({ route }) => ({
             tabBarIndicatorStyle: {
               backgroundColor: '#5A7FCC',
-              height: 2.5,
             },
             tabBarLabelStyle: { fontSize: 14, fontWeight: 'bold' },
           })}
@@ -198,19 +197,19 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingHorizontal: 20,
-    paddingVertical: 30,
+    paddingVertical: 15,
   },
   book_title: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     paddingTop: 10,
   },
   book_author: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 16,
+    fontSize: 14,
     fontStyle: 'italic',
     paddingTop: 3,
   },

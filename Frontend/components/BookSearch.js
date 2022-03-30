@@ -8,10 +8,11 @@ const BookSearch = ({book}) => {
             <Image source={{uri: `${book?.thumbnail}`}}
             style={{
                 resizeMode: 'cover',
-                width: 94,
-                height: 128,
-                borderRadius: 10,
+                width: 95,
+                height: 140,
+                borderRadius: 5,
                 marginBottom:10,
+                marginHorizontal:10, 
             }}/>
         </TouchableOpacity>
     )
