@@ -153,7 +153,7 @@ const BookDetails = ({ route, navigation }) => {
         </View>
 
         {/*Book thumbnail, title and author*/}
-        <View style={{ alignSelf: 'center' }}>
+        <View style={{ alignItems: 'center' }}>
           <Image style={{ width: 110, height: 160, borderRadius: 5 }} source={{uri: `${book.thumbnail}`}} />
           <Text style={styles.book_title}>{book.title}</Text>
           <Text style={styles.book_author}>By {book.author_id.name}</Text>
