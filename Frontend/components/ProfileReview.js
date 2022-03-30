@@ -44,29 +44,27 @@ const ProfileReview = ({ review }) => {
       setErrorMessage("Error! Review field is empty.")
     }
   }
+
   const deleteReview = async () => {
-    if(reviewText){
       try {
         const { data } = await axios({
-          method: 'put',
+          method: 'delete',
           headers: {
             Authorization:
               'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0',
           },
-          url: 'http://192.168.1.10:3000/api/review/edit',
+          url: 'http://192.168.1.10:3000/api/review/delete',
           data: {
-            text: reviewText,
-            review_id: review._id,
-          },
+            review_id: review._id
+          }
         });
-        setEditMode(false);
+        setModalVisible(false);
       } catch (err) {
-        setErrorMessage("Error! Please try again later.");
+        console.log(err)
+          setErrorMessage("Error! Please try again later.");
       }
-    }else{
-      setErrorMessage("Error! Review field is empty.")
-    }
   }
+  
 
 
   return (
@@ -108,7 +106,7 @@ const ProfileReview = ({ review }) => {
             {editMode ? 
               <KeyboardAwareScrollView>
                 <TextInput 
-                        style={{fontSize:14, flexGrow:1, flex:1, flexWrap:'wrap', height:200}}
+                        style={styles.review_text, {fontSize:14, flexGrow:1, flex:1, flexWrap:'wrap', height:200}}
                         defaultValue={reviewText}
                         autoFocus={true}
                         editable={true}
@@ -166,7 +164,7 @@ const ProfileReview = ({ review }) => {
           <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.modalContainerStyle}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => deleteReview()}>
                     <Text style={{color:'red', fontSize:20, paddingVertical:9}}>Delete</Text>
                   </TouchableOpacity>
                   <TouchableOpacity onPress={()  => {
