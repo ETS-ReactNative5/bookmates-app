@@ -63,6 +63,14 @@ const userSchema = new mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:'Review'
   }],
+  latitude:{
+    type: Number,
+    // required: true
+  },
+  longitude:{
+    type: Number,
+    // required: true
+  }
 });
 
 module.exports = mongoose.model("User", userSchema);

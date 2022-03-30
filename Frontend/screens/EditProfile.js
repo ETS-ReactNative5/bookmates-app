@@ -8,6 +8,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import Feather from 'react-native-vector-icons/Feather';
 
+
 const EditProfile = ({ route, navigation }) => {
   const { first_name, last_name, profileImage, email, bio } = route.params;
   const [fname, setFName] = useState(first_name);

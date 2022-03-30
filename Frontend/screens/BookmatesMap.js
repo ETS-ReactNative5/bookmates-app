@@ -3,12 +3,15 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions, Image, Modal, TouchableOpacity, SafeAreaView } from 'react-native';
 
 export default function BookmatesMap({ navigation }) {
+  
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedBookmate, setSelectedBookmate] = useState('');
+
   const [region, setRegion] = useState({
     latitude: 33.787395,
     longitude: 35.72789,
   });
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedBookmate, setSelectedBookmate] = useState('');
+
   const [bookmates, setBookmates] = useState([
     {
       id: 1,
