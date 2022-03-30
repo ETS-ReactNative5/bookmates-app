@@ -1,10 +1,11 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Modal } from 'react-native';
 import React, { useState } from 'react';
-import { AntDesign, FontAwesome } from '@expo/vector-icons';
+import { AntDesign, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 
 const ProfileReview = ({ review }) => {
   const [like_status, setLikeStatus] = useState(false);
   const [dislike_status, setDislikeStatus] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const likeReview = () => {
     setLikeStatus(!like_status);
@@ -29,7 +30,14 @@ const ProfileReview = ({ review }) => {
       >
         <Image style={styles.profile_pic} source={{uri: `${review.user_id.profile_image_URL}`}} />
         <View style={{ flex: 1 }}>
-          <Text style={styles.name}>{review.user_id.first_name} {review.user_id.last_name}</Text>
+          <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+            <Text style={styles.name}>{review.user_id.first_name} {review.user_id.last_name}</Text>
+            
+            <TouchableOpacity style={{marginTop: 10}} onPress={() => setModalVisible(!modalVisible)}>
+              <MaterialCommunityIcons name="dots-horizontal" size={25} color="black" />
+            </TouchableOpacity>
+          
+          </View>
           <Text style={styles.book_title}>
             on {review.book_id.title} by {review.book_id.author_id.name}
           </Text>
@@ -70,6 +78,28 @@ const ProfileReview = ({ review }) => {
               </Text>
             </TouchableOpacity>
           </View>
+
+          <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.modalContainerStyle}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                  <TouchableOpacity>
+                    <Text style={{color:'red', fontSize:20, paddingVertical:9}}>Delete</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Text style={{color:'black', fontSize:20, paddingVertical:10}}>Edit</Text>
+                  </TouchableOpacity>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </Modal>
         </View>
       </View>
     </SafeAreaView>
@@ -79,6 +109,28 @@ const ProfileReview = ({ review }) => {
 export default ProfileReview;
 
 const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalView: {
+    alignItems:'center',
+    width: 200,
+    borderRadius:10,
+    marginVertical: 75,
+    marginHorizontal: 18,
+    backgroundColor: 'white',
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 10,
+  },
   profile_pic: {
     width: 50,
     height: 50,
@@ -112,4 +164,11 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     lineHeight: 18,
   },
+  modalContainerStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+  }
 });
