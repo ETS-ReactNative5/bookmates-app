@@ -15,7 +15,6 @@ import BookDetails from './screens/BookDetails';
 import BookmateProfile from './screens/BookmateProfile';
 import WriteReview from './screens/WriteReview';
 import { AuthContext } from './context/AuthContext';
-import * as SecureStore from 'expo-secure-store';
 
 function App() {
   

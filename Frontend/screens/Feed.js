@@ -3,6 +3,7 @@ import { SafeAreaView, View, StyleSheet, Text, ScrollView, Image, RefreshControl
 import ProfileReview from '../components/ProfileReview';
 import { Ionicons } from '@expo/vector-icons';
 import BookmateReview from '../components/BookmateReview';
+import * as SecureStore from 'expo-secure-store';
 
 const Feed = () => {
   
@@ -14,9 +15,10 @@ const Feed = () => {
   },[])
 
   const loadFeed = async () => {
+    const token = await SecureStore.getItemAsync('token')
     await fetch('http://192.168.1.10:3000/api/review/getfeedreviews',{
         headers:{
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0"
+          Authorization: "Bearer "+token
         }
     }).then(res=>res.json())
       .then(result=>{

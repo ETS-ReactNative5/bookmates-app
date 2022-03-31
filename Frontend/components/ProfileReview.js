@@ -4,6 +4,7 @@ import { AntDesign, FontAwesome, MaterialCommunityIcons } from '@expo/vector-ico
 import Ionic from 'react-native-vector-icons/Ionicons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 const ProfileReview = ({ review }) => {
   const [like_status, setLikeStatus] = useState(false);
@@ -22,13 +23,13 @@ const ProfileReview = ({ review }) => {
   };
 
   const editReview = async () => {
+    const token = await SecureStore.getItemAsync('token')
     if(reviewText){
       try {
         const { data } = await axios({
           method: 'put',
           headers: {
-            Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0',
+            Authorization:'Bearer '+token,
           },
           url: 'http://192.168.1.10:3000/api/review/edit',
           data: {
@@ -47,11 +48,12 @@ const ProfileReview = ({ review }) => {
 
   const deleteReview = async () => {
       try {
+        const token = await SecureStore.getItemAsync('token')
         const { data } = await axios({
           method: 'delete',
           headers: {
             Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0',
+              'Bearer '+token,
           },
           url: 'http://192.168.1.10:3000/api/review/delete',
           data: {
@@ -65,7 +67,6 @@ const ProfileReview = ({ review }) => {
       }
   }
   
-
 
   return (
     <SafeAreaView>

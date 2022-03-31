@@ -11,6 +11,7 @@ import {
   FlatList,
   StatusBar,
 } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 import { Searchbar } from 'react-native-paper';
 import BookSearch from '../components/BookSearch';
 
@@ -28,10 +29,11 @@ const Search = () => {
   }, []);
 
   const getSuggestions = async () => {
+    const token = await SecureStore.getItemAsync('token')
     await fetch('http://192.168.1.10:3000/api/book/suggestions', {
       headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0',
+          'Bearer '+token,
       },
     })
       .then((res) => res.json())

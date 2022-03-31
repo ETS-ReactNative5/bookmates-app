@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, ScrollView, Image, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 const WriteReview = ({ route, navigation }) => {
   let {book} = route.params;
@@ -9,13 +10,14 @@ const WriteReview = ({ route, navigation }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   async function post() {
+    const token = await SecureStore.getItemAsync('token')
     if(reviewText){
         try {
           const { data } = await axios({
             method: 'post',
             headers: {
               Authorization:
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0',
+                'Bearer '+token,
             },
             url: 'http://192.168.1.10:3000/api/review/add',
             data: {

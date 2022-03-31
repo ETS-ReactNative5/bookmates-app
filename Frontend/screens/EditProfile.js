@@ -80,11 +80,11 @@ const EditProfile = ({ route, navigation }) => {
 
   const editData = async () => {
     try {
+      const token = await SecureStore.getItemAsync('token')
       const { data } = await axios({
         method: 'put',
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0',
+          Authorization:'Bearer '+token,
         },
         url: 'http://192.168.1.10:3000/api/user/editprofile',
         data: {

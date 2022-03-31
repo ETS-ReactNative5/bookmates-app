@@ -2,7 +2,7 @@ import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'r
 import React, { useState } from 'react';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 
-const ProfileReview = ({ user, book, review_text, likes, dislikes, comments }) => {
+const BookReview = ({ user, book, review_text, likes, dislikes, comments }) => {
   const [like_status, setLikeStatus] = useState(false);
   const [dislike_status, setDislikeStatus] = useState(false);
 
@@ -69,7 +69,7 @@ const ProfileReview = ({ user, book, review_text, likes, dislikes, comments }) =
   );
 };
 
-export default ProfileReview;
+export default BookReview;
 
 const styles = StyleSheet.create({
   profile_pic: {

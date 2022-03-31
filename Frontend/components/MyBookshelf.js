@@ -1,6 +1,7 @@
 import React , {useState, useEffect} from 'react';
 import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl } from 'react-native';
 import BookSearch from '../components/BookSearch';
+import * as SecureStore from 'expo-secure-store';
 
 const MyBookshelf = () => {
 
@@ -12,9 +13,10 @@ const MyBookshelf = () => {
   },[])
 
   const loadBookshelf = async () => {
+    const token = await SecureStore.getItemAsync('token')
     fetch('http://192.168.1.10:3000/api/book/displaymybookshelf',{
         headers:{
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0",
+          Authorization: "Bearer " +token,
         }
       }).then(res=>res.json())
       .then(result=>{

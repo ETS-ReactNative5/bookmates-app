@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions, Image, Modal, TouchableOpacity, SafeAreaView } from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 
 export default function BookmatesMap({ navigation }) {
   
@@ -8,10 +9,11 @@ export default function BookmatesMap({ navigation }) {
   const [selectedBookmate, setSelectedBookmate] = useState('');
   const [bookmates, setBookmates] = useState(['']);
 
-  useEffect(() => {
+  useEffect(async () => {
+    const token = await SecureStore.getItemAsync('token')
     fetch('http://192.168.1.10:3000/api/user/all', {
       headers:{
-        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQwMzYzOTFkOTA1ZTEwZTVmYzYwZDYiLCJpYXQiOjE2NDgzOTUwNjl9.L6bFuQ50tiGUFhfJrc-81CmVXVH1Xr-DmOXIj2-gvR0",
+        Authorization: "Bearer "+token,
       }
     }).then(res=>res.json())
     .then(result=>{
