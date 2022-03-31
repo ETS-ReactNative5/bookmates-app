@@ -239,8 +239,15 @@ const displayMyBookshelf = async (req, res) => {
 };
 
 const suggestions = async (req, res) => {
-  let suggestions = await Book.aggregate([{ $sample: { size: 9 } }]);
-  return res.status(200).send(suggestions)
+  const suggestions = await Book.aggregate([{ $sample: { size: 9 } }])
+
+  const populated = await Promise.all(
+    suggestions.map((book) => {
+      return Book.find({ _id: book._id }).populate("author_id", "name");
+    })
+  );
+
+  return res.status(200).send(suggestions);
 }
 
 module.exports.search = search;
