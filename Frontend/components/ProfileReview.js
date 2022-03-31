@@ -30,7 +30,7 @@ const ProfileReview = ({ review }) => {
             review_id: review._id,
           },
         }).then((response) => {
-          setReviewLikes(response.review.likes)
+          setReviewLikes(response.data.review.likes)
         });
         
       } catch (err) {
@@ -52,7 +52,7 @@ const ProfileReview = ({ review }) => {
           review_id: review._id,
         },
       }).then((response) => {
-        setReviewDislikes(response.review.dislikes)
+        setReviewDislikes(response.data.review.dislikes)
       });
       
     } catch (err) {

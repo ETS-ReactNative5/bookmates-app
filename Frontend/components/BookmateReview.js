@@ -2,17 +2,58 @@ import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'r
 import React, { useState } from 'react';
 import { AntDesign, FontAwesome} from '@expo/vector-icons';
 import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 const BookmateReview = ({ review }) => {
   const [like_status, setLikeStatus] = useState(false);
   const [dislike_status, setDislikeStatus] = useState(false);
+  const [reviewLikes, setReviewLikes] = useState(review.likes);
+  const [reviewDislikes, setReviewDislikes] = useState(review.dislikes);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const likeReview = () => {
+  const likeReview = async () => {
     setLikeStatus(!like_status);
-  };
+    const token = await SecureStore.getItemAsync('token')
+      try {
+        const { data } = await axios({
+          method: 'put',
+          headers: {
+            Authorization:'Bearer '+token,
+          },
+          url: 'http://192.168.1.10:3000/api/review/like',
+          data: {
+            review_id: review._id,
+          },
+        }).then((response) => {
+          setReviewLikes(response.data.review.likes)
+          console.log(response.data.review.likes)
+        });
+        
+      } catch (err) {
+        setErrorMessage("Error! Please try again later.");
+      }
+    }
 
-  const dislikeReview = () => {
+  const dislikeReview = async () => {
     setDislikeStatus(!dislike_status);
+    const token = await SecureStore.getItemAsync('token')
+    try {
+      const { data } = await axios({
+        method: 'put',
+        headers: {
+          Authorization:'Bearer '+token,
+        },
+        url: 'http://192.168.1.10:3000/api/review/dislike',
+        data: {
+          review_id: review._id,
+        },
+      }).then((response) => {
+        setReviewDislikes(response.data.review.dislikes)
+      });
+      
+    } catch (err) {
+      setErrorMessage("Error! Please try again later.");
+    }
   };
 
   return (
@@ -49,11 +90,11 @@ const BookmateReview = ({ review }) => {
             <TouchableOpacity onPress={() => likeReview()}>
               {like_status ? (
                 <Text style={{ color: '#5A7FCC' }}>
-                  {review.likes.length} <AntDesign name="like1" size={18} color="#5A7FCC" />
+                  {reviewLikes.length} <AntDesign name="like1" size={18} color="#5A7FCC" />
                 </Text>
               ) : (
                 <Text style={{ color: '#5A7FCC' }}>
-                  {review.likes.length} <AntDesign name="like2" size={18} color="#5A7FCC" />
+                  {reviewLikes.length} <AntDesign name="like2" size={18} color="#5A7FCC" />
                 </Text>
               )}
             </TouchableOpacity>
@@ -61,11 +102,11 @@ const BookmateReview = ({ review }) => {
             <TouchableOpacity onPress={() => dislikeReview()}>
               {dislike_status ? (
                 <Text style={{ color: '#5A7FCC' }}>
-                  {review.dislikes.length} <AntDesign name="dislike1" size={18} color="#5A7FCC" />
+                  {reviewDislikes.length} <AntDesign name="dislike1" size={18} color="#5A7FCC" />
                 </Text>
               ) : (
                 <Text style={{ color: '#5A7FCC' }}>
-                  {review.dislikes.length} <AntDesign name="dislike2" size={18} color="#5A7FCC" />
+                  {reviewDislikes.length} <AntDesign name="dislike2" size={18} color="#5A7FCC" />
                 </Text>
               )}
             </TouchableOpacity>
