@@ -60,7 +60,6 @@ const deleteReview =  async (req, res) => {
 };
 
 const likeReview = async (req, res) => {
-  
   try {
       const review = await Review.findById(req.body.review_id);
       if (!review.likes.includes(req.user._id)) {

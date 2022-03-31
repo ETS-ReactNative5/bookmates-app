@@ -13,14 +13,52 @@ const ProfileReview = ({ review }) => {
   const[editMode, setEditMode] = useState(false);
   const [reviewText, setReviewText] = useState();
   const [errorMessage, setErrorMessage] = useState('');
+  const [reviewLikes, setReviewLikes] = useState(review.likes);
+  const [reviewDislikes, setReviewDislikes] = useState(review.dislikes);
 
-  const likeReview = () => {
+  const likeReview = async () => {
     setLikeStatus(!like_status);
-  };
+    const token = await SecureStore.getItemAsync('token')
+      try {
+        const { data } = await axios({
+          method: 'put',
+          headers: {
+            Authorization:'Bearer '+token,
+          },
+          url: 'http://192.168.1.10:3000/api/review/like',
+          data: {
+            review_id: review._id,
+          },
+        }).then((response) => {
+          setReviewLikes(response.review.likes)
+        });
+        
+      } catch (err) {
+        setErrorMessage("Error! Please try again later.");
+      }
+    }
 
-  const dislikeReview = () => {
+  const dislikeReview = async() => {
     setDislikeStatus(!dislike_status);
-  };
+    const token = await SecureStore.getItemAsync('token')
+    try {
+      const { data } = await axios({
+        method: 'put',
+        headers: {
+          Authorization:'Bearer '+token,
+        },
+        url: 'http://192.168.1.10:3000/api/review/dislike',
+        data: {
+          review_id: review._id,
+        },
+      }).then((response) => {
+        setReviewDislikes(response.review.dislikes)
+      });
+      
+    } catch (err) {
+      setErrorMessage("Error! Please try again later.");
+    }
+  }
 
   const editReview = async () => {
     const token = await SecureStore.getItemAsync('token')
@@ -126,11 +164,11 @@ const ProfileReview = ({ review }) => {
             <TouchableOpacity onPress={() => likeReview()}>
               {like_status ? (
                 <Text style={{ color: '#5A7FCC' }}>
-                  {review.likes.length} <AntDesign name="like1" size={18} color="#5A7FCC" />
+                  {reviewLikes.length} <AntDesign name="like1" size={18} color="#5A7FCC" />
                 </Text>
               ) : (
                 <Text style={{ color: '#5A7FCC' }}>
-                  {review.likes.length} <AntDesign name="like2" size={18} color="#5A7FCC" />
+                  {reviewLikes.length} <AntDesign name="like2" size={18} color="#5A7FCC" />
                 </Text>
               )}
             </TouchableOpacity>
@@ -138,11 +176,11 @@ const ProfileReview = ({ review }) => {
             <TouchableOpacity onPress={() => dislikeReview()}>
               {dislike_status ? (
                 <Text style={{ color: '#5A7FCC' }}>
-                  {review.dislikes.length} <AntDesign name="dislike1" size={18} color="#5A7FCC" />
+                  {reviewDislikes.length} <AntDesign name="dislike1" size={18} color="#5A7FCC" />
                 </Text>
               ) : (
                 <Text style={{ color: '#5A7FCC' }}>
-                  {review.dislikes.length} <AntDesign name="dislike2" size={18} color="#5A7FCC" />
+                  {reviewDislikes.length} <AntDesign name="dislike2" size={18} color="#5A7FCC" />
                 </Text>
               )}
             </TouchableOpacity>

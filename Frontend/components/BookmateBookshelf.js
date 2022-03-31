@@ -3,7 +3,7 @@ import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl 
 import BookSearch from '../components/BookSearch';
 import * as SecureStore from 'expo-secure-store';
 
-const BookmateBookshelf = ({user_id}) => {
+const BookmateBookshelf = (user_id) => {
 
   const [bookshelf, setBookshelf] = useState({})
   const [refreshing, setRefreshing] = useState(true);
