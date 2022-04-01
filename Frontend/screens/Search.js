@@ -18,7 +18,7 @@ import { Searchbar } from 'react-native-paper';
 import BookSearch from '../components/BookSearch';
 import Ionic from 'react-native-vector-icons/Ionicons';
 
-const Search = () => {
+const Search = ({navigation}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
@@ -142,13 +142,13 @@ const Search = () => {
               <View style={{ justifyContent: 'center', width:'100%' }}>
                 {searchResults.map((result) => {
                   return(
-                    <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity style={{flexDirection: 'row'}}>
                       <Image source={{uri: `${result?.thumbnail}`}} style={styles.thumbnail}/>
                       <View>
                         <Text style={{marginTop:5}}>{result.title}</Text>
                         <Text style={{fontFamily: 'Roboto_300Light_Italic', marginTop:2}}>By {result.author}</Text>                      
                       </View>
-                    </View>
+                    </TouchableOpacity>
                   )})}
 
           </View>
