@@ -1,10 +1,13 @@
 import React , {useState, useEffect} from 'react';
-import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
 import BookSearch from '../components/BookSearch';
+import BookmateReview from './BookmateReview';
 import * as SecureStore from 'expo-secure-store';
+import axios from 'axios';
 
 const BookmateBookshelf = ({user_id}) => {
-
+  
+  const [reviews, setReviews] = useState([])
   const [bookshelf, setBookshelf] = useState({})
   const [refreshing, setRefreshing] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
@@ -15,13 +18,14 @@ const BookmateBookshelf = ({user_id}) => {
 
   const loadBookshelf = async () => {
     const token = await SecureStore.getItemAsync('token')
+    console.log(token)
     try {
       const { data } = await axios({
         method: 'get',
         headers: {
           Authorization:'Bearer '+token,
         },
-        url: 'http://192.168.1.10:3000/api/review/displaybookmatesbookshelf/' + user_id,
+        url: 'http://192.168.1.10:3000/api/book/bookmatebookshelf/' + user_id,
       }).then((response) => {
         setRefreshing(false)
         setBookshelf(response.data)
@@ -30,15 +34,14 @@ const BookmateBookshelf = ({user_id}) => {
     } catch (err) {
       setErrorMessage("Error! Please try again later.");
     }
-
   }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadBookshelf}/>}>
-        <View
-          style={{ flexDirection: 'row', paddingVertical: 20, justifyContent: 'space-between', alignItems: 'center' }}
-        >
+    {refreshing ? <ActivityIndicator /> : null}
+    <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadBookshelf}/>}>
+      <View style={{ flexDirection: 'row', paddingVertical: 20, justifyContent: 'space-between', alignItems: 'center' }}>
+          {errorMessage && <Text> {errorMessage}</Text>}
           <Text style={{ color: '#5A7FCC', paddingLeft: 20, fontFamily: 'Baloo2_600SemiBold', fontSize: 16 }}>
             Currently Reading
           </Text>
@@ -84,8 +87,8 @@ const BookmateBookshelf = ({user_id}) => {
           </ScrollView>
         </View>
 
-      </ScrollView>
-    </SafeAreaView>
+    </ScrollView>
+  </SafeAreaView>
   );
 };
 

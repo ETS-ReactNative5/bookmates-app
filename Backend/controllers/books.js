@@ -246,7 +246,7 @@ const suggestions = async (req, res) => {
     })
   );
 
-  return res.status(200).send(suggestions);
+  return res.status(200).send(populated);
 }
 
 module.exports.search = search;

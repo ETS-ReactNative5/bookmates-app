@@ -37,8 +37,12 @@ const Search = () => {
       },
     })
       .then((res) => res.json())
-      .then((result) => {
-        setSuggestions(result);
+      .then((result) =>{
+        setSuggestions(
+          result.map((item) => {
+            return item[0];
+          })
+        )
         setRefreshing(false);
       })
       .catch((err) => console.log(err));
@@ -54,26 +58,33 @@ const Search = () => {
         style={{
           height: 40,
           alignSelf: 'center',
-          marginVertical: 20,
+          marginVertical: 15,
           width: '90%',
           borderRadius: 30,
           backgroundColor: '#F3F5F7',
         }}
       />
-
       <Text
-        style={{ color: '#5A7FCC', paddingLeft: 20, fontFamily: 'Baloo2_600SemiBold', fontSize: 20, marginBottom: 15 }}
+        style={{ color: '#5A7FCC', paddingLeft: 25, fontFamily: 'Baloo2_600SemiBold', fontSize: 22, marginBottom: 2 }}
       >
         Wondering what to read next?
       </Text>
+      <Text
+        style={{ color: 'black', paddingLeft: 25, fontFamily: 'Roboto_300Light_Italic', fontSize: 14, marginBottom: 8 }}
+      >
+        Search a library of over 10 million books!
+      </Text>
+      <Text>{searchQuery}</Text>
+
 
       <FlatList
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={getSuggestions} />}
         style={{ marginHorizontal: 15 }}
-        renderItem={({ item }) => <BookSearch book={item} />}
         data={suggestions}
-        keyExtractor={(item) => String(item._id)}
+        renderItem={({ item }) => <BookSearch book={item} />}
+        keyExtractor={(item) => item._id}
         numColumns={3}
+        showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
   );

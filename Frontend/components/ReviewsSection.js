@@ -11,7 +11,6 @@ const ReviewsSection = ({user_id}) => {
   const [emptyState, setEmptyState] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
-    //Testing
     useEffect(async () =>{
       loadReviews();
     },[])
