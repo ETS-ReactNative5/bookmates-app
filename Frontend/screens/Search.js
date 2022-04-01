@@ -16,6 +16,7 @@ import {
 import * as SecureStore from 'expo-secure-store';
 import { Searchbar } from 'react-native-paper';
 import BookSearch from '../components/BookSearch';
+import Ionic from 'react-native-vector-icons/Ionicons';
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -130,7 +131,12 @@ const Search = () => {
                 backgroundColor: '#FFFFFFFF',
               }}
             >
-              <Text style={styles.searchHeader}>Search Results</Text>
+              <View style={{flexDirection:'row'}}>
+                <Text style={styles.searchHeader}>Search Results</Text>
+                <TouchableOpacity onPress={() => setModalVisible(false)}>
+                  <Ionic name="close-outline" style={{ fontSize: 28 }} />
+                </TouchableOpacity>
+              </View>
               <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
 
               <View style={{ justifyContent: 'center', width:'100%' }}>
