@@ -16,9 +16,6 @@ import BookReview from './../components/BookReview';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 
-{
-  /*Description component*/
-}
 const Description = ({description}) => {
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: 'white', flex: 1 }}>
@@ -28,14 +25,12 @@ const Description = ({description}) => {
     </ScrollView>
   );
 };
-{
-  /*Book Reviews component*/
-}
+
 const BookReviews = ({book_id}) => {
 
   const [bookReviews, setBookReviews] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
-
+  
   useEffect(() => {
     loadBookReviews();
   }, [])
@@ -61,7 +56,7 @@ const BookReviews = ({book_id}) => {
       setErrorMessage("Error! Please try again later.");
     }
   }
-
+  
   return (
     <SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -74,18 +69,37 @@ const BookReviews = ({book_id}) => {
 };
 
 const BookDetails = ({ route, navigation }) => {
-
+  
   let {book} = route.params;
-
+  
   const Tab = createMaterialTopTabNavigator();
   const [modalVisible, setModalVisible] = useState(false);
-
+  const [errorMessage, setErrorMessage] = useState('');
+  
   const [currentlyReading, setCurrentlyReading] = useState(false);
   const [finished, setFinished] = useState(false);
   const [toRead, setToRead] = useState(false);
 
-  const toggleCurrentlyReading = () => {
-    setCurrentlyReading(!currentlyReading);
+  
+  const toggleCurrentlyReading = async () => {
+    const token = await SecureStore.getItemAsync('token')
+    try {
+      const { data } = await axios({
+        method: 'put',
+        headers: {
+          Authorization:'Bearer '+token,
+        },
+        url: 'http://192.168.1.10:3000/api/book/addcurrently',
+        data: {
+          book_id: book._id,
+        },
+      }).then((response) => {
+          setCurrentlyReading(!currentlyReading);
+      });
+        
+      } catch (err) {
+        setErrorMessage("Error! Please try again later.");
+      }
   };
 
   const toggleToRead = () => {
