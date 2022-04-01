@@ -17,11 +17,11 @@ import BookReview from './../components/BookReview';
 {
   /*Description component*/
 }
-const Description = ({book}) => {
+const Description = ({description}) => {
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: 'white', flex: 1 }}>
       <Text style={{ lineHeight: 25, paddingTop: 10, textAlign: 'justify', paddingHorizontal: 10 }}>
-        {book.description}
+        {description}
       </Text>
     </ScrollView>
   );
@@ -29,21 +29,33 @@ const Description = ({book}) => {
 {
   /*Book Reviews component*/
 }
-const BookReviews = () => {
-  let book1 = { title: 'Me Before You', author: 'Jojo Moyes', thumbnail: require('./../assets/mebeforeyou.jpg') };
-  let user1 = { name: 'Claudia Holland', profile_pic: require('./../assets/test_profile_pic.jpg') };
+const BookReviews = ({reviews}) => {
+
+  useEffect(() => {
+    loadBookReviews();
+  }, [])
+  
+  const loadBookReviews = async () => {
+    const token = await SecureStore.getItemAsync('token')
+    fetch('http://192.168.1.10:3000/api/book/reviews',{
+        headers:{
+          Authorization: "Bearer " +token,
+        }
+      }).then(res=>res.json())
+      .then(result=>{
+        setRefreshing(false);
+        setBookshelf(result);
+      })
+      .catch(err => console.log(err))
+
+  }
+
   return (
     <SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <BookReview
-          user={user1}
-          book={book1}
-          review_text="I love it. I love its warmth and vibrancy, its heartache and its pain, its humor and meanness, the ugliness, the beauty, the crying, the laughter, the sarcasm.
-        I love Elanor and Park and I love that there's still a tiny chance for them."
-          likes="20"
-          dislikes="3"
-          comments="5"
-        />
+        {book?.book_id?.reviews?.map((review) => {         
+              return ( <BookReview key={result[0]._id} book= {result[0]} />)})
+        }
       </ScrollView>
     </SafeAreaView>
   );
@@ -60,23 +72,14 @@ const BookDetails = ({ route, navigation }) => {
   const [finished, setFinished] = useState(false);
   const [toRead, setToRead] = useState(false);
 
-  {
-    /*Change state of currently reading*/
-  }
   const toggleCurrentlyReading = () => {
     setCurrentlyReading(!currentlyReading);
   };
 
-  {
-    /*Change state of to read*/
-  }
   const toggleToRead = () => {
     setToRead(!toRead);
   };
 
-  {
-    /*Change state of finished*/
-  }
   const toggleFinished = () => {
     setFinished(!finished);
   };
@@ -172,8 +175,8 @@ const BookDetails = ({ route, navigation }) => {
             tabBarLabelStyle: { fontSize: 14, fontWeight: 'bold' },
           })}
         >
-          <Tab.Screen name="Description" children={() => <Description book={book}/>} />
-          <Tab.Screen name="Reviews" component={BookReviews} />
+          <Tab.Screen name="Description" children={() => <Description description={book.description}/>} />
+          <Tab.Screen name="Reviews" children={() => <BookReviews reviews={book.reviews}/>}/>
         </Tab.Navigator>
       </View>
     </SafeAreaView>

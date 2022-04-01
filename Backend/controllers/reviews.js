@@ -9,20 +9,20 @@ const addReview = async (req, res) => {
   }
 
   const newReview = new Review({text, book_id, user_id: req.user})
-  try {
-    const savedReview = await newReview.save();
-    await User.findByIdAndUpdate(
-      req.user._id,
-      { $push: { reviews: savedReview._id } },
-      { new: true }
-    );
-    await Book.findByIdAndUpdate(
-      book_id, {$push: {reviews: savedReview._id}}
-    )
-    res.status(200).send({message: "Review posted successfully"});
-  } catch (err) {
-    return res.status(500).send(err);
-  }
+    try {
+      const savedReview = await newReview.save();
+      await User.findByIdAndUpdate(
+        req.user._id,
+        { $push: { reviews: savedReview._id } },
+        { new: true }
+      );
+      await Book.findByIdAndUpdate(
+        book_id, {$push: {reviews: savedReview._id}}
+      )
+      res.status(200).send({message: "Review posted successfully"});
+    } catch (err) {
+      return res.status(500).send(err);
+    }
 };
 
 const editReview = async (req, res) => {
@@ -135,6 +135,7 @@ const getMyReviews = async (req, res) => {
     return res.status(500).send(err)   
   }
 }
+
 const getBookmateReviews = async (req, res) => {
   try{
     const reviews = await Review.find({ user_id: req.params.id }).populate({
@@ -162,42 +163,51 @@ const getBookmateReviews = async (req, res) => {
 }
 
 const getFeedReviews = async (req, res) => {
-    try {
-        const currentUser = await User.findById(req.user._id);
-        const userReviews = await Review.find({ user_id: req.user._id }).populate({
-          path: "book_id", 
-          populate: [
-            {
-              path: "author_id",
-              model: "Author",
-            },
-            {
-              path: "reviews",
-              model: "Review",
-            },
-          ],
-        }).populate('user_id');
-        const bookmatesReviews = await Promise.all(
-          currentUser.following.map((bookmateId) => {
-            return Review.find({ user_id: bookmateId }).populate({
-              path: "book_id", 
-              populate: [
-                {
-                  path: "author_id",
-                  model: "Author",
-                },
-                {
-                  path: "reviews",
-                  model: "Review",
-                },
-              ],
-            }).populate('user_id');
-          })
-        );
-        res.status(200).send(userReviews.concat(...bookmatesReviews))
-    } catch (err) {
-        res.status(500).json(err);
-    }
+  try {
+      const currentUser = await User.findById(req.user._id);
+      const userReviews = await Review.find({ user_id: req.user._id }).populate({
+        path: "book_id", 
+        populate: [
+          {
+            path: "author_id",
+            model: "Author",
+          },
+        ],
+      }).populate('user_id');
+      const bookmatesReviews = await Promise.all(
+        currentUser.following.map((bookmateId) => {
+          return Review.find({ user_id: bookmateId }).populate({
+            path: "book_id", 
+            populate: [
+              {
+                path: "author_id",
+                model: "Author",
+              },
+              {
+                path: "reviews",
+                model: "Review",
+              },
+            ],
+          }).populate('user_id');
+        })
+      );
+      
+      res.status(200).send(userReviews.concat(...bookmatesReviews))
+  } catch (err) {
+      res.status(500).json(err);
+  }
+};
+
+const getBookReviews = async (req, res) => {
+  try {
+      const book = await Book.findById(req.body.book_id)
+      const populatedReviews = await Promise.all(book.reviews.map((reviewId) => {
+         return Review.findById(reviewId).populate("user_id").select(['-password'])
+      }))
+      res.status(200).send(populatedReviews)      
+  } catch (err) {
+      res.status(500).json(err);
+  }
 };
 
 module.exports.addReview = addReview;
@@ -209,3 +219,4 @@ module.exports.comment = comment;
 module.exports.getMyReviews = getMyReviews;
 module.exports.getFeedReviews = getFeedReviews;
 module.exports.getBookmateReviews = getBookmateReviews;
+module.exports.getBookReviews = getBookReviews;
