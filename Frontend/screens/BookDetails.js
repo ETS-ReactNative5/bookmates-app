@@ -1,14 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  StatusBar,
-  Modal,
-  Image,
-  TouchableOpacity,
-  SafeAreaView,
-  ScrollView,
-} from 'react-native';
+import {View,Text,StyleSheet,StatusBar,Modal,Image,TouchableOpacity,SafeAreaView,ScrollView} from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';

@@ -17,19 +17,18 @@ const search = async (req, res) => {
     })
     .then(({ data }) => {
       const book_results = data.items.map((item) => item.volumeInfo);
-      const books = book_results.map((result) => ({
+      const books = book_results.map((result) => (
+        result?.industryIdentifiers ?
+        ({
         title: result.title,
-        author: result.authors ? result.authors[0] : "",
+        author: result.authors ? result.authors[0] : "Unknown",
         description: result.description,
-        isbn: result.industryIdentifiers
-          ? result.industryIdentifiers[0].type === "ISBN_13"
-            ? result.industryIdentifiers[0].identifier
-            : result.industryIdentifiers[1].type === "ISBN_13"
-            ? result.industryIdentifiers[1].identifier
-            : ""
-          : "",
+        isbn: result.industryIdentifiers,
+        isbn: result.industryIdentifiers[0]?.type ? result.industryIdentifiers[0]?.type === "ISBN_13" ? result.industryIdentifiers[0]?.identifier : result.industryIdentifiers[1]?.type ? result.industryIdentifiers[1]?.type === "ISBN_13" ? result.industryIdentifiers[1]?.identifier : ""  : ""  : "", 
         thumbnail: result.imageLinks ? result.imageLinks.thumbnail : "",
-      }));
+      })
+      :
+      ("")));
       return res.status(200).send(books);
     })
     .catch((err) =>
