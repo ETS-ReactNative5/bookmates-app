@@ -102,12 +102,47 @@ const BookDetails = ({ route, navigation }) => {
       }
   };
 
-  const toggleToRead = () => {
-    setToRead(!toRead);
+  const toggleToRead = async () => {
+    const token = await SecureStore.getItemAsync('token')
+    try {
+      const { data } = await axios({
+        method: 'put',
+        headers: {
+          Authorization:'Bearer '+token,
+        },
+        url: 'http://192.168.1.10:3000/api/book/addtoread',
+        data: {
+          book_id: book._id,
+        },
+      }).then((response) => {
+          setToRead(!toRead);
+     });
+        
+      } catch (err) {
+        setErrorMessage("Error! Please try again later.");
+      }
+
   };
 
-  const toggleFinished = () => {
-    setFinished(!finished);
+  const toggleFinished = async () => {
+    const token = await SecureStore.getItemAsync('token')
+    try {
+      const { data } = await axios({
+        method: 'put',
+        headers: {
+          Authorization:'Bearer '+token,
+        },
+        url: 'http://192.168.1.10:3000/api/book/addfinished',
+        data: {
+          book_id: book._id,
+        },
+      }).then((response) => {
+        setFinished(!finished);
+     });
+        
+      } catch (err) {
+        setErrorMessage("Error! Please try again later.");
+      }
   };
 
   return (
