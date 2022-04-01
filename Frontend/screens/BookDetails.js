@@ -9,10 +9,12 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import BookReview from './../components/BookReview';
+import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 {
   /*Description component*/
@@ -29,7 +31,10 @@ const Description = ({description}) => {
 {
   /*Book Reviews component*/
 }
-const BookReviews = ({reviews}) => {
+const BookReviews = ({book_id}) => {
+
+  const [bookReviews, setBookReviews] = useState([])
+  const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
     loadBookReviews();
@@ -37,24 +42,31 @@ const BookReviews = ({reviews}) => {
   
   const loadBookReviews = async () => {
     const token = await SecureStore.getItemAsync('token')
-    fetch('http://192.168.1.10:3000/api/book/reviews',{
-        headers:{
-          Authorization: "Bearer " +token,
-        }
-      }).then(res=>res.json())
-      .then(result=>{
-        setRefreshing(false);
-        setBookshelf(result);
-      })
-      .catch(err => console.log(err))
-
+    try {
+      const { data } = await axios({
+        method: 'post',
+        headers: {
+          Authorization:'Bearer '+token,
+        },
+        url: 'http://192.168.1.10:3000/api/review/getBookReviews',
+        data: {
+          book_id: book_id,
+        },
+      }).then((response) => {
+        setBookReviews(response.data)
+        console.log(bookReviews)
+      });
+      
+    } catch (err) {
+      setErrorMessage("Error! Please try again later.");
+    }
   }
 
   return (
     <SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {book?.book_id?.reviews?.map((review) => {         
-              return ( <BookReview key={result[0]._id} book= {result[0]} />)})
+        {bookReviews?.map((review) => {         
+              return ( <BookReview key={review._id} review= {review} />)})
         }
       </ScrollView>
     </SafeAreaView>
@@ -176,7 +188,7 @@ const BookDetails = ({ route, navigation }) => {
           })}
         >
           <Tab.Screen name="Description" children={() => <Description description={book.description}/>} />
-          <Tab.Screen name="Reviews" children={() => <BookReviews reviews={book.reviews}/>}/>
+          <Tab.Screen name="Reviews" children={() => <BookReviews book_id={book._id}/>}/>
         </Tab.Navigator>
       </View>
     </SafeAreaView>
