@@ -3,10 +3,11 @@ import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl 
 import BookSearch from '../components/BookSearch';
 import * as SecureStore from 'expo-secure-store';
 
-const BookmateBookshelf = (user_id) => {
+const BookmateBookshelf = ({user_id}) => {
 
   const [bookshelf, setBookshelf] = useState({})
   const [refreshing, setRefreshing] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   useEffect(async () =>{
     loadBookshelf();
@@ -14,16 +15,22 @@ const BookmateBookshelf = (user_id) => {
 
   const loadBookshelf = async () => {
     const token = await SecureStore.getItemAsync('token')
-    fetch('http://192.168.1.10:3000/api/book/displaybookmatesbookshelf?id=' + user_id,{
-        headers:{
-          Authorization: "Bearer "+token,
-        }
-      }).then(res=>res.json())
-      .then(result=>{
-        setRefreshing(false);
-        setBookshelf(result);
-      })
-      .catch(err => console.log(err))
+    try {
+      const { data } = await axios({
+        method: 'get',
+        headers: {
+          Authorization:'Bearer '+token,
+        },
+        url: 'http://192.168.1.10:3000/api/review/displaybookmatesbookshelf/' + user_id,
+      }).then((response) => {
+        setRefreshing(false)
+        setBookshelf(response.data)
+      });
+      
+    } catch (err) {
+      setErrorMessage("Error! Please try again later.");
+    }
+
   }
 
   return (

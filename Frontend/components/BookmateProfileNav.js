@@ -16,7 +16,7 @@ const BookmateProfileNav = ({user}) => {
       })}
     >
       <Tab.Screen name="Bookshelf" children={() => <BookmateBookshelf user_id={user._id}/>}  />
-      <Tab.Screen name="Reviews" children={() => <ReviewsSection user={{user}}/>} />
+      <Tab.Screen name="Reviews" children={() => <ReviewsSection user_id={user._id}/>} />
     </Tab.Navigator>
   );
 };
