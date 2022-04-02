@@ -208,7 +208,6 @@ const displayBookmatesBookshelf = async (req, res) => {
   }catch(err){
     return res.status(400).send(err);
   }
-
 };
 
 const displayMyBookshelf = async (req, res) => {

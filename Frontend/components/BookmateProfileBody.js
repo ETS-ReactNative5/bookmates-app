@@ -52,7 +52,6 @@ const BookmateProfileBody = ({ user }) => {
 
   };
 
-
   return (
     <SafeAreaView>
       <View
