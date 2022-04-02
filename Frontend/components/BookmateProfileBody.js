@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
@@ -7,6 +7,14 @@ import * as SecureStore from 'expo-secure-store';
 const BookmateProfileBody = ({ user }) => {
   const [followed, setFollowed] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    getUserProfile();
+  }, [])
+  
+  const getUserProfile = async () =>{
+    
+  }
 
   const follow = async () => {
 

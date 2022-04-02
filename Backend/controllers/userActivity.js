@@ -93,7 +93,12 @@ const getAllUsers = async (req, res) => {
 }
 
 const getProfile = async (req, res) => {
-  return res.status(200).send(req.user);
+  return res.status(200).send(req.user).select(['-password']);;
+}
+
+const getUserProfile = async (req, res) => {
+  const user = await User.findById(req.params.id).select(['-password']);
+  return res.status(200).send(user);
 }
 
 
@@ -102,3 +107,4 @@ module.exports.unfollow = unfollow;
 module.exports.editProfile = editProfile;
 module.exports.getAllUsers = getAllUsers;
 module.exports.getProfile = getProfile;
+module.exports.getUserProfile = getUserProfile;
