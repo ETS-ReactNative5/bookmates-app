@@ -42,7 +42,7 @@ const saveBook = async (req, res) => {
 
   if (bookExists){
     return res
-    .status(400)
+    .status(200)
     .send({
       message: "Book is already saved.",
     });
@@ -59,12 +59,14 @@ const saveBook = async (req, res) => {
         { $push: { books: savedBook._id } },
         { new: true }
       );
-      const updatedBook = await Book.findByIdAndUpdate(savedBook._id, {$push: {author_id: author._id}}, {new: true})
+      const updatedBook = await Book.findByIdAndUpdate(savedBook._id, {$push: {author_id: author._id}}, {new: true}).populate({
+        path: "author_id",
+        model: "Author",
+      })
       return res
         .status(200)
         .send({
           message: "Book saved successfully",
-          author: author,
           book: updatedBook,
         });
     } else {
