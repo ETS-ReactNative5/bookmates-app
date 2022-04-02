@@ -89,10 +89,9 @@ const Search = ({ navigation }) => {
           isbn: result.isbn,
         },
       }).then((res) => {
-        if (res.data.message === 'Book saved successfully') {
-          setModalVisible(false);
-          navigation.navigate('BookDetails', { book: res.data.book });
-        }
+        if(res.data.message === 'Book saved successfully' || res.data.message === 'Book is already saved.' )
+        setModalVisible(false);
+        navigation.navigate('BookDetails', { book: res.data.book });
       });
     } catch (err) {
       setErrorMessage('Error! Please try again later.');

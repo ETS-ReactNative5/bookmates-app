@@ -38,13 +38,17 @@ const search = async (req, res) => {
 
 const saveBook = async (req, res) => {
 
-  const bookExists = await Book.findOne({isbn: req.body.isbn});
+  const bookExists = await Book.findOne({isbn: req.body.isbn}).populate({
+    path: "author_id",
+    model: "Author",
+  });
 
   if (bookExists){
     return res
     .status(200)
     .send({
       message: "Book is already saved.",
+      book:bookExists
     });
   }
   const book = new Book(req.body);
@@ -78,12 +82,14 @@ const saveBook = async (req, res) => {
           { $push: { books: savedBook._id } },
           { new: true }
         );
-        const updatedBook = await Book.findByIdAndUpdate(savedBook._id, {$push: {author_id: updatedAuthor._id}}, {new: true})
+        const updatedBook = await Book.findByIdAndUpdate(savedBook._id, {$push: {author_id: updatedAuthor._id}}, {new: true}).populate({
+          path: "author_id",
+          model: "Author",
+        })
         return res
           .status(200)
           .send({
             message: "Book saved successfully",
-            author: updatedAuthor,
             book: updatedBook,
           });
       } catch (err) {

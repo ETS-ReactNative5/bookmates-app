@@ -187,7 +187,7 @@ const BookDetails = ({ route, navigation }) => {
                 <TouchableOpacity
                   onPress={() => {
                       setModalVisible(false);
-                      navigation.navigate('WriteReview', {book: book});}}
+                      navigation.navigate('WriteReview', {book: book})}}
                   style={{ flexDirection: 'row', alignItems: 'center' }}
                 >
                   <MaterialCommunityIcons name="comment-text-multiple-outline" size={18} color="#5A7FCC" />
