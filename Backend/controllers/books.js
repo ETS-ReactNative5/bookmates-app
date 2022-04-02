@@ -22,10 +22,10 @@ const search = async (req, res) => {
         ({
         title: result.title,
         author: result.authors ? result.authors[0] : "Unknown",
-        description: result.description,
+        description: result.description ? result.description : "No description available",
         isbn: result.industryIdentifiers,
         isbn: result.industryIdentifiers[0]?.type ? result.industryIdentifiers[0]?.type === "ISBN_13" ? result.industryIdentifiers[0]?.identifier : result.industryIdentifiers[1]?.type ? result.industryIdentifiers[1]?.type === "ISBN_13" ? result.industryIdentifiers[1]?.identifier : ""  : ""  : "", 
-        thumbnail: result.imageLinks ? result.imageLinks.thumbnail : "",
+        thumbnail: result.imageLinks ? result.imageLinks.thumbnail : "https://www.instandngs4p.eu/wp-content/themes/fox/images/placeholder.jpg",
       })
       :
       ("")));

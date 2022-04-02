@@ -125,13 +125,14 @@ const Search = ({navigation}) => {
                 borderRadius: 20,
                 padding: 20,
                 width: 300,
+                height:500,
                 alignItems: 'flex-start',
                 justifyContent: 'center',
                 flexDirection: 'column',
                 backgroundColor: '#FFFFFFFF',
               }}
             >
-              <View style={{flexDirection:'row'}}>
+              <View style={{width: 270, flexDirection:'row', justifyContent:'space-between', alignContent:'center'}}>
                 <Text style={styles.searchHeader}>Search Results</Text>
                 <TouchableOpacity onPress={() => setModalVisible(false)}>
                   <Ionic name="close-outline" style={{ fontSize: 28 }} />
@@ -139,14 +140,14 @@ const Search = ({navigation}) => {
               </View>
               <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
 
-              <View style={{ justifyContent: 'center', width:'100%' }}>
+              <View style={{ justifyContent: 'center', width:'98%' }}>
                 {searchResults.map((result) => {
                   return(
                     <TouchableOpacity style={{flexDirection: 'row'}}>
                       <Image source={{uri: `${result?.thumbnail}`}} style={styles.thumbnail}/>
-                      <View>
+                      <View style={{width: 180}}>
                         <Text style={{marginTop:5}}>{result.title}</Text>
-                        <Text style={{fontFamily: 'Roboto_300Light_Italic', marginTop:2}}>By {result.author}</Text>                      
+                        <Text style={{fontFamily: 'Roboto_300Light_Italic', marginTop:10}}>By {result.author}</Text>                      
                       </View>
                     </TouchableOpacity>
                   )})}
@@ -155,14 +156,6 @@ const Search = ({navigation}) => {
               </ScrollView>
         </View>
           </View>
-                {/* <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => {
-                    navigation.navigate('BookmateProfile', { user: selectedBookmate });
-                    setModalVisible(!modalVisible);
-                  }}
-                >
-                </TouchableOpacity> */}
       </Modal>
 
     </SafeAreaView>
