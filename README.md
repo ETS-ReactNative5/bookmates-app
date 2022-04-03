@@ -4,7 +4,7 @@
 
 > Bookmates is a mobile application meant to bring you closer to book lovers around you.
 
-**[PROJECT PHILOSOPHY](https://github.com/julescript/well_app#-project-philosophy) • [WIREFRAMES](https://github.com/julescript/well_app#-wireframes) • [TECH STACK](https://github.com/julescript/well_app#-tech-stack) • [IMPLEMENTATION](https://github.com/julescript/well_app#-impplementation) • [HOW TO RUN?](https://github.com/julescript/well_app#-how-to-run)**
+**[PROJECT PHILOSOPHY]() • [WIREFRAMES]() • [TECH STACK]() • [IMPLEMENTATION]() • [HOW TO RUN?]()**
 
 </div>
 
@@ -64,9 +64,9 @@ Here's a brief high-level overview of the tech stack the bookmates app uses:
 |-----------|-----------|-----------|
 | ![Map](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedMap.png) | ![Search](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedSearch.png) | ![Feed](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedFeed.png)
 
-| Book Details | Book Reviews | Profile|
+| Book Details | Post Review | Profile|
 |-----------|-----------|-----------|
-| ![Book Details](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedBookDetails.png)| ![Book Reviews](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedBookReviews.png) | ![Profile](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedProfile.png)
+| ![Book Details]https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedDetails.png)| ![Post Review](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedPost.png) | ![Profile](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedProfile.PNG)
 
 <br><br>
 <img src="./readme/title6.svg"/>
