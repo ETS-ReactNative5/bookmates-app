@@ -13,6 +13,7 @@ const BookmateBookshelf = ({user_id}) => {
   const [errorMessage, setErrorMessage] = useState(false);
 
   useEffect(async () =>{
+    console.log(user_id)
     loadBookshelf();
   },[])
 

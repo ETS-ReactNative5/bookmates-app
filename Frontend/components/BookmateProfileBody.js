@@ -4,16 +4,30 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 
-const BookmateProfileBody = ({ user }) => {
-  const [followed, setFollowed] = useState(true);
+const BookmateProfileBody = ( {user} ) => {
+  const [bookmate, setBookmate] = useState({user})
+  const [followed, setFollowed] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     getUserProfile();
-  }, [])
+  }, [followed])
   
   const getUserProfile = async () =>{
-    
+    const token = await SecureStore.getItemAsync('token');
+    try {
+      const { data } = await axios({
+        method: 'get',
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+        url: 'http://192.168.1.10:3000/api/user/userprofile/'+ bookmate.user.user._id,
+      }).then((res) => {
+        setBookmate(res.data)
+      });
+    } catch (err) {
+      setErrorMessage('Error! Please try again later.');
+    }
   }
 
   const follow = async () => {
@@ -27,7 +41,7 @@ const BookmateProfileBody = ({ user }) => {
         },
         url: 'http://192.168.1.10:3000/api/user/follow',
         data: {
-          user_id: user._id,
+          user_id: bookmate._id,
         },
       }).then((res) => {
         setFollowed(true);
@@ -46,15 +60,14 @@ const BookmateProfileBody = ({ user }) => {
         headers: {
           Authorization: 'Bearer ' + token,
         },
-        url: 'http://192.168.1.10:3000/api/user/follow',
+        url: 'http://192.168.1.10:3000/api/user/unfollow',
         data: {
-          user_id: user._id,
+          user_id: bookmate._id,
         },
       }).then((res) => {
         setFollowed(false);
       });
     } catch (err) {
-      console.log(err)
       setErrorMessage('Error! Please try again later.');
     }
 
@@ -72,7 +85,7 @@ const BookmateProfileBody = ({ user }) => {
       >
         <View>
           <Image
-            source={{uri: `${user.profile_image_URL}`}}
+            source={{uri: `${bookmate?.profile_image_URL}`}}
             style={{
               resizeMode: 'cover',
               width: 70,
@@ -82,11 +95,11 @@ const BookmateProfileBody = ({ user }) => {
           />
         </View>
         <View style={{ alignItems: 'center' }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{user.followers.length}</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{bookmate?.followers?.length}</Text>
           <Text>Followers</Text>
         </View>
         <View style={{ alignItems: 'center' }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 18, paddingRight: 15 }}>{user.following.length}</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 18, paddingRight: 15 }}>{bookmate?.following?.length}</Text>
           <Text style={{ paddingRight: 15 }}>Following</Text>
         </View>
       </View>
@@ -98,7 +111,7 @@ const BookmateProfileBody = ({ user }) => {
             fontWeight: 'bold',
           }}
         >
-          {user.first_name} {user.last_name} 
+          {bookmate?.first_name} {bookmate?.last_name} 
         </Text>
 
         {followed ? (
@@ -117,7 +130,7 @@ const BookmateProfileBody = ({ user }) => {
           </TouchableOpacity>
         )}
       </View>
-      <Text style={{ paddingVertical: 15, paddingLeft: 10 }}>{user.profile_bio}</Text>
+      <Text style={{ paddingVertical: 15, paddingLeft: 10 }}>{bookmate?.profile_bio}</Text>
     </SafeAreaView>
   );
 };

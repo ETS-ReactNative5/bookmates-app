@@ -112,7 +112,7 @@ const comment = async (req, res) => {
 
 const getMyReviews = async (req, res) => {
   try{
-    const reviews = await Review.find({ user_id: req.user._id }).populate({
+    const reviews = await Review.find({ user_id: req.user._id }).sort('-date').populate({
       path: "book_id", 
       populate: [
         {
@@ -138,7 +138,7 @@ const getMyReviews = async (req, res) => {
 
 const getBookmateReviews = async (req, res) => {
   try{
-    const reviews = await Review.find({ user_id: req.params.id }).populate({
+    const reviews = await Review.find({ user_id: req.params.id }).sort('-date').populate({
       path: "book_id", 
       populate: [
         {
@@ -165,7 +165,7 @@ const getBookmateReviews = async (req, res) => {
 const getFeedReviews = async (req, res) => {
   try {
       const currentUser = await User.findById(req.user._id);
-      const userReviews = await Review.find({ user_id: req.user._id }).populate({
+      const userReviews = await Review.find({ user_id: req.user._id }).sort('-date').populate({
         path: "book_id", 
         populate: [
           {
@@ -176,7 +176,7 @@ const getFeedReviews = async (req, res) => {
       }).populate('user_id');
       const bookmatesReviews = await Promise.all(
         currentUser.following.map((bookmateId) => {
-          return Review.find({ user_id: bookmateId }).populate({
+          return Review.find({ user_id: bookmateId }).sort('-date').populate({
             path: "book_id", 
             populate: [
               {
@@ -202,7 +202,7 @@ const getBookReviews = async (req, res) => {
   try {
       const book = await Book.findById(req.body.book_id)
       const populatedReviews = await Promise.all(book.reviews.map((reviewId) => {
-         return Review.findById(reviewId).populate("user_id").select(['-password'])
+         return Review.findById(reviewId).sort('-date').populate("user_id").select(['-password'])
       }))
       res.status(200).send(populatedReviews)      
   } catch (err) {

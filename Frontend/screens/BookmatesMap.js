@@ -88,7 +88,7 @@ export default function BookmatesMap({ navigation }) {
                 <TouchableOpacity
                   style={styles.button}
                   onPress={() => {
-                    navigation.navigate('BookmateProfile', { user_id: selectedBookmate._id });
+                    navigation.navigate('BookmateProfile', { user: selectedBookmate });
                     setModalVisible(!modalVisible);
                   }}
                 >

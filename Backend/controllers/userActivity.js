@@ -93,7 +93,7 @@ const getAllUsers = async (req, res) => {
 }
 
 const getProfile = async (req, res) => {
-  return res.status(200).send(req.user).select(['-password']);;
+  return res.status(200).send(req.user);
 }
 
 const getUserProfile = async (req, res) => {
