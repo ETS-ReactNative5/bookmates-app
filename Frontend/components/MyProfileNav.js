@@ -4,7 +4,7 @@ import MyBookshelf from './MyBookshelf';
 import MyReviewsSection from './MyReviewsSection';
 import { ScrollView } from 'react-native';
 
-const MyProfileNav = () => {
+const MyProfileNav = ({user}) => {
   const Tab = createMaterialTopTabNavigator();
   return (
     <Tab.Navigator
@@ -16,7 +16,7 @@ const MyProfileNav = () => {
         tabBarLabelStyle: { fontSize: 14, fontWeight: 'bold' },
       })}
     >
-      <Tab.Screen name="Bookshelf" children={() => <MyBookshelf/>}  />
+      <Tab.Screen name="Bookshelf" children={() => <MyBookshelf user={user}/>}  />
       <Tab.Screen name="Reviews" children={() => <MyReviewsSection/>} />
     </Tab.Navigator>
   );

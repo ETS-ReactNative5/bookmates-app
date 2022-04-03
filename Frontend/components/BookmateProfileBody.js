@@ -3,15 +3,19 @@ import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
+import {useIsFocused} from '@react-navigation/native'
 
 const BookmateProfileBody = ( {user} ) => {
+  const isFocused = useIsFocused();
   const [bookmate, setBookmate] = useState({user})
   const [followed, setFollowed] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    getUserProfile();
-  }, [followed])
+    if(isFocused){
+    getUserProfile()
+    }
+  }, [isFocused])
   
   const getUserProfile = async () =>{
     const token = await SecureStore.getItemAsync('token');

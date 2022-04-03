@@ -2,16 +2,19 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView, RefreshControl, Activ
 import React, {useEffect, useState} from 'react'
 import ProfileReview from './ProfileReview';
 import * as SecureStore from 'expo-secure-store';
+import {useIsFocused} from '@react-navigation/native'
 
 const MyReviewsSection = () => {
 
+  const isFocused = useIsFocused();
   const [reviews, setReviews] = useState([])
   const [refreshing, setRefreshing] = useState(true);
 
-    //Testing
     useEffect(async () =>{
-      loadReviews();
-    },[])
+      if(isFocused){
+        loadReviews();
+      }
+    },[isFocused])
   
     const loadReviews = async () => {
       const token = await SecureStore.getItemAsync('token')

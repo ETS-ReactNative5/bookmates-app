@@ -3,8 +3,10 @@ import React , {useState, useEffect} from 'react'
 import BookmateReview from './BookmateReview';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
+import {useIsFocused} from '@react-navigation/native'
 
 const ReviewsSection = ({user_id}) => {
+  const isFocused = useIsFocused();
   const [message, setMessage] = useState('')
   const [reviews, setReviews] = useState([])
   const [refreshing, setRefreshing] = useState(true);
@@ -12,8 +14,10 @@ const ReviewsSection = ({user_id}) => {
   const [errorMessage, setErrorMessage] = useState(false);
 
     useEffect(async () =>{
-      loadReviews();
-    },[])
+      if(isFocused){
+        loadReviews();
+      }
+    },[isFocused])
   
     const loadReviews = async () => {
       const token = await SecureStore.getItemAsync('token')

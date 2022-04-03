@@ -4,18 +4,20 @@ import BookSearch from '../components/BookSearch';
 import BookmateReview from './BookmateReview';
 import * as SecureStore from 'expo-secure-store';
 import axios from 'axios';
+import {useIsFocused} from '@react-navigation/native'
 
 const BookmateBookshelf = ({user_id}) => {
-  
+  const isFocused = useIsFocused();
   const [reviews, setReviews] = useState([])
   const [bookshelf, setBookshelf] = useState({})
   const [refreshing, setRefreshing] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
 
   useEffect(async () =>{
-    console.log(user_id)
+    if(isFocused){
     loadBookshelf();
-  },[])
+    }
+  },[isFocused])
 
   const loadBookshelf = async () => {
     const token = await SecureStore.getItemAsync('token')

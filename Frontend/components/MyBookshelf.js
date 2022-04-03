@@ -2,15 +2,19 @@ import React , {useState, useEffect} from 'react';
 import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, RefreshControl } from 'react-native';
 import BookSearch from '../components/BookSearch';
 import * as SecureStore from 'expo-secure-store';
+import {useIsFocused} from '@react-navigation/native'
 
 const MyBookshelf = () => {
 
+  const isFocused = useIsFocused();
   const [bookshelf, setBookshelf] = useState({})
   const [refreshing, setRefreshing] = useState(true);
 
   useEffect(async () =>{
-    loadBookshelf();
-  },[])
+    if(isFocused){
+      loadBookshelf();
+    }
+  },[isFocused])
 
   const loadBookshelf = async () => {
     const token = await SecureStore.getItemAsync('token')

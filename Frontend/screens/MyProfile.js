@@ -9,11 +9,9 @@ const Profile = () => {
   const isFocused = useIsFocused();
   const [user, setUser] = useState('')
   
-  //Testing
   useEffect( async () => {
     if(isFocused){
       const token = await SecureStore.getItemAsync('token')
-      console.log(token)
       fetch('http://192.168.1.10:3000/api/user/getprofile',{
         headers:{
           "Authorization":"Bearer "+token,
