@@ -10,6 +10,7 @@ const BookmateReview = ({ review }) => {
   const [reviewLikes, setReviewLikes] = useState(review.likes);
   const [reviewDislikes, setReviewDislikes] = useState(review.dislikes);
   const [commentText, setCommentText] = useState('');
+  const [comments, setComments] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const likeReview = async () => {
@@ -58,7 +59,26 @@ const BookmateReview = ({ review }) => {
   };
 
   const getReviewComments = async () => {
-    
+    const token = await SecureStore.getItemAsync('token')
+    try {
+      const { data } = await axios({
+        method: 'post',
+        headers: {
+          Authorization:'Bearer '+token,
+        },
+        url: 'http://192.168.1.10:3000/api/review/comments',
+        data: {
+          review_id: review._id,
+        },
+      }).then((response) => {
+        setComments(response.data)
+        console.log(comments)
+      });
+      
+    } catch (err) {
+      setErrorMessage("Error! Please try again later.");
+    }
+
   }
 
   return (
@@ -117,8 +137,10 @@ const BookmateReview = ({ review }) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
-              getReviewComments();
-              setModalVisible(true);
+              if(review.comments.length){
+                getReviewComments();
+                // setModalVisible(true);
+              }
             }}>
               <Text style={{ color: '#5A7FCC' }}>
                 {review.comments.length} <FontAwesome name="commenting-o" size={18} color="#5A7FCC" />
