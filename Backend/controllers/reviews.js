@@ -214,6 +214,23 @@ const getBookReviews = async (req, res) => {
   }
 };
 
+const getComments = async (req, res) => {
+
+  const user = await Review.findById(req.body.review_id).populate({
+    path: "comments", 
+    populate: [
+      {
+        path: "postedBy",
+        model: "User",
+        select: ["first_name", "last_name", "profile_image_URL"],
+        sort: '-date'
+      },
+    ],
+  })
+  const comments = user.comments
+  res.status(200).send(comments)
+}
+
 module.exports.addReview = addReview;
 module.exports.editReview = editReview;
 module.exports.deleteReview = deleteReview;
@@ -224,3 +241,4 @@ module.exports.getMyReviews = getMyReviews;
 module.exports.getFeedReviews = getFeedReviews;
 module.exports.getBookmateReviews = getBookmateReviews;
 module.exports.getBookReviews = getBookReviews;
+module.exports.getComments = getComments;

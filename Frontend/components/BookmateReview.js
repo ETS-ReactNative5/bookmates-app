@@ -57,6 +57,10 @@ const BookmateReview = ({ review }) => {
     }
   };
 
+  const getReviewComments = async () => {
+    
+  }
+
   return (
     <SafeAreaView>
       <View
@@ -112,7 +116,10 @@ const BookmateReview = ({ review }) => {
               )}
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              getReviewComments();
+              setModalVisible(true);
+            }}>
               <Text style={{ color: '#5A7FCC' }}>
                 {review.comments.length} <FontAwesome name="commenting-o" size={18} color="#5A7FCC" />
               </Text>
