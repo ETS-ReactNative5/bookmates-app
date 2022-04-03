@@ -66,7 +66,7 @@ Here's a brief high-level overview of the tech stack the bookmates app uses:
 
 | Book Details | Post Review | Profile|
 |-----------|-----------|-----------|
-| ![Book Details]https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedDetails.png)| ![Post Review](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedPost.png) | ![Profile](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedProfile.PNG)
+| ![Book Details](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedDetails.png)| ![Post Review](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedPost.png) | ![Profile](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedProfile.PNG)
 
 <br><br>
 <img src="./readme/title6.svg"/>
