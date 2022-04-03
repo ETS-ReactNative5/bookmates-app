@@ -1,16 +1,17 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Modal, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { AntDesign, FontAwesome, Ionicons} from '@expo/vector-icons';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 
 const BookmateReview = ({ review }) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const [like_status, setLikeStatus] = useState(false);
   const [dislike_status, setDislikeStatus] = useState(false);
   const [reviewLikes, setReviewLikes] = useState(review.likes);
   const [reviewDislikes, setReviewDislikes] = useState(review.dislikes);
   const [commentText, setCommentText] = useState('');
-  const [comments, setComments] = useState('');
+  const [comments, setComments] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
   const likeReview = async () => {
@@ -72,6 +73,7 @@ const BookmateReview = ({ review }) => {
         },
       }).then((response) => {
         setComments(response.data)
+        setModalVisible(true);
         console.log(comments)
       });
       
@@ -139,7 +141,6 @@ const BookmateReview = ({ review }) => {
             <TouchableOpacity onPress={() => {
               if(review.comments.length){
                 getReviewComments();
-                // setModalVisible(true);
               }
             }}>
               <Text style={{ color: '#5A7FCC' }}>
@@ -165,7 +166,49 @@ const BookmateReview = ({ review }) => {
             </TouchableOpacity>
           </View>
         </View>
-        </View>
+      </View>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.modalContainerStyle}>
+          <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', marginBottom: 60 }}>
+          <View
+            style={{
+              borderRadius: 20,
+              padding: 20,
+              width: 300,
+              height: 250,
+              alignItems: 'flex-start',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              backgroundColor: '#FFFFFFFF',
+            }}
+          >
+                  <View style={{ justifyContent: 'center', width: '98%' }}>
+                  <Text style={styles.commentsHeader}>Comments</Text>
+                    <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
+                    {comments?.map((comment, index) => {
+                      return (
+                        <View key={index} style={{ flexDirection: 'row', alignItems:'flex-start', marginVertical:5}}>
+                          <Image source={{ uri: `${comment?.postedBy.profile_image_URL}` }} style={styles.profile_pic} />
+                          <View>
+                            <Text style={styles.name}>{comment?.postedBy?.first_name} {comment?.postedBy?.last_name}</Text>
+                            <Text style={styles.review_text}>{comment?.text}</Text>
+                          </View>                     
+                        </View>
+                      );
+                    })}
+                </ScrollView>
+              </View>
+          </View>
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </SafeAreaView>
   );
 };
@@ -173,11 +216,6 @@ const BookmateReview = ({ review }) => {
 export default BookmateReview;
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   modalView: {
     alignItems:'center',
     width: 200,
@@ -214,6 +252,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   review_text: {
+    paddingHorizontal: 10,
     textAlign: 'justify',
     fontFamily: 'Roboto_300Light',
     flex: 1,
@@ -226,7 +265,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
   },
   confirmbutton:{
     width: 80,
@@ -235,5 +274,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#5A7FCC',
     borderRadius: 20,
+  }, 
+  commentsHeader: {
+    fontFamily: 'Baloo2_800ExtraBold',
+    color: '#5A7FCC',
+    fontSize: 20,
+    marginBottom: 15,
   },
+
 });
