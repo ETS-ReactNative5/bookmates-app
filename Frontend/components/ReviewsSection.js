@@ -40,7 +40,7 @@ const ReviewsSection = ({user_id}) => {
     }
   
     return (
-      <SafeAreaView>
+      <SafeAreaView style={{backgroundColor:'white', height:600}}>
         {refreshing ? <ActivityIndicator /> : null}
         {reviews.length ? 
         <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadReviews}/>}>

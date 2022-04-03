@@ -1,6 +1,7 @@
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Modal, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { AntDesign, FontAwesome, Ionicons} from '@expo/vector-icons';
+import Ionic from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 
@@ -10,6 +11,7 @@ const BookmateReview = ({ review }) => {
   const [dislike_status, setDislikeStatus] = useState(false);
   const [reviewLikes, setReviewLikes] = useState(review.likes);
   const [reviewDislikes, setReviewDislikes] = useState(review.dislikes);
+  const [commentsCount, setCommentsCount] = useState(review.comments.length)
   const [commentText, setCommentText] = useState('');
   const [comments, setComments] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
@@ -74,13 +76,36 @@ const BookmateReview = ({ review }) => {
       }).then((response) => {
         setComments(response.data)
         setModalVisible(true);
-        console.log(comments)
       });
       
     } catch (err) {
       setErrorMessage("Error! Please try again later.");
     }
 
+  }
+
+  const postComment = async () => {
+    const token = await SecureStore.getItemAsync('token')
+    try {
+      const { data } = await axios({
+        method: 'put',
+        headers: {
+          Authorization:'Bearer '+token,
+        },
+        url: 'http://192.168.1.10:3000/api/review/comment',
+        data: {
+          review_id: review._id,
+          text: commentText
+        },
+      }).then((response) => {
+        setCommentsCount(response.data.result.comments.length)
+        setCommentText('')
+        getReviewComments()
+      });
+      
+    } catch (err) {
+      setErrorMessage("Error! Please try again later.");
+    }
   }
 
   return (
@@ -144,12 +169,13 @@ const BookmateReview = ({ review }) => {
               }
             }}>
               <Text style={{ color: '#5A7FCC' }}>
-                {review.comments.length} <FontAwesome name="commenting-o" size={18} color="#5A7FCC" />
+                {commentsCount} <FontAwesome name="commenting-o" size={18} color="#5A7FCC" />
               </Text>
             </TouchableOpacity>
           </View>
           <View style={{marginTop:5, flexDirection:'row', alignItems:'center'}}>
             <TextInput
+            value={commentText}
             backgroundColor="#f5f5f5"
             padding={10}
             marginHorizontal={5}
@@ -161,7 +187,11 @@ const BookmateReview = ({ review }) => {
             multiline={true}
             onChangeText={(e) => setCommentText(e)}>
             </TextInput>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              if(commentText){
+                postComment();
+              }
+            }}>
               <Ionicons name="send" size={20} color="#5A7FCC" />
             </TouchableOpacity>
           </View>
@@ -175,39 +205,42 @@ const BookmateReview = ({ review }) => {
           setModalVisible(!modalVisible);
         }}
       >
-        <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.modalContainerStyle}>
-          <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', marginBottom: 60 }}>
+        <View style={styles.modalContainerStyle}>
           <View
             style={{
               borderRadius: 20,
               padding: 20,
               width: 300,
-              height: 250,
+              height: 200,
               alignItems: 'flex-start',
               justifyContent: 'center',
               flexDirection: 'column',
               backgroundColor: '#FFFFFFFF',
             }}
           >
-                  <View style={{ justifyContent: 'center', width: '98%' }}>
-                  <Text style={styles.commentsHeader}>Comments</Text>
-                    <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
-                    {comments?.map((comment, index) => {
-                      return (
-                        <View key={index} style={{ flexDirection: 'row', alignItems:'flex-start', marginVertical:5}}>
-                          <Image source={{ uri: `${comment?.postedBy.profile_image_URL}` }} style={styles.profile_pic} />
-                          <View>
-                            <Text style={styles.name}>{comment?.postedBy?.first_name} {comment?.postedBy?.last_name}</Text>
-                            <Text style={styles.review_text}>{comment?.text}</Text>
-                          </View>                     
-                        </View>
-                      );
-                    })}
-                </ScrollView>
+            <View style={{ width: 270, flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center' }}>
+              <Text style={styles.commentsHeader}>Comments</Text>
+              <TouchableOpacity onPress={() => setModalVisible(false)}>
+                <Ionic name="close-outline" style={{ fontSize: 28 }} />
+              </TouchableOpacity>
+            </View>
+            <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
+              <View style={{ justifyContent: 'center'}}>
+              {comments?.map((comment, index) => {
+                  return (
+                    <View key={index} style={{ flexDirection: 'row', alignItems:'flex-start', marginVertical:5, flex:1}}>
+                      <Image source={{ uri: `${comment?.postedBy.profile_image_URL}` }} style={styles.profile_pic} />
+                      <View style={{width:'82%'}}>
+                        <Text style={styles.name}>{comment?.postedBy?.first_name} {comment?.postedBy?.last_name}</Text>
+                        <Text style={styles.comment_text}>{comment?.text}</Text>
+                      </View>                     
+                    </View>
+                  );
+              })}
               </View>
+            </ScrollView>
           </View>
-          </View>
-        </TouchableOpacity>
+        </View>
       </Modal>
     </SafeAreaView>
   );
@@ -252,13 +285,21 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   review_text: {
-    paddingHorizontal: 10,
     textAlign: 'justify',
     fontFamily: 'Roboto_300Light',
     flex: 1,
     flexWrap: 'wrap',
     flexGrow: 1,
     lineHeight: 18,
+  },
+  comment_text:{
+    textAlign: 'justify',
+    fontFamily: 'Roboto_300Light',
+    flex: 1,
+    flexWrap: 'wrap',
+    flexGrow: 1,
+    lineHeight: 18,
+    paddingHorizontal:10
   },
   modalContainerStyle: {
     flex: 1,

@@ -100,7 +100,7 @@ const comment = async (req, res) => {
     postedBy: req.user._id
   }
 
-  await Review.findByIdAndUpdate(req.body.review_id, {$push: {comments: comment}}, {new:true}).populate("comments.postedBy", "_id first_name last_name")
+  Review.findByIdAndUpdate(req.body.review_id, {$push: {comments: comment}}, {new:true}).populate("comments.postedBy", "_id first_name last_name")
   .exec((err, result) => {
     if(err){
       return res.status(400).send(err);
@@ -242,3 +242,5 @@ module.exports.getFeedReviews = getFeedReviews;
 module.exports.getBookmateReviews = getBookmateReviews;
 module.exports.getBookReviews = getBookReviews;
 module.exports.getComments = getComments;
+
+
