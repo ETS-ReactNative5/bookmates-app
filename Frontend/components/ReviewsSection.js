@@ -6,6 +6,7 @@ import * as SecureStore from 'expo-secure-store';
 import {useIsFocused} from '@react-navigation/native'
 
 const ReviewsSection = ({user_id}) => {
+  console.log(user_id)
   const isFocused = useIsFocused();
   const [message, setMessage] = useState('')
   const [reviews, setReviews] = useState([])
@@ -41,6 +42,7 @@ const ReviewsSection = ({user_id}) => {
     return (
       <SafeAreaView>
         {refreshing ? <ActivityIndicator /> : null}
+        {reviews.length ? 
         <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadReviews}/>}>
         <View>
           {reviews.map((result) => {         
@@ -48,6 +50,11 @@ const ReviewsSection = ({user_id}) => {
           }
         </View>
         </ScrollView>
+        :
+        <View style={{backgroundColor:'white', height:600}}>
+          <Text style={{marginVertical:20,color:'gray' , textAlign: 'center', fontFamily:'Roboto_300Light', fontSize:14}}>No Reviews</Text>
+        </View>
+      }
       </SafeAreaView>
     );
   };

@@ -33,11 +33,18 @@ const MyReviewsSection = () => {
     return (
       <SafeAreaView>
         {refreshing ? <ActivityIndicator /> : null}
-        <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadReviews}/>}>
-        {reviews?.map((result) => {         
-            return ( <ProfileReview key={result._id} review= {result} />)})
-          }
-        </ScrollView>
+        {reviews.length ? 
+          <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadReviews}/>}>
+          {reviews?.map((result) => {         
+              return ( <ProfileReview key={result._id} review= {result} />)})
+            }
+          </ScrollView>
+          :
+          <View style={{backgroundColor:'white', height:600}}>
+            <Text style={{marginVertical:20,color:'gray' , textAlign: 'center', fontFamily:'Roboto_300Light', fontSize:14}}>No Reviews</Text>
+          </View>
+        }
+
       </SafeAreaView>
     );
   };

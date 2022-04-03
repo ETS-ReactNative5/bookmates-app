@@ -39,7 +39,6 @@ const BookReviews = ({book_id}) => {
         },
       }).then((response) => {
         setBookReviews(response.data)
-        console.log(bookReviews)
       });
       
     } catch (err) {
@@ -49,11 +48,17 @@ const BookReviews = ({book_id}) => {
   
   return (
     <SafeAreaView>
+      {bookReviews.length ?      
       <ScrollView showsVerticalScrollIndicator={false}>
         {bookReviews?.map((review) => {         
               return ( <BookReview key={review._id} review= {review} />)})
         }
       </ScrollView>
+    :
+      <View style={{backgroundColor:'white', height:600}}>
+          <Text style={{marginVertical:20,color:'gray' , textAlign: 'center', fontFamily:'Roboto_300Light', fontSize:14}}>No Reviews</Text>
+      </View>
+    }
     </SafeAreaView>
   );
 };

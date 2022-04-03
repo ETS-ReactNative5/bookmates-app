@@ -40,7 +40,7 @@ const MyBookshelf = () => {
             Currently Reading
           </Text>
         </View>
-
+        {bookshelf?.currentlyReadingBooks?.length ?
         <View style={{marginLeft:15}}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {bookshelf?.currentlyReadingBooks?.map((result) => {         
@@ -48,6 +48,11 @@ const MyBookshelf = () => {
             }
           </ScrollView>
         </View>
+        :
+        <View>
+          <Text style={{marginVertical:20,color:'gray' , textAlign: 'center', fontFamily:'Roboto_300Light', fontSize:14}}>No Books</Text>
+        </View>
+        }
 
         <View
           style={{ flexDirection: 'row', paddingVertical: 20, justifyContent: 'space-between', alignItems: 'center' }}
@@ -58,11 +63,19 @@ const MyBookshelf = () => {
         </View>
 
         <View style={{marginLeft:15}}>
+        {bookshelf?.toReadBooks?.length ?
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {bookshelf?.toReadBooks?.map((result) => {         
               return ( <BookSearch key={result[0]._id} book= {result[0]} />)})
             }
           </ScrollView>
+          :       
+          <View>
+            <Text style={{marginVertical:20,color:'gray' , textAlign: 'center', fontFamily:'Roboto_300Light', fontSize:14}}>No Books</Text>
+        </View>
+        }
+
+
         </View>
 
         <View
@@ -74,11 +87,17 @@ const MyBookshelf = () => {
         </View>
 
         <View style={{marginLeft:15}}>
+        {bookshelf?.finishedBooks?.length ?
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {bookshelf?.finishedBooks?.map((result) => {         
               return ( <BookSearch key={result[0]._id} book= {result[0]} />)})
             }
           </ScrollView>
+          :
+          <View>
+            <Text style={{marginVertical:20,color:'gray' , textAlign: 'center', fontFamily:'Roboto_300Light', fontSize:14}}>No Books</Text>
+          </View>
+        }
         </View>
 
       </ScrollView>

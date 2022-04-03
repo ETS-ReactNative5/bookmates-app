@@ -129,7 +129,7 @@ const getMyReviews = async (req, res) => {
     if (reviews.length) {
       return res.status(200).send(reviews);
     }else {
-      return res.status(400).send("No reviews");
+      return res.status(200).send([]);
     }   
   }catch (err) {
     return res.status(500).send(err)   
@@ -155,7 +155,7 @@ const getBookmateReviews = async (req, res) => {
     if (reviews.length) {
       return res.status(200).send(reviews);
     }else {
-      return res.status(400).json("No reviews");
+      return res.status(200).send([]);
     }   
   }catch (err) {
     return res.status(500).send(err)   
@@ -204,7 +204,11 @@ const getBookReviews = async (req, res) => {
       const populatedReviews = await Promise.all(book.reviews.map((reviewId) => {
          return Review.findById(reviewId).sort('-date').populate("user_id").select(['-password'])
       }))
-      res.status(200).send(populatedReviews)      
+      if(populatedReviews.length){
+        res.status(200).send(populatedReviews)      
+      }else{
+        res.status(200).send([])      
+      }
   } catch (err) {
       res.status(500).json(err);
   }
