@@ -1,6 +1,6 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState } from 'react';
-import { AntDesign, FontAwesome} from '@expo/vector-icons';
+import { AntDesign, FontAwesome, Ionicons} from '@expo/vector-icons';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 
@@ -9,6 +9,7 @@ const BookmateReview = ({ review }) => {
   const [dislike_status, setDislikeStatus] = useState(false);
   const [reviewLikes, setReviewLikes] = useState(review.likes);
   const [reviewDislikes, setReviewDislikes] = useState(review.dislikes);
+  const [commentText, setCommentText] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const likeReview = async () => {
@@ -115,6 +116,23 @@ const BookmateReview = ({ review }) => {
               <Text style={{ color: '#5A7FCC' }}>
                 {review.comments.length} <FontAwesome name="commenting-o" size={18} color="#5A7FCC" />
               </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{marginTop:5, flexDirection:'row', alignItems:'center'}}>
+            <TextInput
+            backgroundColor="#f5f5f5"
+            padding={10}
+            marginHorizontal={5}
+            borderRadius="20"
+            height={30}
+            placeholder='Write a comment...'
+            style={{fontSize:14, flexGrow:1, flex:1, flexWrap:'wrap'}}
+            maxLength={100}
+            multiline={true}
+            onChangeText={(e) => setCommentText(e)}>
+            </TextInput>
+            <TouchableOpacity>
+              <Ionicons name="send" size={20} color="#5A7FCC" />
             </TouchableOpacity>
           </View>
         </View>

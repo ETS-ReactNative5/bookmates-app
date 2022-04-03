@@ -38,8 +38,9 @@ export default function BookmatesMap({ navigation }) {
         provider={PROVIDER_GOOGLE}>
         {bookmates.map((item) => {
           return (
-            <View key={item?._id}>
+            <View >
               <MapView.Marker
+                key={item?._id}
                 onPress={() => {
                   setSelectedBookmate(item);
                   setModalVisible(true);

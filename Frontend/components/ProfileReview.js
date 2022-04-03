@@ -151,6 +151,10 @@ const ProfileReview = ({ review }) => {
             </TouchableOpacity>
           </View>
 
+          <View>
+            
+          </View>
+
           <Modal
           animationType="fade"
           transparent={true}
