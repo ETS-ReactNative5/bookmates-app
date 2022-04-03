@@ -11,6 +11,10 @@ const follow = async (req, res) => {
       if (!user.followers.includes(currentUser._id)) {
         await user.updateOne({ $push: { followers: currentUser._id } });
         await currentUser.updateOne({ $push: { following: user._id } });
+        await user.updateOne({$push: {notifications: {
+          from: currentUser._id, 
+          action: " followed you."
+        }}})
         res.status(200).send("User successfully followed!");
       } else {
         res.status(403).send("You already follow this user!");
@@ -101,6 +105,20 @@ const getUserProfile = async (req, res) => {
   return res.status(200).send(user);
 }
 
+const getNotifications = async (req, res) => {
+  const user = await User.findById(req.user._id).populate({
+    path: "notifications", 
+    populate: [
+      {
+        path: "from",
+        model: "User",
+        select: ["first_name", "last_name", "profile_image_URL"]
+      },
+    ],
+  })
+  const notifications = user.notifications
+  res.status(200).send(notifications)
+}
 
 module.exports.follow = follow;
 module.exports.unfollow = unfollow;
@@ -108,3 +126,4 @@ module.exports.editProfile = editProfile;
 module.exports.getAllUsers = getAllUsers;
 module.exports.getProfile = getProfile;
 module.exports.getUserProfile = getUserProfile;
+module.exports.getNotifications = getNotifications;
