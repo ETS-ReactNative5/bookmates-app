@@ -98,9 +98,9 @@ const BookmateReview = ({ review }) => {
           text: commentText
         },
       }).then((response) => {
-        setCommentsCount(response.data.result.comments.length)
         setCommentText('')
-        getReviewComments()
+        setCommentsCount(response.data.result.comments.length)
+        getReviewComments();
       });
       
     } catch (err) {

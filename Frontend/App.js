@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, {useState, useContext, useEffect} from 'react';
+import { LogBox } from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useFonts, Baloo2_800ExtraBold, Baloo2_600SemiBold} from '@expo-google-fonts/baloo-2';
 import {Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto'
@@ -17,6 +18,7 @@ import WriteReview from './screens/WriteReview';
 import EditReview from './screens/EditReview';
 
 function App() {
+  LogBox.ignoreAllLogs();
   const Stack = createNativeStackNavigator();
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   
