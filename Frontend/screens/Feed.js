@@ -34,8 +34,17 @@ const Feed = () => {
         <View style={styles.header}>
           <Text style={styles.logo}>bookmates</Text>
         </View>
-        {feedReviews.map((result) => { 
-              return ( <BookmateReview key={result._id} review= {result} />)})
+        {feedReviews.length?
+          <View>
+            {feedReviews.map((result) => { 
+                  return ( <BookmateReview key={result._id} review= {result} />)})
+            }
+          </View>
+        :
+        <View style={{backgroundColor:'white', height:600}}>
+          <Text style={{marginVertical:20,color:'gray' , textAlign: 'center', fontFamily:'Roboto_300Light', fontSize:14}}>No Reviews</Text>
+        </View>
+
         }
 
       </ScrollView>

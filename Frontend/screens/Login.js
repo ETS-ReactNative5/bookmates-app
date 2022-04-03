@@ -85,6 +85,7 @@ const Login = ({ navigation }) => {
           <View style={styles.action}>
             <Feather name="mail" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
             <TextInput
+              defaultValue=''
               placeholder="Enter your email address"
               placeholderTextColor="#BDBDBD"
               style={[styles.textInput, { color: '#242424' }]}
@@ -102,6 +103,7 @@ const Login = ({ navigation }) => {
           <View style={styles.action}>
             <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
             <TextInput
+              defaultValue=''
               placeholder="Enter your password"
               placeholderTextColor="#BDBDBD"
               secureTextEntry={data.secureTextEntry ? true : false}
@@ -123,9 +125,6 @@ const Login = ({ navigation }) => {
             <Text style={{ fontSize: 11, color: 'red', paddingLeft: 20 }}>{errors.password}</Text>
           }
 
-
-          {/*Sign in button*/}
-          {/* onPress={() => navigation.navigate('BookmatesMap')} */}
           <View style={styles.button}>
             <TouchableOpacity onPress={() => handleSubmit()} style={[styles.signIn, { backgroundColor: '#5A7FCC', marginTop: 5, borderRadius: 30 }]}>
               <Text style={[styles.textSign, { color: '#ffffff' }]}>

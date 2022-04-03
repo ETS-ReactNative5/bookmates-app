@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, Text, TouchableOpacity, StyleSheet,Image,TextInput,SafeAreaView,Modal,ScrollView,} from 'react-native';
+import {View, Text, TouchableOpacity, ActivityIndicator,StyleSheet,Image,TextInput,SafeAreaView,Modal,ScrollView,} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Ionic from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
@@ -21,6 +21,8 @@ const EditProfile = ({ route, navigation }) => {
   const [error_message, setErrorMessage] = useState('');
   const [isError, setIsError] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
   const [data, setData] = useState({
     check_textInputChange: false,
     secureTextEntry1: true,
@@ -59,6 +61,7 @@ const EditProfile = ({ route, navigation }) => {
       type: `test/${data.uri.split('.')[1]}`,
       name: `test.${data.uri.split('.')[1]}`,
     };
+    setRefreshing(true)
     handleUpload(selectedImage);
   };
 
@@ -74,6 +77,7 @@ const EditProfile = ({ route, navigation }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setRefreshing(false)
         setProfileImageURL(data.url);
       });
   };
@@ -146,6 +150,7 @@ const EditProfile = ({ route, navigation }) => {
               >
                 Change Profile Picture
               </Text>
+              {refreshing ? <ActivityIndicator /> : null}
             </TouchableOpacity>
           </View>
           <View style={{ paddingHorizontal: 20 }}>
