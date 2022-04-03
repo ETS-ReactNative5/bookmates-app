@@ -18,7 +18,7 @@
 - You can check out other bookmates' bookshelves, see what books they have read, are currently reading, or have on their to-read list. 
 - Add books you like to your own bookshelf, or get other suggestions using the search functionality with a library of over 10 million books!
 - You can also post reviews on books you've finished reading, interact with your bookmates, and share different perspectives.
-#### Today's stranger could be tomorrow's reading pal!
+#### Today's stranger could become tomorrow's reading pal!
 
 ### User Stories
 - As a user, I want to view bookmates profiles on a map based on their locations
@@ -28,7 +28,6 @@
 - As a user, I want to customize my profile (name, profile picture, bio)
 - As a user, I want to view a feed that shows the reviews of bookmates that I follow, and interact with them (like, dislike, comment)
 - As a user, I want to post my own reviews on books that I've read
-- As a user, I want to receive notifications for any new activities (followers/interactions)
 
 <br><br>
 
