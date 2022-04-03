@@ -1,29 +1,51 @@
 import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   CommentNotification,
   ReactionNotification,
   FollowBackNotification,
   FollowNotification,
 } from './../components/Notification';
+import * as SecureStore from 'expo-secure-store';
+import {useIsFocused} from '@react-navigation/native'
 
 const Notifications = () => {
+  const isFocused = useIsFocused();
+  const [notifications, setNotifications] = useState([])
+
+  useEffect(() => {
+    getNotifications();
+  }, [isFocused])
+  
+  const getNotifications = async () => {
+    const token = await SecureStore.getItemAsync('token')
+    await fetch('http://192.168.1.10:3000/api/user/notifications',{
+      headers:{
+        "Authorization":"Bearer "+token,
+      }}).then(res=>res.json())
+  .then(result=>{
+    setNotifications(result);
+    console.log(notifications)
+  })
+  .catch(err => console.log(err))
+  }
+
   return (
     <SafeAreaView>
-      <ScrollView showsVerticalScrollIndicator={false} stickyHeaderIndices={[0]}>
         <View style={styles.header}>
           <Text style={styles.logo}>Notifications</Text>
         </View>
-        <CommentNotification
-          name="Laurena Fayad"
-          profile_pic={require('./../assets/test_profile_pic.jpg')}
-          comment_text="Totally agreed!😍"
-        />
-        <ReactionNotification name="Laurena Fayad" profile_pic={require('./../assets/test_profile_pic.jpg')} />
-
-        <FollowNotification name="Laurena Fayad" profile_pic={require('./../assets/test_profile_pic.jpg')} />
-        <FollowBackNotification name="Laurena Fayad" profile_pic={require('./../assets/test_profile_pic.jpg')} />
-      </ScrollView>
+        {notifications.length ?        
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {notifications?.map((notif, index) => {         
+                  return ( <FollowNotification key={index} notification= {notif} />)
+            })}
+          </ScrollView>
+        :
+      <View>
+        <Text style={{marginVertical:20,color:'gray' , textAlign: 'center', fontFamily:'Roboto_300Light', fontSize:14}}>No Notifications</Text>
+       </View>
+      }
     </SafeAreaView>
   );
 };
