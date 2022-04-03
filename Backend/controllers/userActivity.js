@@ -112,7 +112,8 @@ const getNotifications = async (req, res) => {
       {
         path: "from",
         model: "User",
-        select: ["first_name", "last_name", "profile_image_URL"]
+        select: ["first_name", "last_name", "profile_image_URL"],
+        sort: '-date'
       },
     ],
   })

@@ -48,6 +48,10 @@ const userSchema = new mongoose.Schema({
     },
     action: {
       type: String
+    },
+    date: {
+      type: Date,
+      default: Date.now
     }
   }],
   finishedBooks: [{

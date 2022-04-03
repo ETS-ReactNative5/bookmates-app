@@ -37,8 +37,8 @@ const Notifications = () => {
         </View>
         {notifications.length ?        
           <ScrollView showsVerticalScrollIndicator={false}>
-            {notifications?.map((notif, index) => {         
-                  return ( <FollowNotification key={index} notification= {notif} />)
+            {notifications?.map((notif) => {         
+                  return ( <FollowNotification key={notif._id} notification= {notif} />)
             })}
           </ScrollView>
         :
