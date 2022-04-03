@@ -36,11 +36,13 @@ const Notifications = () => {
           <Text style={styles.logo}>Notifications</Text>
         </View>
         {notifications.length ?        
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {notifications?.map((notif) => {         
-                  return ( <FollowNotification key={notif._id} notification= {notif} />)
-            })}
-          </ScrollView>
+          <View>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {notifications?.map((notif) => {         
+                    return ( <FollowNotification key={notif._id} notification= {notif} />)
+              })}
+            </ScrollView>
+          </View>
         :
       <View>
         <Text style={{marginVertical:20,color:'gray' , textAlign: 'center', fontFamily:'Roboto_300Light', fontSize:14}}>No Notifications</Text>
@@ -55,12 +57,12 @@ export default Notifications;
 const styles = StyleSheet.create({
   header: {
     paddingVertical: 15,
+    marginBottom:5,
     paddingHorizontal: 15,
     backgroundColor: 'white',
-    elevation: 10,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
-    marginBottom: -7,
+    marginBottom: -3,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -68,7 +70,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-
+    elevation: 10,
+    zIndex:999,  
   },
   logo: {
     fontFamily: 'Baloo2_800ExtraBold',

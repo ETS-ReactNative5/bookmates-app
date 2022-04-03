@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 15,
+    zIndex:999,  
   },
   logo: {
     fontFamily: 'Baloo2_800ExtraBold',
