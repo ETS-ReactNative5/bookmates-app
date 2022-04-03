@@ -14,10 +14,9 @@ import EditProfile from './screens/EditProfile';
 import BookDetails from './screens/BookDetails';
 import BookmateProfile from './screens/BookmateProfile';
 import WriteReview from './screens/WriteReview';
-import { AuthContext } from './context/AuthContext';
+
 
 function App() {
-  
   const Stack = createNativeStackNavigator();
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   
@@ -38,23 +37,16 @@ function App() {
         <Stack.Navigator initialRouteName="Splash" screenOptions={{
           headerShown: false
         }}>
-        {/* {isLoggedIn ? ( */}
-           <>
             <Stack.Screen name="BookmatesMap" component = {MyTabs} />
             <Stack.Screen name="EditProfile" component = {EditProfile} />
             <Stack.Screen name="BookDetails" component = {BookDetails} />
             <Stack.Screen name="BookmateProfile" component = {BookmateProfile} />
             <Stack.Screen name="WriteReview" component = {WriteReview} />
-          </>
-        {/* ) :  */}
-          <>
             <Stack.Screen name="Splash" component={SplashScreen} />
             <Stack.Screen name="Login" component = {Login} />
             <Stack.Screen name="Signup" component = {Signup} />
             <Stack.Screen name="ForgotPW" component = {ForgotPW} />
             <Stack.Screen name="ChangePW" component = {ChangePW} />
-          </>  
-        {/* }  */}
 
       </Stack.Navigator>
     </NavigationContainer>

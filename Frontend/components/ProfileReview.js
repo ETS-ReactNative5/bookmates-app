@@ -15,7 +15,7 @@ const ProfileReview = ({ review }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [reviewLikes, setReviewLikes] = useState(review.likes);
   const [reviewDislikes, setReviewDislikes] = useState(review.dislikes);
-
+  
   const likeReview = async () => {
     setLikeStatus(!like_status);
     const token = await SecureStore.getItemAsync('token')
@@ -105,7 +105,6 @@ const ProfileReview = ({ review }) => {
       }
   }
   
-
   return (
     <SafeAreaView>
       <View
@@ -131,9 +130,11 @@ const ProfileReview = ({ review }) => {
               </TouchableOpacity> 
             </View>
             :
-            (<TouchableOpacity style={{marginTop: 10}} onPress={() => setModalVisible(!modalVisible)}>
-              <MaterialCommunityIcons name="dots-horizontal" size={25} color="black" />
-            </TouchableOpacity>)
+            (<View style={{flexDirection: 'row'}}> 
+              <TouchableOpacity style={{marginTop: 10}} onPress={() => setModalVisible(!modalVisible)}>
+                <MaterialCommunityIcons name="dots-horizontal" size={25} color="black" />
+              </TouchableOpacity>
+            </View>)
             }
           
           </View>
