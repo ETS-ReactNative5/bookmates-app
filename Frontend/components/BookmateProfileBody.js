@@ -8,7 +8,7 @@ import {useIsFocused} from '@react-navigation/native'
 const BookmateProfileBody = ( {user} ) => {
   const isFocused = useIsFocused();
   const [bookmate, setBookmate] = useState({user})
-  const [followed, setFollowed] = useState(false);
+  const [followed, setFollowed] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {

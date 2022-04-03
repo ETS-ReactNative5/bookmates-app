@@ -14,7 +14,7 @@ import EditProfile from './screens/EditProfile';
 import BookDetails from './screens/BookDetails';
 import BookmateProfile from './screens/BookmateProfile';
 import WriteReview from './screens/WriteReview';
-
+import EditReview from './screens/EditReview';
 
 function App() {
   const Stack = createNativeStackNavigator();
@@ -42,6 +42,7 @@ function App() {
             <Stack.Screen name="BookDetails" component = {BookDetails} />
             <Stack.Screen name="BookmateProfile" component = {BookmateProfile} />
             <Stack.Screen name="WriteReview" component = {WriteReview} />
+            <Stack.Screen name="EditReview" component = {EditReview} />
             <Stack.Screen name="Splash" component={SplashScreen} />
             <Stack.Screen name="Login" component = {Login} />
             <Stack.Screen name="Signup" component = {Signup} />

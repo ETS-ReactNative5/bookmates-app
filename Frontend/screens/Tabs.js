@@ -17,9 +17,16 @@ const MyTabs = () => {
       barStyle={{
         backgroundColor: '#FFFFFF',
         elevation: 10,
-        // borderTopLeftRadius: 20,
-        // borderTopRightRadius: 20,
-        // overflow: 'hidden'
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        zIndex:999,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
       }}
     >
       <Tab.Screen
@@ -51,7 +58,14 @@ const MyTabs = () => {
         component={Notifications}
         options={{
           tabBarLabel: 'Notifications',
-          tabBarBadge: 5,
+          tabBarBadge: '1',
+          tabBarBadgeStyle: {
+            minWidth: 14,
+            minHeight: 14,
+            maxWidth: 10,
+            maxHeight: 14,
+            borderRadius: 7,
+          },          
           tabBarIcon: ({ color }) => <Ionicons name="notifications-outline" size={24} color={color} />,
         }}
       />

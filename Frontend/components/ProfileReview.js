@@ -4,13 +4,15 @@ import { AntDesign, FontAwesome, MaterialCommunityIcons } from '@expo/vector-ico
 import Ionic from 'react-native-vector-icons/Ionicons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 import * as SecureStore from 'expo-secure-store';
+import EditReview from '../screens/EditReview';
 
 const ProfileReview = ({ review }) => {
+  const navigation = useNavigation();
   const [like_status, setLikeStatus] = useState(false);
   const [dislike_status, setDislikeStatus] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const[editMode, setEditMode] = useState(false);
   const [reviewText, setReviewText] = useState();
   const [errorMessage, setErrorMessage] = useState('');
   const [reviewLikes, setReviewLikes] = useState(review.likes);
@@ -60,30 +62,6 @@ const ProfileReview = ({ review }) => {
     }
   }
 
-  const editReview = async () => {
-    const token = await SecureStore.getItemAsync('token')
-    if(reviewText){
-      try {
-        const { data } = await axios({
-          method: 'put',
-          headers: {
-            Authorization:'Bearer '+token,
-          },
-          url: 'http://192.168.1.10:3000/api/review/edit',
-          data: {
-            text: reviewText,
-            review_id: review._id,
-          },
-        });
-        setEditMode(false);
-      } catch (err) {
-        setErrorMessage("Error! Please try again later.");
-      }
-    }else{
-      setErrorMessage("Error! Review field is empty.")
-    }
-  }
-
   const deleteReview = async () => {
       try {
         const token = await SecureStore.getItemAsync('token')
@@ -123,19 +101,12 @@ const ProfileReview = ({ review }) => {
           <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
             <Text style={styles.name}>{review.user_id.first_name} {review.user_id.last_name}</Text>
             
-            {editMode ? 
-            <View style={{flexDirection:'row'}}>
-              <TouchableOpacity style={styles.confirmbutton} onPress={() => editReview()}>
-                  <Text style={{ textAlign: 'center', color: '#FFF', fontWeight: 'bold' }}>Edit</Text>
-              </TouchableOpacity> 
-            </View>
-            :
-            (<View style={{flexDirection: 'row'}}> 
+            <View style={{flexDirection: 'row'}}> 
               <TouchableOpacity style={{marginTop: 10}} onPress={() => setModalVisible(!modalVisible)}>
                 <MaterialCommunityIcons name="dots-horizontal" size={25} color="black" />
               </TouchableOpacity>
-            </View>)
-            }
+            </View>
+            
           
           </View>
           <Text style={styles.book_title}>
@@ -143,20 +114,7 @@ const ProfileReview = ({ review }) => {
           </Text>
           <View style={{ flexDirection: 'row' }}>
             <Image style={styles.book_img} source={{uri: `${review.book_id.thumbnail}`}} />
-            {editMode ? 
-              <KeyboardAwareScrollView>
-                <TextInput 
-                      style={{fontSize:14, flexGrow:1, flex:1, flexWrap:'wrap'}}
-                      defaultValue={reviewText}
-                      autoFocus={true}
-                      editable={true}
-                      maxLength={250}
-                      multiline={true}
-                      onChangeText={(e) => setReviewText(e)}>
-                </TextInput>       
-              </KeyboardAwareScrollView> :
-            
-            <Text style={styles.review_text}>{review.text}</Text>}
+            <Text style={styles.review_text}>{review.text}</Text>
           
           </View>
 
@@ -209,7 +167,7 @@ const ProfileReview = ({ review }) => {
                   </TouchableOpacity>
                   <TouchableOpacity onPress={()  => {
                     setModalVisible(false)
-                    setEditMode(true)
+                    navigation.navigate('EditReview', {review})
                   }}>
                     <Text style={{color:'black', fontSize:20, paddingVertical:10}}>Edit</Text>
                   </TouchableOpacity>
