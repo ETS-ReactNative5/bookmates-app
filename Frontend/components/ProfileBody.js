@@ -34,9 +34,9 @@ const ProfileBody = ({user}) => {
             <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{(user.followers && user.followers.length) || 0}</Text>
             <Text>Followers</Text>
           </View>
-          <View style={{ alignItems: 'center' }}>
+          <View style={{ alignItems: 'center'}}>
             <Text style={{ fontWeight: 'bold', fontSize: 18, paddingRight: 15 }}>{(user.following && user.following.length) || 0}</Text>
-            <Text style={{ paddingRight: 15 }}>Following</Text>
+            <Text style={{ paddingRight: 10 }}>Following</Text>
           </View>
         </View>
         <View

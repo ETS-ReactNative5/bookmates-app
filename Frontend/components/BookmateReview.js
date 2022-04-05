@@ -177,7 +177,7 @@ const BookmateReview = ({ review }) => {
             <TextInput
             value={commentText}
             backgroundColor="#f5f5f5"
-            padding={10}
+            padding={8}
             marginHorizontal={5}
             borderRadius="20"
             height={30}

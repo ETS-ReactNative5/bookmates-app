@@ -45,7 +45,7 @@ const EditReview = ({ route, navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity style={styles.confirmbutton} onPress={() => editReview()}>
           <Text style={{ textAlign: 'center', color: '#FFF', fontWeight: 'bold' }}>
-            Edit
+            Save
           </Text>
         </TouchableOpacity>
       </View>
