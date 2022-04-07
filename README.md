@@ -47,12 +47,14 @@
 
 <img src="./readme/title4.svg"/>
 
-Here's a brief high-level overview of the tech stack the bookmates app uses:
+Here's a brief high-level overview of the tech stack the Bookmates app uses:
 
-- Frontend: this project uses the [React Native framework](https://reactnative.dev/). React Native is used to develop applications for Android, Android TV, iOS, macOS, tvOS, Web, Windows and UWP by enabling developers to use the React framework along with native platform capabilities.
-- Backend: this project uses [Node.js](https://reactnative.dev/). Node.js is a cross-platform, JavaScript runtime environment - it representing a "JavaScript everywhere" paradigm, by unifying web-application development around a single programming language, rather than different languages for server-side and client-side scripts.
+- Frontend: this project uses the [React Native framework](https://reactnative.dev/). React Native is used to develop applications for Android, Android TV, iOS, macOS, tvOS, Web, Windows and UWP by enabling developers to use the React framework along with native platform capabilities. For the development environment, [Expo CLI](https://reactnative.dev/docs/environment-setup) was used.
+- Backend: this project uses [Node.js](https://reactnative.dev/) and [Express](https://expressjs.com/). Node.js is a cross-platform, JavaScript runtime environment - it representing a "JavaScript everywhere" paradigm, by unifying web-application development around a single programming language, rather than different languages for server-side and client-side scripts. Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 - For persistent storage (database), the app uses [MongoDB](https://www.mongodb.com/).
 - The app uses the fonts [Roboto](https://fonts.google.com/specimen/Roboto) and [Baloo-2](https://fonts.google.com/specimen/Baloo+2) as its main fonts, and the design of the app adheres to the material design guidelines.
+- [Google Maps API](https://developers.google.com/maps) is used to display users on a map based on their locations.
+- [Google Books API](https://developers.google.com/books) is used to search books and display their data (title, author, thumbnail, isbn, description).
 
 <br><br>
 
@@ -76,10 +78,21 @@ Here's a brief high-level overview of the tech stack the bookmates app uses:
 
 ### Prerequisites
 
+* Download and install [Node.js](https://nodejs.org/en/)
+
 * npm
   ```sh
   npm install npm@latest -g
   ```
+* Expo CLI
+  ```sh
+  npm install --global expo-cli
+  ```
+* Expo Go app for iOS and Android  
+
+  > 🤖 [Android Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent) - Android Lollipop (5) and greater.  
+  > 🍎 [iOS App Store](https://apps.apple.com/app/expo-go/id982107779) - iOS 11 and greater.
+ 
 
 ### Installation
 
@@ -87,8 +100,13 @@ Here's a brief high-level overview of the tech stack the bookmates app uses:
    ```sh
    git clone https://github.com/laurena-fayad/bookmates-app.git
    ```
-2. Install NPM packages
+2. Navigate to the Frontend folder and install dependencies
    ```sh
+   cd bookmates-app/Frontend
    npm install
    ```
-
+3. Run the start up command
+   ```sh
+   expo start
+   ```
+4. Scan the generated QR code with your camera (ios) or through the Expo Go application (android).
