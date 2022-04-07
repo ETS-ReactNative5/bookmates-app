@@ -18,7 +18,7 @@ const MyReviewsSection = () => {
   
     const loadReviews = async () => {
       const token = await SecureStore.getItemAsync('token')
-      fetch('http://192.168.1.10:3000/api/review/myreviews',{
+      fetch('http://18.191.232.230:3000/api/review/myreviews',{
           headers:{
             Authorization: "Bearer "+token
           }

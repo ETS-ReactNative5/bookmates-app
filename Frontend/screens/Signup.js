@@ -43,7 +43,7 @@ const Signup = ({ navigation }) => {
 
     try {
       await axios
-        .post('http://192.168.1.10:3000/api/auth/register', user)
+        .post('http://18.191.232.230:3000/api/auth/register', user)
         .then(({ data }) => {
           resetForm();
           navigation.navigate('Login');

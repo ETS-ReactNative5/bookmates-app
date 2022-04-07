@@ -27,7 +27,7 @@ const ProfileReview = ({ review }) => {
           headers: {
             Authorization:'Bearer '+token,
           },
-          url: 'http://192.168.1.10:3000/api/review/like',
+          url: 'http://18.191.232.230:3000/api/review/like',
           data: {
             review_id: review._id,
           },
@@ -49,7 +49,7 @@ const ProfileReview = ({ review }) => {
         headers: {
           Authorization:'Bearer '+token,
         },
-        url: 'http://192.168.1.10:3000/api/review/dislike',
+        url: 'http://18.191.232.230:3000/api/review/dislike',
         data: {
           review_id: review._id,
         },
@@ -71,7 +71,7 @@ const ProfileReview = ({ review }) => {
             Authorization:
               'Bearer '+token,
           },
-          url: 'http://192.168.1.10:3000/api/review/delete',
+          url: 'http://18.191.232.230:3000/api/review/delete',
           data: {
             review_id: review._id
           }

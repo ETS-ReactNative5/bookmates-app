@@ -90,7 +90,7 @@ const EditProfile = ({ route, navigation }) => {
         headers: {
           Authorization:'Bearer '+token,
         },
-        url: 'http://192.168.1.10:3000/api/user/editprofile',
+        url: 'http://18.191.232.230:3000/api/user/editprofile',
         data: {
           first_name: fname,
           last_name: lname,

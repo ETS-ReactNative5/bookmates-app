@@ -27,7 +27,7 @@ const BookmateBookshelf = ({user_id}) => {
         headers: {
           Authorization:'Bearer '+token,
         },
-        url: 'http://192.168.1.10:3000/api/book/bookmatebookshelf/' + user_id,
+        url: 'http://18.191.232.230:3000/api/book/bookmatebookshelf/' + user_id,
       }).then((response) => {
         setRefreshing(false)
         setBookshelf(response.data)

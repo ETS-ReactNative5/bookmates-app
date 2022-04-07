@@ -12,7 +12,7 @@ const Profile = () => {
   useEffect( async () => {
     if(isFocused){
       const token = await SecureStore.getItemAsync('token')
-      fetch('http://192.168.1.10:3000/api/user/getprofile',{
+      fetch('http://18.191.232.230:3000/api/user/getprofile',{
         headers:{
           "Authorization":"Bearer "+token,
         }}).then(res=>res.json())

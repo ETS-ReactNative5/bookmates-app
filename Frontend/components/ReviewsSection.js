@@ -28,7 +28,7 @@ const ReviewsSection = ({user_id}) => {
           headers: {
             Authorization:'Bearer '+token,
           },
-          url: 'http://192.168.1.10:3000/api/review/bookmatereviews/' + user_id,
+          url: 'http://18.191.232.230:3000/api/review/bookmatereviews/' + user_id,
         }).then((response) => {
           setRefreshing(false)
           setReviews(response.data)

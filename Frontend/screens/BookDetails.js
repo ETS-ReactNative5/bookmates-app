@@ -33,7 +33,7 @@ const BookReviews = ({book_id}) => {
         headers: {
           Authorization:'Bearer '+token,
         },
-        url: 'http://192.168.1.10:3000/api/review/getBookReviews',
+        url: 'http://18.191.232.230:3000/api/review/getBookReviews',
         data: {
           book_id: book_id,
         },
@@ -84,7 +84,7 @@ const BookDetails = ({ route, navigation }) => {
         headers: {
           Authorization:'Bearer '+token,
         },
-        url: 'http://192.168.1.10:3000/api/book/addcurrently',
+        url: 'http://18.191.232.230:3000/api/book/addcurrently',
         data: {
           book_id: book._id,
         },
@@ -105,7 +105,7 @@ const BookDetails = ({ route, navigation }) => {
         headers: {
           Authorization:'Bearer '+token,
         },
-        url: 'http://192.168.1.10:3000/api/book/addtoread',
+        url: 'http://18.191.232.230:3000/api/book/addtoread',
         data: {
           book_id: book._id,
         },
@@ -127,7 +127,7 @@ const BookDetails = ({ route, navigation }) => {
         headers: {
           Authorization:'Bearer '+token,
         },
-        url: 'http://192.168.1.10:3000/api/book/addfinished',
+        url: 'http://18.191.232.230:3000/api/book/addfinished',
         data: {
           book_id: book._id,
         },

@@ -25,7 +25,7 @@ const BookmateProfileBody = ( {user} ) => {
         headers: {
           Authorization: 'Bearer ' + token,
         },
-        url: 'http://192.168.1.10:3000/api/user/userprofile/'+ bookmate.user.user._id,
+        url: 'http://18.191.232.230:3000/api/user/userprofile/'+ bookmate.user.user._id,
       }).then((res) => {
         setBookmate(res.data)
       });
@@ -43,7 +43,7 @@ const BookmateProfileBody = ( {user} ) => {
         headers: {
           Authorization: 'Bearer ' + token,
         },
-        url: 'http://192.168.1.10:3000/api/user/follow',
+        url: 'http://18.191.232.230:3000/api/user/follow',
         data: {
           user_id: bookmate._id,
         },
@@ -64,7 +64,7 @@ const BookmateProfileBody = ( {user} ) => {
         headers: {
           Authorization: 'Bearer ' + token,
         },
-        url: 'http://192.168.1.10:3000/api/user/unfollow',
+        url: 'http://18.191.232.230:3000/api/user/unfollow',
         data: {
           user_id: bookmate._id,
         },

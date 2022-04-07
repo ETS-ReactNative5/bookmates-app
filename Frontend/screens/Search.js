@@ -38,7 +38,7 @@ const Search = ({ navigation }) => {
   const getSearchResults = async () => {
     if (searchQuery) {
       const token = await SecureStore.getItemAsync('token');
-      await fetch('http://192.168.1.10:3000/api/book/search/' + searchQuery, {
+      await fetch('http://18.191.232.230:3000/api/book/search/' + searchQuery, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -55,7 +55,7 @@ const Search = ({ navigation }) => {
 
   const getSuggestions = async () => {
     const token = await SecureStore.getItemAsync('token');
-    await fetch('http://192.168.1.10:3000/api/book/suggestions', {
+    await fetch('http://18.191.232.230:3000/api/book/suggestions', {
       headers: {
         Authorization: 'Bearer ' + token,
       },
@@ -80,7 +80,7 @@ const Search = ({ navigation }) => {
         headers: {
           Authorization: 'Bearer ' + token,
         },
-        url: 'http://192.168.1.10:3000/api/book/savebook',
+        url: 'http://18.191.232.230:3000/api/book/savebook',
         data: {
           title: result.title,
           thumbnail: result.thumbnail,

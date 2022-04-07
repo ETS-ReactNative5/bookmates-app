@@ -11,7 +11,7 @@ export default function BookmatesMap({ navigation }) {
 
   useEffect(async () => {
     const token = await SecureStore.getItemAsync('token')
-    fetch('http://192.168.1.10:3000/api/user/all', {
+    fetch('http://18.191.232.230:3000/api/user/all', {
       headers:{
         Authorization: "Bearer "+token,
       }

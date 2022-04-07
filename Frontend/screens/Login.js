@@ -39,7 +39,7 @@ const Login = ({ navigation }) => {
       };
       try {
         axios
-          .post('http://192.168.1.10:3000/api/auth/login', user)
+          .post('http://18.191.232.230:3000/api/auth/login', user)
           .then(({ data }) => {
             save('token', data.token);
             navigation.navigate('BookmatesMap');

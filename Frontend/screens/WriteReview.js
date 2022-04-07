@@ -19,7 +19,7 @@ const WriteReview = ({ route, navigation }) => {
               Authorization:
                 'Bearer '+token,
             },
-            url: 'http://192.168.1.10:3000/api/review/add',
+            url: 'http://18.191.232.230:3000/api/review/add',
             data: {
               text: reviewText,
               book_id: book._id,

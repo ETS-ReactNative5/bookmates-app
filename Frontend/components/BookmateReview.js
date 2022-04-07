@@ -25,7 +25,7 @@ const BookmateReview = ({ review }) => {
           headers: {
             Authorization:'Bearer '+token,
           },
-          url: 'http://192.168.1.10:3000/api/review/like',
+          url: 'http://18.191.232.230:3000/api/review/like',
           data: {
             review_id: review._id,
           },
@@ -48,7 +48,7 @@ const BookmateReview = ({ review }) => {
         headers: {
           Authorization:'Bearer '+token,
         },
-        url: 'http://192.168.1.10:3000/api/review/dislike',
+        url: 'http://18.191.232.230:3000/api/review/dislike',
         data: {
           review_id: review._id,
         },
@@ -69,7 +69,7 @@ const BookmateReview = ({ review }) => {
         headers: {
           Authorization:'Bearer '+token,
         },
-        url: 'http://192.168.1.10:3000/api/review/comments',
+        url: 'http://18.191.232.230:3000/api/review/comments',
         data: {
           review_id: review._id,
         },
@@ -92,7 +92,7 @@ const BookmateReview = ({ review }) => {
         headers: {
           Authorization:'Bearer '+token,
         },
-        url: 'http://192.168.1.10:3000/api/review/comment',
+        url: 'http://18.191.232.230:3000/api/review/comment',
         data: {
           review_id: review._id,
           text: commentText

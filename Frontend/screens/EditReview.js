@@ -18,7 +18,7 @@ const EditReview = ({ route, navigation }) => {
           headers: {
             Authorization:'Bearer '+token,
           },
-          url: 'http://192.168.1.10:3000/api/review/edit',
+          url: 'http://18.191.232.230:3000/api/review/edit',
           data: {
             text: reviewText,
             review_id: review._id,

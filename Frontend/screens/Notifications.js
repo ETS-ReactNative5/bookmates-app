@@ -19,7 +19,7 @@ const Notifications = () => {
   
   const getNotifications = async () => {
     const token = await SecureStore.getItemAsync('token')
-    await fetch('http://192.168.1.10:3000/api/user/notifications',{
+    await fetch('http://18.191.232.230:3000/api/user/notifications',{
       headers:{
         "Authorization":"Bearer "+token,
       }}).then(res=>res.json())

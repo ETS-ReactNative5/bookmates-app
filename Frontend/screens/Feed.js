@@ -16,7 +16,7 @@ const Feed = () => {
 
   const loadFeed = async () => {
     const token = await SecureStore.getItemAsync('token')
-    await fetch('http://192.168.1.10:3000/api/review/getfeedreviews',{
+    await fetch('http://18.191.232.230:3000/api/review/getfeedreviews',{
         headers:{
           Authorization: "Bearer "+token
         }
