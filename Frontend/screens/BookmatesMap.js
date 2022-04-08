@@ -2,12 +2,35 @@ import React, { useState, useEffect } from 'react';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions, Image, Modal, TouchableOpacity, SafeAreaView } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
+import * as Location from 'expo-location';
 
 export default function BookmatesMap({ navigation }) {
   
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedBookmate, setSelectedBookmate] = useState('');
   const [bookmates, setBookmates] = useState(['']);
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  if (location) {
+    console.log(location.coords.latitude)
+    console.log(location.coords.longitude)
+  } else {
+    console.log('Not working');
+  }
 
   useEffect(async () => {
     const token = await SecureStore.getItemAsync('token')
@@ -36,10 +59,11 @@ export default function BookmatesMap({ navigation }) {
           longitudeDelta: 2,
         }}
         provider={PROVIDER_GOOGLE}>
-        {bookmates.map((item, index) => {
+        {bookmates?.map((item, index) => {
           return (
             <View key={item?._id}>
               <MapView.Marker
+                key={index}
                 onPress={() => {
                   setSelectedBookmate(item);
                   setModalVisible(true);
