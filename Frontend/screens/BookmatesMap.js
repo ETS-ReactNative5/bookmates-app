@@ -3,6 +3,7 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions, Image, Modal, TouchableOpacity, SafeAreaView } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import * as Location from 'expo-location';
+import axios from 'axios';
 
 export default function BookmatesMap({ navigation }) {
   
@@ -23,13 +24,23 @@ export default function BookmatesMap({ navigation }) {
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
       if (location) {
-        console.log(location.coords.latitude)
-        console.log(location.coords.longitude)
-      } else {
-        console.log('Not working');
-      }
-
-    })();  
+        const token = await SecureStore.getItemAsync('token')
+        try {
+          const { data } = await axios({
+            method: 'post',
+            headers: {
+              Authorization:'Bearer '+token,
+            },
+            url: 'http://192.168.1.8:3000/api/user/location',
+            data: {
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude
+            },
+          })
+        } catch (err) {
+          setErrorMsg('Error while saving location.');
+        }    
+    }})();  
   }, []);  
 
   useEffect(async () => {
