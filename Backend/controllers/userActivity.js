@@ -102,7 +102,11 @@ const getProfile = async (req, res) => {
 
 const getUserProfile = async (req, res) => {
   const user = await User.findById(req.params.id).select(['-password']);
-  return res.status(200).send(user);
+  if (user.followers.includes(req.user._id)) {
+    return res.status(200).send({user:user, isFollowed: true});
+  }else if (!user.followers.includes(req.user._id)){
+    return res.status(200).send({user: user, isFollowed: false});
+  }
 }
 
 const getNotifications = async (req, res) => {

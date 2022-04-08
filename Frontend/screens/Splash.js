@@ -1,14 +1,15 @@
 import { StyleSheet, Text, SafeAreaView, Image, View, TouchableWithoutFeedback } from 'react-native';
 import Logo from '../assets/Vectorbook-logo.png';
 export default function SplashScreen({ navigation }) {
+  setTimeout(() => {
+    navigation.navigate('Login')
+  }, 3000); 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableWithoutFeedback onPress={() => navigation.navigate('Login')}>
-        <View style={styles.container}>
-          <Image source={Logo} style={{ marginBottom: 20 }} />
-          <Text style={styles.titleText}>bookmates</Text>
-        </View>
-      </TouchableWithoutFeedback>
+      <View style={styles.container}>
+        <Image source={Logo} style={{ marginBottom: 20 }} />
+        <Text style={styles.titleText}>bookmates</Text>
+      </View>
     </SafeAreaView>
   );
 }

@@ -8,7 +8,7 @@ import {useIsFocused} from '@react-navigation/native'
 const BookmateProfileBody = ( {user} ) => {
   const isFocused = useIsFocused();
   const [bookmate, setBookmate] = useState({user})
-  const [followed, setFollowed] = useState(true);
+  const [isFollowed, setIsFollowed] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -25,9 +25,10 @@ const BookmateProfileBody = ( {user} ) => {
         headers: {
           Authorization: 'Bearer ' + token,
         },
-        url: 'http://18.191.232.230:3000/api/user/userprofile/'+ bookmate.user.user._id,
+        url: 'http://192.168.1.8:3000/api/user/userprofile/'+ bookmate.user.user._id,
       }).then((res) => {
-        setBookmate(res.data)
+        setBookmate(res.data.user)
+        setIsFollowed(res.data.isFollowed)
       });
     } catch (err) {
       setErrorMessage('Error! Please try again later.');
@@ -36,6 +37,7 @@ const BookmateProfileBody = ( {user} ) => {
 
   const follow = async () => {
 
+    setIsFollowed(true);
     const token = await SecureStore.getItemAsync('token');
     try {
       const { data } = await axios({
@@ -48,7 +50,8 @@ const BookmateProfileBody = ( {user} ) => {
           user_id: bookmate._id,
         },
       }).then((res) => {
-        setFollowed(true);
+        setIsFollowed(true); 
+        getUserProfile()
       });
     } catch (err) {
       setErrorMessage('Error! Please try again later.');
@@ -56,7 +59,7 @@ const BookmateProfileBody = ( {user} ) => {
   };
 
   const unfollow = async () => {
-    
+    setIsFollowed(false);
     const token = await SecureStore.getItemAsync('token');
     try {
       const { data } = await axios({
@@ -69,12 +72,12 @@ const BookmateProfileBody = ( {user} ) => {
           user_id: bookmate._id,
         },
       }).then((res) => {
-        setFollowed(false);
+        setIsFollowed(false);
+        getUserProfile()
       });
     } catch (err) {
       setErrorMessage('Error! Please try again later.');
     }
-
   };
 
   return (
@@ -118,7 +121,7 @@ const BookmateProfileBody = ( {user} ) => {
           {bookmate?.first_name} {bookmate?.last_name} 
         </Text>
 
-        {followed ? (
+        {isFollowed ? (
         <TouchableOpacity
           onPress={() => unfollow()}
           style={{ width: 100, height: 30, justifyContent: 'center', backgroundColor: '#5A7FCC', borderRadius: 20 }}
