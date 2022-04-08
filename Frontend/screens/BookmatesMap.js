@@ -22,15 +22,15 @@ export default function BookmatesMap({ navigation }) {
 
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
-    })();
-  }, []);
+      if (location) {
+        console.log(location.coords.latitude)
+        console.log(location.coords.longitude)
+      } else {
+        console.log('Not working');
+      }
 
-  if (location) {
-    console.log(location.coords.latitude)
-    console.log(location.coords.longitude)
-  } else {
-    console.log('Not working');
-  }
+    })();  
+  }, []);  
 
   useEffect(async () => {
     const token = await SecureStore.getItemAsync('token')

@@ -121,6 +121,17 @@ const getNotifications = async (req, res) => {
   res.status(200).send(notifications)
 }
 
+const saveLocation = async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.user._id, {
+      $set: req.body,
+    }, {new: true});
+    res.status(200).send("Location saved");
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+}
+
 module.exports.follow = follow;
 module.exports.unfollow = unfollow;
 module.exports.editProfile = editProfile;
@@ -128,3 +139,4 @@ module.exports.getAllUsers = getAllUsers;
 module.exports.getProfile = getProfile;
 module.exports.getUserProfile = getUserProfile;
 module.exports.getNotifications = getNotifications;
+module.exports.saveLocation = saveLocation;
