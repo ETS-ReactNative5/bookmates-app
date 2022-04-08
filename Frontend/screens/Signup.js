@@ -50,8 +50,8 @@ const Signup = ({ navigation }) => {
         })
         .catch((err) => {
           setErrorMessage(err.response.data);
-          setIsError(true);
           resetForm();
+          setIsError(true);
         });
     } catch (error) {
       console.log('error');
@@ -99,6 +99,7 @@ const Signup = ({ navigation }) => {
             <View style={styles.action}>
               <Feather name="user" size={24} color="#BDBDBD" style={{ marginTop: 15 }} />
               <TextInput
+                value={values.first_name}
                 placeholder="Enter your first name"
                 placeholderTextColor="#BDBDBD"
                 style={[styles.textInput, { color: '#242424' }]}
@@ -117,6 +118,7 @@ const Signup = ({ navigation }) => {
             <View style={styles.action}>
               <Feather name="user" size={24} color="#BDBDBD" style={{ marginTop: 15 }} />
               <TextInput
+                value={values.last_name}
                 placeholder="Enter your last name"
                 placeholderTextColor="#BDBDBD"
                 style={[styles.textInput, { color: '#242424' }]}
@@ -134,6 +136,7 @@ const Signup = ({ navigation }) => {
             <View style={styles.action}>
               <Feather name="mail" color="#BDBDBD" size={20} style={{ marginTop: 15 }} />
               <TextInput
+                value={values.email}
                 placeholder="Enter your email address"
                 placeholderTextColor="#BDBDBD"
                 style={[styles.textInput, { color: '#242424' }]}
@@ -151,6 +154,7 @@ const Signup = ({ navigation }) => {
             <View style={styles.action}>
               <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: 15 }} />
               <TextInput
+                value={values.password}
                 placeholder="Choose a password"
                 placeholderTextColor="#BDBDBD"
                 secureTextEntry={data.secureTextEntry1 ? true : false}
@@ -176,6 +180,7 @@ const Signup = ({ navigation }) => {
             <View style={styles.action}>
               <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: 15 }} />
               <TextInput
+                value={values.password_confirmation}
                 placeholder="Confirm password"
                 placeholderTextColor="#BDBDBD"
                 secureTextEntry={data.secureTextEntry2 ? true : false}

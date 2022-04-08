@@ -31,35 +31,35 @@ const Login = ({ navigation }) => {
     catch(err => setErrorMessage(err))
   }
 
-    // API linking
-    const onSubmitHandler = async (values) => {
-      const user = {
-        email: values.email,
-        password: values.password,
-      };
-      try {
-        axios
-          .post('http://18.191.232.230:3000/api/auth/login', user)
-          .then(({ data }) => {
-            save('token', data.token);
-            navigation.navigate('BookmatesMap');
-          })
-          .catch((err) => {
-            setErrorMessage(err.response.data);
-            setIsError(true);
-          });
-      } catch (error) {
-        console.log('error');
-      }
-    };
-
   return (
       <Formik       
       initialValues={{
         email: '',
         password: '',
       }}
-      onSubmit={onSubmitHandler}
+      onSubmit={(values, {resetForm}) => {
+        const user = {
+          email: values.email,
+          password: values.password,
+        };
+        try {
+          axios
+            .post('http://18.191.232.230:3000/api/auth/login', user)
+            .then(({ data }) => {
+              save('token', data.token);
+              resetForm();
+              navigation.navigate('BookmatesMap');
+            })
+            .catch((err) => {
+              setErrorMessage(err.response.data);
+              setIsError(true);
+              resetForm();
+            });
+        } catch (error) {
+          console.log('error');
+        }
+  
+      }}
 
       //Yup to handle schema creation
       validationSchema={yup.object().shape({
@@ -67,7 +67,7 @@ const Login = ({ navigation }) => {
         password: yup.string().min(8, 'Password must be at least 8 characters.').required('Password is required.'),
       })}
     >
-    {({ values, errors, setFieldTouched, touched, handleChange, isValid, handleSubmit }) => (
+    {({ values, errors, setFieldTouched, touched, handleChange, isValid, handleSubmit, resetForm }) => (
     <View style={styles.container}>
       <StatusBar backgroundColor="#5A7FCC" barStyle="light-content" />
 
@@ -85,6 +85,7 @@ const Login = ({ navigation }) => {
           <View style={styles.action}>
             <Feather name="mail" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
             <TextInput
+              value={values.email}
               defaultValue=''
               placeholder="Enter your email address"
               placeholderTextColor="#BDBDBD"
@@ -104,6 +105,7 @@ const Login = ({ navigation }) => {
             <Feather name="lock" color="#BDBDBD" size={20} style={{ marginTop: Platform.OS === 'ios' ? 15 : 25 }} />
             <TextInput
               defaultValue=''
+              value={values.password}
               placeholder="Enter your password"
               placeholderTextColor="#BDBDBD"
               secureTextEntry={data.secureTextEntry ? true : false}
