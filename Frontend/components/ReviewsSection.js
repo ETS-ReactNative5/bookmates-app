@@ -6,7 +6,6 @@ import * as SecureStore from 'expo-secure-store';
 import {useIsFocused} from '@react-navigation/native'
 
 const ReviewsSection = ({user_id}) => {
-  console.log(user_id)
   const isFocused = useIsFocused();
   const [message, setMessage] = useState('')
   const [reviews, setReviews] = useState([])

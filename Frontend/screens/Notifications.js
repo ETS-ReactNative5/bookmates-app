@@ -25,7 +25,6 @@ const Notifications = () => {
       }}).then(res=>res.json())
   .then(result=>{
     setNotifications(result);
-    console.log(notifications)
   })
   .catch(err => console.log(err))
   }

@@ -31,7 +31,6 @@ const BookmateReview = ({ review }) => {
           },
         }).then((response) => {
           setReviewLikes(response.data.review.likes)
-          console.log(response.data.review.likes)
         });
         
       } catch (err) {

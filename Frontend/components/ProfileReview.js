@@ -78,8 +78,7 @@ const ProfileReview = ({ review }) => {
         });
         setModalVisible(false);
       } catch (err) {
-        console.log(err)
-          setErrorMessage("Error! Please try again later.");
+        setErrorMessage("Error! Please try again later.");
       }
   }
   
