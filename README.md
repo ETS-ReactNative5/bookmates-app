@@ -69,16 +69,16 @@ Here's a brief high-level overview of the tech stack the Bookmates app uses:
 
 <table>
   <tr>
-    <td><img src="./readme/maps.gif" /></td>
-    <td><img src="./readme/suggest.gif" /></td>
-    <td><img src="./readme/search.gif" /></td>
-    <td><img src="./readme/details.gif" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/maps.gif" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/suggest.gif" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/search.gif" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/details.gif" /></td>
   </tr>
   <tr>
-    <td><img src="./readme/feeds.gif" /></td>
-    <td><img src="./readme/myprofile.gif" /></td>
-    <td><img src="./readme/bookshelves.gif" /></td>
-    <td><img src="./readme/review.gif" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/feeds.gif" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/myprofile.gif" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/bookshelves.gif" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/review.gif" /></td>
   </tr>
 </table>
 
