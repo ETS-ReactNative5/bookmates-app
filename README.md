@@ -37,14 +37,14 @@
 
 <table>
   <tr>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Map.jpg" /></td>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Search.jpg"/></td>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Feed.jpg"/></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/map.PNG" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/search.PNG"/></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/feed.PNG"/></td>
   </tr>
   <tr>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/BookOptions.jpg" /></td>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/BookReviews.jpg"/></td>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ProfileBookshelf.jpg"/></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/options.PNG" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/reviews.PNG"/></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/profile.PNG"/></td>
   </tr>
 </table>
 
@@ -69,16 +69,16 @@ Here's a brief high-level overview of the tech stack the Bookmates app uses:
 
 <table>
   <tr>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedMap.png" /></td>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedSearch.png"/></td>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedFeed.png"/></td>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedFeed.png"/></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Map.GIF" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Suggestions.GIF" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/SearchResult.GIF" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/BookDetails.GIF" /></td>
   </tr>
   <tr>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedDetails.png" /></td>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedPost.png"/></td>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedProfile.PNG"/></td>
-    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedFeed.png"/></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Feed.GIF" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Profile.GIF" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Bookshelf.GIF" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Post.GIF" /></td>
   </tr>
 </table>
 
