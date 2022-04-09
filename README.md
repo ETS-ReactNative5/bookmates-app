@@ -69,16 +69,16 @@ Here's a brief high-level overview of the tech stack the Bookmates app uses:
 
 <table>
   <tr>
-    <td><img src="./readme/Map.GIF" /></td>
-    <td><img src="./readme/Suggestions.GIF" /></td>
-    <td><img src="./readme/SearchResult.GIF" /></td>
-    <td><img src="./readme/BookDetails.GIF" /></td>
+    <td><img src="./readme/maps.gif" /></td>
+    <td><img src="./readme/suggest.gif" /></td>
+    <td><img src="./readme/search.gif" /></td>
+    <td><img src="./readme/details.gif" /></td>
   </tr>
   <tr>
-    <td><img src="./readme/Feed.GIF" /></td>
-    <td><img src="./readme/Profile.GIF" /></td>
-    <td><img src="./readme/Bookshelf.GIF" /></td>
-    <td><img src="./readme/Post.GIF" /></td>
+    <td><img src="./readme/feeds.gif" /></td>
+    <td><img src="./readme/myprofile.gif" /></td>
+    <td><img src="./readme/bookshelves.gif" /></td>
+    <td><img src="./readme/review.gif" /></td>
   </tr>
 </table>
 
