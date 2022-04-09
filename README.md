@@ -4,14 +4,14 @@
 
 > Bookmates is a mobile application meant to bring you closer to book lovers around you.
 
-**[PROJECT PHILOSOPHY]() • [WIREFRAMES]() • [TECH STACK]() • [IMPLEMENTATION]() • [HOW TO RUN?]()**
+**[PROJECT PHILOSOPHY](#philosophy) • [WIREFRAMES](#wireframes) • [TECH STACK](#tech) • [IMPLEMENTATION](#implementation) • [HOW TO RUN?](#install)**
 
 </div>
 
 <br><br>
 
 
-<img src="./readme/title2.svg"/>
+<img src="./readme/title2.svg" id='philosophy'/>
 
 > Ever finished a really good book, but found no one to discuss it with?
 > Bookmates' main vision is to connect you to readers around you who have similar interests. 
@@ -31,21 +31,26 @@
 
 <br><br>
 
-<img src="./readme/title3.svg"/>
+<img src="./readme/title3.svg" id='wireframes'/>
 
 > This design was planned before on paper, then moved to Figma app for the fine details.
 
-|Map|Search|Feed|
-|-----------|-----------|-----------|
-| ![Map](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Map.jpg) | ![Search](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Search.jpg) | ![Feed](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Feed.jpg)
-
-|Book Details|Book Reviews|Profile|
-|-----------|-----------|-----------|
-| ![Book Details](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/BookOptions.jpg) | ![Book Reviews](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/BookReviews.jpg) | ![Profile](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ProfileBookshelf.jpg) |
+<table>
+  <tr>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Map.jpg" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Search.jpg"/></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/Feed.jpg"/></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/BookOptions.jpg" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/BookReviews.jpg"/></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ProfileBookshelf.jpg"/></td>
+  </tr>
+</table>
 
 <br><br>
 
-<img src="./readme/title4.svg"/>
+<img src="./readme/title4.svg" id='tech'/>
 
 Here's a brief high-level overview of the tech stack the Bookmates app uses:
 
@@ -58,20 +63,27 @@ Here's a brief high-level overview of the tech stack the Bookmates app uses:
 
 <br><br>
 
-<img src="./readme/title5.svg"/>
+<img src="./readme/title5.svg" id='implementation'/>
 
 > Using the above mentioned tech stack and the wireframes built with Figma, the implementation of the app is shown as below (screenshots from the real app)
 
-| Map|Search|Feed|
-|-----------|-----------|-----------|
-| ![Map](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedMap.png) | ![Search](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedSearch.png) | ![Feed](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedFeed.png)
-
-| Book Details | Post Review | Profile|
-|-----------|-----------|-----------|
-| ![Book Details](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedDetails.png)| ![Post Review](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedPost.png) | ![Profile](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedProfile.PNG)
+<table>
+  <tr>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedMap.png" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedSearch.png"/></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedFeed.png"/></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedFeed.png"/></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedDetails.png" /></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedPost.png"/></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedProfile.PNG"/></td>
+    <td><img src="https://github.com/laurena-fayad/bookmates-app/blob/main/readme/ImplementedFeed.png"/></td>
+  </tr>
+</table>
 
 <br><br>
-<img src="./readme/title6.svg"/>
+<img src="./readme/title6.svg" id='install'/>
 
 
 > To get a local copy up and running follow these simple steps.
@@ -109,4 +121,4 @@ Here's a brief high-level overview of the tech stack the Bookmates app uses:
    ```sh
    expo start
    ```
-4. Scan the generated QR code with your camera (ios) or through the Expo Go application (android).
+4. Scan the generated QR code with your camera (ios) or through the Expo Go application (android)
