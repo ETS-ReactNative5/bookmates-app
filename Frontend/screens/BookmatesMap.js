@@ -31,7 +31,7 @@ export default function BookmatesMap({ navigation }) {
             headers: {
               Authorization:'Bearer '+token,
             },
-            url: 'http://192.168.1.8:3000/api/user/location',
+            url: 'http://18.191.232.230:3000/api/user/location',
             data: {
               latitude: location.coords.latitude,
               longitude: location.coords.longitude

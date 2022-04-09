@@ -7,7 +7,7 @@ import {useIsFocused} from '@react-navigation/native'
 
 const BookmateProfileBody = ( {user} ) => {
   const isFocused = useIsFocused();
-  const [bookmate, setBookmate] = useState({user})
+  const [bookmate, setBookmate] = useState(user)
   const [isFollowed, setIsFollowed] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -25,7 +25,7 @@ const BookmateProfileBody = ( {user} ) => {
         headers: {
           Authorization: 'Bearer ' + token,
         },
-        url: 'http://192.168.1.8:3000/api/user/userprofile/'+ bookmate.user.user._id,
+        url: 'http://18.191.232.230:3000/api/user/userprofile/'+ bookmate?.user?._id,
       }).then((res) => {
         setBookmate(res.data.user)
         setIsFollowed(res.data.isFollowed)
