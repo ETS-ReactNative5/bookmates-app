@@ -4,14 +4,14 @@
 
 > Bookmates is a mobile application meant to bring you closer to book lovers around you.
 
-**[PROJECT PHILOSOPHY]() • [WIREFRAMES]() • [TECH STACK]() • [IMPLEMENTATION]() • [HOW TO RUN?]()**
+**[PROJECT PHILOSOPHY](#philosophy) • [WIREFRAMES](#wireframes) • [TECH STACK](#tech) • [IMPLEMENTATION](#implementation) • [HOW TO RUN?](#install)**
 
 </div>
 
 <br><br>
 
 
-<img src="./readme/title2.svg"/>
+<img src="./readme/title2.svg" id='philosophy'/>
 
 > Ever finished a really good book, but found no one to discuss it with?
 > Bookmates' main vision is to connect you to readers around you who have similar interests. 
@@ -31,7 +31,7 @@
 
 <br><br>
 
-<img src="./readme/title3.svg"/>
+<img src="./readme/title3.svg" id='wireframes'/>
 
 > This design was planned before on paper, then moved to Figma app for the fine details.
 
@@ -45,7 +45,7 @@
 
 <br><br>
 
-<img src="./readme/title4.svg"/>
+<img src="./readme/title4.svg" id='tech'/>
 
 Here's a brief high-level overview of the tech stack the Bookmates app uses:
 
@@ -58,7 +58,7 @@ Here's a brief high-level overview of the tech stack the Bookmates app uses:
 
 <br><br>
 
-<img src="./readme/title5.svg"/>
+<img src="./readme/title5.svg" id='implementation'/>
 
 > Using the above mentioned tech stack and the wireframes built with Figma, the implementation of the app is shown as below (screenshots from the real app)
 
@@ -71,7 +71,7 @@ Here's a brief high-level overview of the tech stack the Bookmates app uses:
 | ![Book Details](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedDetails.png)| ![Post Review](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedPost.png) | ![Profile](https://github.com/laurena-fayad/bookmates-app/blob/main/readme/implementedProfile.PNG)
 
 <br><br>
-<img src="./readme/title6.svg"/>
+<img src="./readme/title6.svg" id='install'/>
 
 
 > To get a local copy up and running follow these simple steps.
