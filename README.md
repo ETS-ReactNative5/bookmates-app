@@ -65,7 +65,7 @@ Here's a brief high-level overview of the tech stack the Bookmates app uses:
 
 <img src="./readme/title5.svg" id='implementation'/>
 
-> Using the above mentioned tech stack and the wireframes built with Figma, the implementation of the app is shown as below (screenshots from the real app)
+> Using the above mentioned tech stack and the wireframes built with Figma, the implementation of the app is shown as below (recordings from the real app)
 
 <table>
   <tr>
