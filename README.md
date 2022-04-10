@@ -37,6 +37,7 @@
 
 <table>
   <tr>
+    <td><img src="./readme/login.PNG" /></td>
     <td><img src="./readme/map.PNG" /></td>
     <td><img src="./readme/search.PNG"/></td>
     <td><img src="./readme/feed.PNG"/></td>
@@ -45,6 +46,7 @@
     <td><img src="./readme/options.PNG" /></td>
     <td><img src="./readme/reviews.PNG"/></td>
     <td><img src="./readme/profile.PNG"/></td>
+    <td><img src="./readme/profilerev.PNG"/></td>
   </tr>
 </table>
 
